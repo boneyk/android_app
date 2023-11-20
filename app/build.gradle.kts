@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.libsDirectory
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -36,6 +38,17 @@ android {
 }
 
 dependencies {
+    // !!! - Retrofit 2 & GSON-converter
+//    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+//    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+//    // !!! - Glide
+//    implementation ("com.github.bumptech.glide:glide:4.15.1")
+//    // !!! - Fragment Ktx
+//    implementation ("androidx.fragment:fragment-ktx:1.5.6")
+//    // !!! - Kotlin Coroutines
+//    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+//    // !!! - JWT decode
+//    implementation ("com.auth0.android:jwtdecode:2.0.2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

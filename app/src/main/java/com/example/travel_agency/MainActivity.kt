@@ -1,47 +1,49 @@
 package com.example.travel_agency
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        val listView = findViewById<ListView>(R.id.listView)
-        val userData: EditText = findViewById(R.id.user_data)
-        val button: Button = findViewById(R.id.button)
 
-        val todos: MutableList<String> = mutableListOf()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,todos)
-        listView.adapter = adapter
+        val userName: EditText = findViewById(R.id.user_name_auth)
+        val userLogin: EditText = findViewById(R.id.user_login_auth)
+        val userPassword: EditText = findViewById(R.id.user_password_auth)
+        val buttonSign: Button = findViewById(R.id.button_auth)
+        val linkToReg: TextView = findViewById(R.id.link_to_reg)
 
-        listView.setOnItemClickListener{adapterView, view, i, l ->
-            val text =  listView.getItemAtPosition(i).toString()
-            adapter.remove(text)
-
-            Toast.makeText(this,"Мы удалили: $text",Toast.LENGTH_LONG).show()
+        linkToReg.setOnClickListener{
+            val intent = Intent(this, RegActivity::class.java)
+            startActivity(intent)
         }
 
-        button.setOnClickListener{
-            val text = userData.text.toString().trim()
-            if(text != ""){
-                adapter.insert(text,0)
+        buttonSign.setOnClickListener{
+            val name = userName.text.toString().trim()
+            val login = userLogin.text.toString().trim()
+            val password = userPassword.text.toString().trim()
+
+            if(name == "" || login == "" || password == ""){
+                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
+            }else{
+                val user = User(name,login,password)
+                userName.text.clear()
+                userLogin.text.clear()
+                userPassword.text.clear()
+
+                Toast.makeText(this, "Пользователь $login успешно прошел авторизацию", Toast.LENGTH_LONG).show()
+                val intent = Intent(this,ToursActivity::class.java)
+                startActivity(intent)
             }
         }
+
     }
 }

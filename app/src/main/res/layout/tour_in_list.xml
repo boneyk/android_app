@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/tour_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+
+
+
+    <ImageView
+        android:id="@+id/tour_list_image"
+        android:layout_width="fill_parent"
+        android:layout_height="230dp"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/egypt" />
+
+    <TextView
+        android:id="@+id/tour_list_country"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tour_list_datestart"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:textSize="17sp"
+        android:textStyle="italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tour_list_price"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:gravity="end"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/tour_list_button"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#566573"
+        android:layout_height="wrap_content"
+        android:text="Смотреть" />
+</LinearLayout>
