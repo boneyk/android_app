@@ -30,7 +30,12 @@ class TourAdapter(var tours: List<Tour>,var context: Context): RecyclerView.Adap
         holder.date_start.text = tours[position].date_start
         holder.price.text = tours[position].price_per_one.toString()
 
-
+        val imageId = context.resources.getIdentifier(
+            tours[position].image,
+            "drawable",
+            context.packageName
+        )
+        holder.image.setImageResource(imageId)
 
     }
 }

@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity(){
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val userName: EditText = findViewById(R.id.user_name_auth)
         val userLogin: EditText = findViewById(R.id.user_login_auth)
         val userPassword: EditText = findViewById(R.id.user_password_auth)
         val buttonSign: Button = findViewById(R.id.button_auth)
@@ -27,15 +26,13 @@ class MainActivity : AppCompatActivity(){
         }
 
         buttonSign.setOnClickListener{
-            val name = userName.text.toString().trim()
             val login = userLogin.text.toString().trim()
             val password = userPassword.text.toString().trim()
 
-            if(name == "" || login == "" || password == ""){
+            if(login == "" || password == ""){
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
             }else{
-                val user = User(name,login,password)
-                userName.text.clear()
+                val user = User(login,password)
                 userLogin.text.clear()
                 userPassword.text.clear()
 

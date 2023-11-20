@@ -17,7 +17,6 @@ class RegActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_reg)
 
-        val userName: EditText = findViewById(R.id.user_name)
         val userLogin: EditText = findViewById(R.id.user_login)
         val userEmail: EditText = findViewById(R.id.user_email)
         val userPassword: EditText = findViewById(R.id.user_password)
@@ -31,20 +30,18 @@ class RegActivity : AppCompatActivity() {
         }
 
         buttonReg.setOnClickListener {
-            val name = userName.text.toString().trim()
             val login = userLogin.text.toString().trim()
             val email = userEmail.text.toString().trim()
             val password = userPassword.text.toString().trim()
             val passwordCopy = userPasswordCopy.text.toString().trim()
 
-            if (name == "" || login == "" || password == "" || email == "" || passwordCopy == "") {
+            if (login == "" || password == "" || email == "" || passwordCopy == "") {
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
             }else if(password != passwordCopy){
                 Toast.makeText(this, "Пароль введен неверно", Toast.LENGTH_LONG).show()
             }else{
-                val user = User(name,login,password)
+                val user = User(login,password)
 
-                userName.text.clear()
                 userLogin.text.clear()
                 userEmail.text.clear()
                 userPassword.text.clear()
