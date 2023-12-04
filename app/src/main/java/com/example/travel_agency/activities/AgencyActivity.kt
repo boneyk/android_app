@@ -1,8 +1,13 @@
-package com.example.travel_agency
+package com.example.travel_agency.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.travel_agency.ProfileFragment
+import com.example.travel_agency.fragments.BasketFragment
+import com.example.travel_agency.fragments.FaveFragment
+import com.example.travel_agency.R
+import com.example.travel_agency.fragments.ToursFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AgencyActivity : AppCompatActivity() {

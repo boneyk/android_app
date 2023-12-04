@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travel_agency.activities.TourActivity
+import com.example.travel_agency.models.Tour
 
-class TourAdapter(var tours: List<Tour>,var context: Context): RecyclerView.Adapter<TourAdapter.MyViewHolder>() {
+class TourAdapter(var tours: List<Tour>, var context: Context): RecyclerView.Adapter<TourAdapter.MyViewHolder>() {
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.tour_list_image)
         val country: TextView = view.findViewById(R.id.tour_list_country)
@@ -43,7 +45,7 @@ class TourAdapter(var tours: List<Tour>,var context: Context): RecyclerView.Adap
         holder.image.setImageResource(imageId)
 
         holder.btn.setOnClickListener{
-            val intent = Intent(context,TourActivity::class.java)
+            val intent = Intent(context, TourActivity::class.java)
             intent.putExtra("tourTitle",tours[position].country)
             intent.putExtra("tourCity",tours[position].city)
             intent.putExtra("tourSDate",tours[position].date_start)

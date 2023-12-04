@@ -1,4 +1,4 @@
-package com.example.travel_agency
+package com.example.travel_agency.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.travel_agency.R
+import com.example.travel_agency.models.User
 
 class MainActivity : AppCompatActivity(){
 
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity(){
                 userPassword.text.clear()
 
                 Toast.makeText(this, "Пользователь $login успешно прошел авторизацию", Toast.LENGTH_LONG).show()
-                val intent = Intent(this,AgencyActivity::class.java)
+                val intent = Intent(this, AgencyActivity::class.java)
                 startActivity(intent)
             }
         }
