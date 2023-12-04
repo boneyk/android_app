@@ -7,6 +7,9 @@
     <item android:title="покупки"
         android:icon="@drawable/baseline_account_balance_wallet_24"
         android:id="@+id/basket"/>
+    <item android:title="избранное"
+        android:icon="@drawable/ic_favorite_white_24dp"
+        android:id="@+id/favorite"/>
     <item android:title="профиль"
         android:icon="@drawable/baseline_person_24"
         android:id="@+id/profile"/>

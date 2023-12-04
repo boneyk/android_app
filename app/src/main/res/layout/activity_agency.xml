@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#dddfeb"
-    tools:context=".ToursActivity">
+    tools:context=".AgencyActivity">
 
     <FrameLayout
         android:id="@+id/frame_place"
         android:layout_width="match_parent"
-        android:layout_height="690dp"
+        android:layout_height="705dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="30dp">
 

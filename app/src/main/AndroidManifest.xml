@@ -25,7 +25,7 @@
             android:name=".TourActivity"
             android:exported="false" />
         <activity
-            android:name=".ToursActivity"
+            android:name=".AgencyActivity"
             android:exported="false" />
         <activity
             android:name=".RegActivity"

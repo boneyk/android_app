@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(){
                 userPassword.text.clear()
 
                 Toast.makeText(this, "Пользователь $login успешно прошел авторизацию", Toast.LENGTH_LONG).show()
-                val intent = Intent(this,ToursActivity::class.java)
+                val intent = Intent(this,AgencyActivity::class.java)
                 startActivity(intent)
             }
         }
