@@ -2,35 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#dddfeb"
     tools:context=".ToursActivity">
 
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_alternates_bold"
-        android:textColor="#1f1317"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Путешествуй по России" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/toursList"
+    <FrameLayout
+        android:id="@+id/frame_place"
         android:layout_width="match_parent"
-        android:layout_height="685dp"
+        android:layout_height="690dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="30dp">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav_menu" />
+
 </LinearLayout>
