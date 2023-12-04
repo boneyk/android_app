@@ -47,7 +47,7 @@
             android:layout_marginLeft="20dp"
             android:autoSizeTextType="uniform"
             android:fontFamily="@font/montserrat_alternates_bold"
-            android:text="Login"
+            android:text="ФИО"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -75,6 +75,69 @@
             android:textSize="30sp"
             android:textStyle="italic"
             android:layout_gravity="center" />
+
+        <EditText
+            android:id="@+id/user_login_auth"
+            android:background="@drawable/edit_text"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="#6a6a6a"
+            android:layout_marginTop="20sp"
+            android:layout_gravity="center"
+            android:textColor="#1f1317"
+            android:hint="  Login" />
+
+        <EditText
+            android:id="@+id/user_login_auth"
+            android:background="@drawable/edit_text"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="#6a6a6a"
+            android:layout_marginTop="20sp"
+            android:layout_gravity="center"
+            android:textColor="#1f1317"
+            android:hint="  Email" />
+
+        <EditText
+            android:id="@+id/user_login_auth"
+            android:background="@drawable/edit_text"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="#6a6a6a"
+            android:layout_marginTop="20sp"
+            android:layout_gravity="center"
+            android:textColor="#1f1317"
+            android:hint="  Номер телефона" />
+
+        <EditText
+            android:id="@+id/user_login_auth"
+            android:background="@drawable/edit_text"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:textColorHint="#6a6a6a"
+            android:layout_marginTop="20sp"
+            android:layout_gravity="center"
+            android:textColor="#1f1317"
+            android:hint="  Password" />
+
+        <Button
+            android:id="@+id/button_auth"
+            android:layout_width="220dp"
+            android:layout_height="60dp"
+            android:textSize="19sp"
+            android:layout_marginTop="30sp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:backgroundTint="#3C5A5C"
+            android:text="Документы" />
 
     </LinearLayout>
 </FrameLayout>

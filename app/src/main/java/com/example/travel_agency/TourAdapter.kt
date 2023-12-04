@@ -15,6 +15,7 @@ class TourAdapter(var tours: List<Tour>,var context: Context): RecyclerView.Adap
         val image: ImageView = view.findViewById(R.id.tour_list_image)
         val country: TextView = view.findViewById(R.id.tour_list_country)
         val date_start: TextView = view.findViewById(R.id.tour_list_datestart)
+        val date_end: TextView = view.findViewById(R.id.tour_list_dateend)
         val price: TextView = view.findViewById(R.id.tour_list_price)
         val btn: Button = view.findViewById(R.id.tour_list_button)
     }
@@ -32,6 +33,7 @@ class TourAdapter(var tours: List<Tour>,var context: Context): RecyclerView.Adap
         holder.country.text = tours[position].country
         holder.date_start.text = tours[position].date_start
         holder.price.text = tours[position].price_per_one
+        holder.date_end.text = tours[position].date_end
 
         val imageId = context.resources.getIdentifier(
             tours[position].image,
