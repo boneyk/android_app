@@ -9,13 +9,12 @@
     android:paddingBottom="20dp">
 
 
-
     <ImageView
         android:id="@+id/tour_list_image"
         android:layout_width="fill_parent"
         android:layout_height="230dp"
-        android:scaleType="centerInside"
-        app:srcCompat="@drawable/egypt" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/egypt_title" />
 
     <TextView
         android:id="@+id/tour_list_country"

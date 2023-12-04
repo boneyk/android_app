@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="каталог туров"
+        android:icon="@drawable/baseline_apps_24"
+        android:id="@+id/catalog"/>
+    <item android:title="покупки"
+        android:icon="@drawable/baseline_account_balance_wallet_24"
+        android:id="@+id/basket"/>
+    <item android:title="профиль"
+        android:icon="@drawable/baseline_person_24"
+        android:id="@+id/profile"/>
+</menu>

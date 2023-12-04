@@ -1,11 +1,195 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:background="#dddfeb"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TourActivity">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="false">
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/main"
+        android:background="#dddfeb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TourActivity"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/tour_list_image"
+            android:layout_width="fill_parent"
+            android:layout_height="320dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/egypt_title" />
+
+        <TextView
+            android:id="@+id/tour_title"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:text="TextView"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tour_city"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textSize="17sp"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tour_list_dateS"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:gravity="right"
+            android:text="TextView"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tour_list_dateF"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:gravity="right"
+            android:text="TextView"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Описание тура:" />
+
+        <TextView
+            android:id="@+id/tour_list_desc"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:layout_width="fill_parent"
+            android:layout_height="370dp"
+            android:autoSizeTextType="uniform"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:text="TextView"
+            android:textSize="18sp"
+            android:paddingBottom="35dp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tour_price"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <Button
+            android:id="@+id/button_buy"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="17dp"
+            android:backgroundTint="#EC7063"
+            android:text="Купить" />
+
+        <TextView
+            android:id="@+id/tour_hotel_title"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:text="Отель"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/hotel_image"
+            android:layout_width="fill_parent"
+            android:layout_height="320dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/egypt_title" />
+
+        <TextView
+            android:id="@+id/hotel_title"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:rating="@integer/material_motion_duration_medium_1"
+            android:layout_width="240dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tour_desc_title"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Описание отеля:" />
+
+        <TextView
+            android:id="@+id/tour_hotel_desc"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:layout_width="fill_parent"
+            android:layout_height="370dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:text="TextView"
+            android:textSize="18sp"
+            android:paddingBottom="35dp"
+            android:textStyle="normal" />
+
+
+        <TextView
+            android:id="@+id/tour_review_title"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"
+            android:text="Отзывы"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</ScrollView>
