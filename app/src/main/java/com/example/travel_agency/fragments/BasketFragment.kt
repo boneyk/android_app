@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travel_agency.adapters.BasketListAdapter
 import com.example.travel_agency.R
 import com.example.travel_agency.models.Tour
-import com.example.travel_agency.TourAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +36,7 @@ class BasketFragment : Fragment() {
         tours.add(Tour(2,"Южная Корея", "Сеул", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse elit velit, venenatis tempus egestas in, iaculis sed mi. Praesent ultrices blandit elit id pellentesque. Nulla nec odio at eros vehicula eleifend. Etiam posuere bibendum ante eget facilisis. Quisque sed sollicitudin eros, non rhoncus nisi. Vestibulum posuere dui sit amet justo mollis, vel finibus mauris blandit. Aliquam tincidunt nunc ac erat mattis posuere. Proin pharetra ante eget urna rutrum molestie. Maecenas ante tellus, sodales ac molestie ac, vehicula eget ligula.","30-11-2023", "06-12-2023",1,"2500 руб.","southkorea"))
 
         toursList.layoutManager = LinearLayoutManager(requireContext())
-        toursList.adapter = TourAdapter(tours, requireContext())
+        toursList.adapter = BasketListAdapter(tours, requireContext())
     }
 
     override fun onCreateView(

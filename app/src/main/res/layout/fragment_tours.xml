@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#dddfeb"
+    android:background="#FFFFFF"
     tools:context=".fragments.ToursFragment">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#dddfeb">
+        android:background="#FFFFFF">
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"

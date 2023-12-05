@@ -11,16 +11,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.travel_agency.R
 import com.example.travel_agency.models.User
 
-class MainActivity : AppCompatActivity(){
+class SignActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_sign)
 
         val userLogin: EditText = findViewById(R.id.user_login_auth)
         val userPassword: EditText = findViewById(R.id.user_password_auth)
-        val buttonSign: Button = findViewById(R.id.button_auth)
+        val buttonSign: Button = findViewById(R.id.button_dock)
         val linkToReg: TextView = findViewById(R.id.link_to_reg)
 
         linkToReg.setOnClickListener{

@@ -25,7 +25,7 @@ class RegActivity : AppCompatActivity() {
         val linkToAuth: TextView = findViewById(R.id.link_to_auth)
 
         linkToAuth.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, SignActivity::class.java)
             startActivity(intent)
         }
 
@@ -48,6 +48,8 @@ class RegActivity : AppCompatActivity() {
                 userPasswordCopy.text.clear()
 
                 Toast.makeText(this, "Пользователь $login успешно прошел регистрацию", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, AgencyActivity::class.java)
+                startActivity(intent)
             }
         }
     }

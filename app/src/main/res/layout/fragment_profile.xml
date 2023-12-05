@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#dddfeb"
+    android:background="#FFFFFF"
     tools:context=".fragments.ProfileFragment">
 
     <LinearLayout
         android:id="@+id/main"
-        android:background="#dddfeb"
+        android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -34,7 +34,7 @@
             android:id="@+id/prof_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            tools:srcCompat="@drawable/avatarr"
+            tools:srcCompat="@drawable/avatar"
             android:layout_marginLeft="20dp"/>
 
 
@@ -129,7 +129,7 @@
             android:hint="  Password" />
 
         <Button
-            android:id="@+id/button_auth"
+            android:id="@+id/button_dock"
             android:layout_width="220dp"
             android:layout_height="60dp"
             android:textSize="19sp"

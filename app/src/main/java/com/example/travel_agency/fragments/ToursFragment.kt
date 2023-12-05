@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
 import com.example.travel_agency.models.Tour
-import com.example.travel_agency.TourAdapter
+import com.example.travel_agency.adapters.TourListAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,7 +39,7 @@ class ToursFragment : Fragment() {
         tours.add(Tour(5,"Мальдивы", "Острова Велиганду", "    4 дня\n" + "\n" + "  Прибытие в страну\n" + "  Прилетим на Мальдивские острова. Отдохнем в отеле, после пойдем купаться.\n" + "\n" + "  Банановый риф\n" + "  Риф имеет форму банана, поражает своими фантастическими кораллами, удивительными скалами, выступами и пещерами.\n" + "\n" + "  Пляж острова Велиганду\n" + " Пляж острова находится в непосредственной близости от рыбацкой деревни, а потому вкусная еда на острове гарантирована.","01-12-2023", "05-12-2023",2,"255 367 руб.","maldives"))
 
         toursList.layoutManager = LinearLayoutManager(requireContext())
-        toursList.adapter = TourAdapter(tours, requireContext())
+        toursList.adapter = TourListAdapter(tours, requireContext())
     }
 
 

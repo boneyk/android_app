@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#739dcd"
-    tools:context=".activities.MainActivity">
+    android:background="#b8cbe9"
+    tools:context=".activities.SignActivity">
 
     <TextView
         android:id="@+id/title_text"
@@ -61,7 +61,7 @@
         android:hint="  Password" />
 
     <Button
-        android:id="@+id/button_auth"
+        android:id="@+id/button_dock"
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:textSize="19sp"

@@ -34,7 +34,7 @@
             android:name=".activities.RegActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.SignActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

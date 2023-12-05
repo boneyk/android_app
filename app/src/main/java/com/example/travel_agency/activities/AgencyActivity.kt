@@ -1,5 +1,6 @@
 package com.example.travel_agency.activities
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ class AgencyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agency)
+
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.navigation)
         // handle navigation selection
@@ -47,7 +49,8 @@ class AgencyActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frame_place, ToursFragment())
             .commit()
-
-
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.navigationBarColor = resources.getColor(R.color.navigationBarColor)
+        }
     }
 }

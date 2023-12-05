@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#dddfeb"
+    android:background="#FFFFFF"
     tools:context=".fragments.BasketFragment">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,24 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#dddfeb">
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_alternates_bold"
-        android:textColor="#1f1317"
-        android:layout_gravity="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:text="История покупок" />
+        android:background="#FFFFFF">
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates_bold"
+            android:textColor="#1f1317"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:text="История покупок" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/toursList"
-        android:layout_width="match_parent"
-        android:layout_height="685dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/toursList"
+            android:layout_width="match_parent"
+            android:layout_height="685dp">
 
-    </androidx.recyclerview.widget.RecyclerView>
-</LinearLayout>
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
 </FrameLayout>

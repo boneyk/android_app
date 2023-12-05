@@ -1,4 +1,4 @@
-package com.example.travel_agency
+package com.example.travel_agency.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -9,10 +9,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travel_agency.R
 import com.example.travel_agency.activities.TourActivity
 import com.example.travel_agency.models.Tour
 
-class TourAdapter(var tours: List<Tour>, var context: Context): RecyclerView.Adapter<TourAdapter.MyViewHolder>() {
+class FaveListAdapter (var tours: List<Tour>, var context: Context): RecyclerView.Adapter<FaveListAdapter.MyViewHolder>() {
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.tour_list_image)
         val country: TextView = view.findViewById(R.id.tour_list_country)
@@ -20,10 +21,11 @@ class TourAdapter(var tours: List<Tour>, var context: Context): RecyclerView.Ada
         val date_end: TextView = view.findViewById(R.id.tour_list_dateend)
         val price: TextView = view.findViewById(R.id.tour_list_price)
         val btn: Button = view.findViewById(R.id.tour_list_button)
+        val btn_del: Button = view.findViewById(R.id.del_button_list)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.tour_in_list,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.tour_in_fave,parent,false)
         return MyViewHolder(view)
     }
 
@@ -53,6 +55,9 @@ class TourAdapter(var tours: List<Tour>, var context: Context): RecyclerView.Ada
             intent.putExtra("tourDesc",tours[position].description)
             intent.putExtra("tourPrice",tours[position].price_per_one)
             context.startActivity(intent)
+        }
+        holder.btn_del.setOnClickListener{
+            notifyItemRemoved(position) // Уведомляем адаптер об удалении элемента
         }
     }
 }
