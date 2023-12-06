@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import com.example.travel_agency.activities.DockActivity
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,12 +34,73 @@ class ProfileFragment : Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
+            val editProfButton = view.findViewById(R.id.prof_edit_button) as Button
+            val cancelProfButton = view.findViewById(R.id.prof_cancelbutton) as Button
+            val saveProfButton = view.findViewById(R.id.prof_okbutton) as Button
+
+            //        ОТМЕНА И СОХРАНИТЬ
+            val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+            passCancel.visibility = View.GONE
+            val passSave: View = view.findViewById(R.id.prof_okbutton)
+            passSave.visibility = View.GONE
+            val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+            editProfLogin.isEnabled = false
+            val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+            editProfEmail.isEnabled = false
+            val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+            editProfPhone.isEnabled = false
+            val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+            editProfPassword.isEnabled = false
+
+            editProfButton.setOnClickListener{
+                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+                editProfLogin.isEnabled = true
+                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+                editProfEmail.isEnabled = true
+                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+                editProfPhone.isEnabled = true
+                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+                editProfPassword.isEnabled = true
+                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+                passCancel.visibility = View.VISIBLE
+                val passSave: View = view.findViewById(R.id.prof_okbutton)
+                passSave.visibility = View.VISIBLE
+            }
+            cancelProfButton.setOnClickListener{
+                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+                passCancel.visibility = View.GONE
+                val passSave: View = view.findViewById(R.id.prof_okbutton)
+                passSave.visibility = View.GONE
+                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+                editProfLogin.isEnabled = false
+                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+                editProfEmail.isEnabled = false
+                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+                editProfPhone.isEnabled = false
+                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+                editProfPassword.isEnabled = false
+            }
+            saveProfButton.setOnClickListener{
+                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+                passCancel.visibility = View.GONE
+                val passSave: View = view.findViewById(R.id.prof_okbutton)
+                passSave.visibility = View.GONE
+                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+                editProfLogin.isEnabled = false
+                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+                editProfEmail.isEnabled = false
+                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+                editProfPhone.isEnabled = false
+                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+                editProfPassword.isEnabled = false
+            }
+
+
             val buttonDock: Button = view.findViewById(R.id.button_dock)
             buttonDock.setOnClickListener {
                 val intent = Intent(activity, DockActivity::class.java)
                 startActivity(intent)
             }
-
             return view
         }
 

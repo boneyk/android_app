@@ -171,15 +171,43 @@
                 android:textColor="#1f1317"
                 android:hint="  Регистрация" />
 
-            <Button
-                android:id="@+id/passport_edit_button"
-                android:layout_width="160dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:orientation="horizontal">
+            <Button
+                android:id="@+id/pass_cancelbutton"
                 android:backgroundTint="#3C5A5C"
+                android:layout_width="160dp"
+                android:layout_weight="1"
+                android:onClick="cancelButtonClick"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
-                android:layout_marginRight="45dp"
-                android:text="Редактировать" />
+                android:layout_marginLeft="40dp"
+                android:text="Отменить" />
+                <Button
+                    android:id="@+id/passport_edit_button"
+
+                    android:layout_toRightOf="@+id/pass_cancelbutton"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Редактировать" />
+
+            <Button
+                android:id="@+id/pass_okbutton"
+                android:layout_toRightOf="@+id/pass_cancelbutton"
+                android:backgroundTint="#3C5A5C"
+                android:layout_width="160dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:onClick="okButtonClick"
+                android:text="Сохранить" />
+        </RelativeLayout>
 
 <!--            Загранпаспорт-->
             <TextView
@@ -311,15 +339,43 @@
                 android:textColor="#1f1317"
                 android:hint="  Кем выдан" />
 
-            <Button
-                android:id="@+id/zagr_edit_button"
-                android:layout_width="160dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:backgroundTint="#3C5A5C"
-                android:layout_marginTop="20sp"
-                android:layout_marginRight="45dp"
-                android:text="Редактировать" />
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/zagr_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_weight="1"
+                    android:onClick="cancelButtonClick"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="Отменить" />
+                <Button
+                    android:id="@+id/zagr_edit_button"
+
+                    android:layout_toRightOf="@+id/zagr_cancelbutton"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Редактировать" />
+
+                <Button
+                    android:id="@+id/zagr_okbutton"
+                    android:layout_toRightOf="@+id/zagr_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="okButtonClick"
+                    android:text="Сохранить" />
+            </RelativeLayout>
 
 <!--            Виза-->
             <TextView
@@ -522,15 +578,42 @@
                 android:layout_gravity="center"
                 android:textColor="#1f1317"
                 android:hint="  Цель посещения" />
-            <Button
-                android:id="@+id/visa_edit_button"
-                android:layout_width="160dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:backgroundTint="#3C5A5C"
-                android:layout_marginTop="20sp"
-                android:layout_marginRight="45dp"
-                android:text="Редактировать" />
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/visa_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_weight="1"
+                    android:onClick="cancelButtonClick"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="Отменить" />
+                <Button
+                    android:id="@+id/visa_edit_button"
+                    android:layout_toRightOf="@+id/visa_cancelbutton"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Редактировать" />
+
+                <Button
+                    android:id="@+id/visa_okbutton"
+                    android:layout_toRightOf="@+id/visa_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="okButtonClick"
+                    android:text="Сохранить" />
+            </RelativeLayout>
 <!--            Страховка(insurance)-->
 
             <TextView
@@ -626,16 +709,43 @@
                 android:layout_gravity="center"
                 android:textColor="#1f1317"
                 android:hint="  Сумма на человека" />
-            <Button
-                android:id="@+id/insurance_edit_button"
-                android:layout_width="160dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:backgroundTint="#3C5A5C"
-                android:layout_marginTop="20sp"
-                android:layout_marginRight="45dp"
-                android:layout_marginBottom="30dp"
-                android:text="Редактировать" />
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/insurance_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_weight="1"
+                    android:onClick="cancelButtonClick"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="Отменить" />
+                <Button
+                    android:id="@+id/insurance_edit_button"
+
+                    android:layout_toRightOf="@+id/insurance_cancelbutton"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Редактировать" />
+
+                <Button
+                    android:id="@+id/insurance_okbutton"
+                    android:layout_toRightOf="@+id/insurance_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="okButtonClick"
+                    android:text="Сохранить" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

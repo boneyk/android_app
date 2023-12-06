@@ -15,7 +15,6 @@
         android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -66,10 +65,9 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_alternates_bold"
             android:text="Личные данные"
             android:textSize="30sp"
@@ -77,8 +75,8 @@
             android:layout_gravity="center" />
 
         <EditText
-            android:id="@+id/user_login_auth"
-            android:background="@drawable/edit_text"
+            android:id="@+id/prof_login"
+            android:background="#dddfeb"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -90,8 +88,8 @@
             android:hint="  Login" />
 
         <EditText
-            android:id="@+id/user_login_auth"
-            android:background="@drawable/edit_text"
+            android:id="@+id/prof_email"
+            android:background="#dddfeb"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -103,8 +101,8 @@
             android:hint="  Email" />
 
         <EditText
-            android:id="@+id/user_login_auth"
-            android:background="@drawable/edit_text"
+            android:id="@+id/prof_phone"
+            android:background="#dddfeb"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -116,8 +114,8 @@
             android:hint="  Номер телефона" />
 
         <EditText
-            android:id="@+id/user_login_auth"
-            android:background="@drawable/edit_text"
+            android:id="@+id/prof_password"
+            android:background="#dddfeb"
             android:layout_width="320dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -128,9 +126,49 @@
             android:textColor="#1f1317"
             android:hint="  Password" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/prof_cancelbutton"
+                android:backgroundTint="#dddfeb"
+                android:textColor="@color/black"
+                android:layout_width="160dp"
+                android:layout_weight="1"
+                android:onClick="cancelButtonClick"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layout_marginLeft="20dp"
+                android:text="Отменить" />
+            <Button
+                android:id="@+id/prof_edit_button"
+
+                android:layout_toRightOf="@+id/prof_cancelbutton"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:backgroundTint="#dddfeb"
+                android:textColor="@color/black"
+                android:layout_marginTop="20sp"
+                android:layout_marginLeft="10dp"
+                android:text="Редактировать" />
+
+            <Button
+                android:id="@+id/prof_okbutton"
+                android:layout_toRightOf="@+id/prof_cancelbutton"
+                android:backgroundTint="#dddfeb"
+                android:textColor="@color/black"
+                android:layout_width="160dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:onClick="okButtonClick"
+                android:text="Сохранить" />
+        </RelativeLayout>
         <Button
             android:id="@+id/button_dock"
-            android:layout_width="220dp"
+            android:layout_width="200dp"
             android:layout_height="60dp"
             android:textSize="19sp"
             android:layout_marginTop="30sp"
@@ -138,6 +176,7 @@
             android:textStyle="bold"
             android:backgroundTint="#3C5A5C"
             android:text="Документы" />
+
 
     </LinearLayout>
 </FrameLayout>
