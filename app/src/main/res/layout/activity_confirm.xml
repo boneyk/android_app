@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#dddfeb"
+    tools:context=".activities.ConfirmActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_alternates_bold"
+        android:textColor="#1f1317"
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="Подтверждение заказа" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:textColor="#1f1317"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                android:text="Личная информация" />
+    <TextView
+        android:id="@+id/prof_login"
+        android:background="#ffffff"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="#6a6a6a"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center"
+        android:textColor="#1f1317"
+        android:hint="  Полное имя" />
+
+    <TextView
+        android:id="@+id/prof_email"
+        android:background="#ffffff"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="#6a6a6a"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center"
+        android:textColor="#1f1317"
+        android:hint="  Login" />
+
+    <TextView
+        android:id="@+id/prof_phone"
+        android:background="#ffffff"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="#6a6a6a"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center"
+        android:textColor="#1f1317"
+        android:hint="  Email" />
+
+    <TextView
+        android:id="@+id/prof_password"
+        android:background="#ffffff"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="#6a6a6a"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center"
+        android:textColor="#1f1317"
+        android:hint="  Номер телефона" />
+    <TextView
+        android:id="@+id/prof_password"
+        android:background="#ffffff"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="#6a6a6a"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center"
+        android:textColor="#1f1317"
+        android:hint="  Пол" />
+    <TextView
+        android:id="@+id/prof_password"
+        android:background="#ffffff"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColorHint="#6a6a6a"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center"
+        android:textColor="#1f1317"
+        android:hint="  Дата рождения" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:textColor="#1f1317"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                android:text="Информация о туре" />
+
+            <TextView
+                android:id="@+id/info_passport_name"
+                android:background="#FFFFFF"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:textColorHint="#6a6a6a"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center"
+                android:textColor="#1f1317"
+                android:hint="  Страна" />
+            <TextView
+                android:id="@+id/info_passport_name"
+                android:background="#FFFFFF"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:textColorHint="#6a6a6a"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center"
+                android:textColor="#1f1317"
+                android:hint="  Город" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/info_passport_sex"
+                    android:background="#FFFFFF"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:textColorHint="#6a6a6a"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_gravity="center"
+                    android:textColor="#1f1317"
+                    android:hint="  Дата начала" />
+                <TextView
+                    android:id="@+id/info_passport_birth"
+                    android:layout_toRightOf="@+id/info_passport_sex"
+                    android:background="#FFFFFF"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:textColorHint="#6a6a6a"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_gravity="center"
+                    android:textColor="#1f1317"
+                    android:hint="  Дата окончания" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/info_passport_citizenship"
+                android:background="#FFFFFF"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:textColorHint="#6a6a6a"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center"
+                android:textColor="#1f1317"
+                android:hint="  Цена" />
+            <TextView
+                android:id="@+id/info_passport_citizenship"
+                android:background="#FFFFFF"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:autoSizeTextType="uniform"
+                android:textColorHint="#6a6a6a"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center"
+                android:textColor="#1f1317"
+                android:hint="  Описание тура" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:textColor="#1f1317"
+                android:layout_gravity="center"
+                android:textSize="30sp"
+                android:textStyle="italic"
+                android:text="Спасибо за покупку!" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

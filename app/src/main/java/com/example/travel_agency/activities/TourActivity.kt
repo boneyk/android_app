@@ -1,5 +1,6 @@
 package com.example.travel_agency.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -26,5 +27,10 @@ class TourActivity : AppCompatActivity() {
         desc.text = intent.getStringExtra("tourDesc")
         price.text = intent.getStringExtra("tourPrice")
 
+        val linkToConfirm: TextView = findViewById(R.id.button_buy)
+        linkToConfirm.setOnClickListener{
+            val intent = Intent(this, ConfirmActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
