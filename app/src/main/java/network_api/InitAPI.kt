@@ -2,6 +2,7 @@ package network_api
 
 import android.util.Log
 import com.example.travel_agency.models.LoginRequest
+import com.example.travel_agency.models.RegRequest
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -32,6 +33,11 @@ class InitAPI(){
         fun onError()
         fun onFailure(error: Throwable)
     }
+    interface RegCallback {
+        fun onSuccess(response: Any)
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
 
     fun loginUser(login: String, password: String, callback: LoginCallback) {
 
@@ -56,6 +62,27 @@ class InitAPI(){
 //                    Log.d("MyLog", "login: ${t.message}")
                 }
 
+            })
+    }
+    fun regUser(login: String, email: String, password: String, password_confirm: String, callback: RegCallback){
+        api.regUser(RegRequest(login,email,password,password_confirm))
+            .enqueue(object : Callback<Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(response)
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                    callback.onFailure(t)
+                }
             })
     }
 }

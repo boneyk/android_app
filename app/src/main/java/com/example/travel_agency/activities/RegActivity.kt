@@ -8,14 +8,23 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
+import com.example.travel_agency.ViewModel.LoginViewModel
+import com.example.travel_agency.ViewModel.RegViewModel
+import com.example.travel_agency.databinding.ActivityRegBinding
 import com.example.travel_agency.models.User
 
 class RegActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRegBinding
+    private lateinit var viewModel: RegViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_reg)
+        binding = ActivityRegBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        viewModel = ViewModelProvider(this)[RegViewModel::class.java]
 
         val userLogin: EditText = findViewById(R.id.user_login)
         val userEmail: EditText = findViewById(R.id.user_email)
@@ -30,27 +39,17 @@ class RegActivity : AppCompatActivity() {
         }
 
         buttonReg.setOnClickListener {
-            val login = userLogin.text.toString().trim()
-            val email = userEmail.text.toString().trim()
-            val password = userPassword.text.toString().trim()
-            val passwordCopy = userPasswordCopy.text.toString().trim()
+            viewModel.tryReg(binding)
 
-            if (login == "" || password == "" || email == "" || passwordCopy == "") {
-                Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
-            }else if(password != passwordCopy){
-                Toast.makeText(this, "Пароль введен неверно", Toast.LENGTH_LONG).show()
-            }else{
-                val user = User(login,password)
-
+            viewModel.startAgencyActivityEvent.observe(this) {
+                Toast.makeText(this, "Пользователь успешно прошел регистрацию", Toast.LENGTH_LONG).show()
                 userLogin.text.clear()
-                userEmail.text.clear()
                 userPassword.text.clear()
+                userEmail.text.clear()
                 userPasswordCopy.text.clear()
-
-                Toast.makeText(this, "Пользователь $login успешно прошел регистрацию", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, AgencyActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, AgencyActivity::class.java))
+                finish()
+            }
             }
         }
     }
-}

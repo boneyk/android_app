@@ -2,5 +2,6 @@
     <string name="app_name">travel_agency</string>
     <string name="login_errer_message">Enter the login</string>
     <string name="password_errer_message">Enter the password</string>
+    <string name="email_errer_message">Enter the email</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
