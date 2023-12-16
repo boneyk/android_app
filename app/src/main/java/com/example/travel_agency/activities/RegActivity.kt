@@ -33,23 +33,23 @@ class RegActivity : AppCompatActivity() {
         val buttonReg: Button = findViewById(R.id.button_reg)
         val linkToAuth: TextView = findViewById(R.id.link_to_auth)
 
-        linkToAuth.setOnClickListener{
+        linkToAuth.setOnClickListener {
             val intent = Intent(this, SignActivity::class.java)
             startActivity(intent)
         }
 
         buttonReg.setOnClickListener {
             viewModel.tryReg(binding)
-
-            viewModel.startAgencyActivityEvent.observe(this) {
-                Toast.makeText(this, "Пользователь успешно прошел регистрацию", Toast.LENGTH_LONG).show()
-                userLogin.text.clear()
-                userPassword.text.clear()
-                userEmail.text.clear()
-                userPasswordCopy.text.clear()
-                startActivity(Intent(this, AgencyActivity::class.java))
-                finish()
-            }
-            }
+        }
+        viewModel.startAgencyActivityEvent.observe(this) {
+            Toast.makeText(this, "Пользователь успешно прошел регистрацию", Toast.LENGTH_LONG)
+                .show()
+            userLogin.text.clear()
+            userPassword.text.clear()
+            userEmail.text.clear()
+            userPasswordCopy.text.clear()
+            startActivity(Intent(this, AgencyActivity::class.java))
+            finish()
         }
     }
+}

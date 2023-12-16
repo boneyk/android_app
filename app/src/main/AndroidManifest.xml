@@ -27,15 +27,6 @@
             android:name=".activities.DockActivity"
             android:exported="false" />
         <activity
-            android:name=".FaveActivity"
-            android:exported="false" />
-        <activity
-            android:name=".BasketActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".activities.TourActivity"
             android:exported="false" />
         <activity

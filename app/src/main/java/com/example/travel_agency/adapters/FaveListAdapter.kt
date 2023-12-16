@@ -11,9 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
 import com.example.travel_agency.activities.TourActivity
-import com.example.travel_agency.models.Tour
+import com.example.travel_agency.models.Tours
 
-class FaveListAdapter (var tours: List<Tour>, var context: Context): RecyclerView.Adapter<FaveListAdapter.MyViewHolder>() {
+class FaveListAdapter (var tours: List<Tours>, var context: Context): RecyclerView.Adapter<FaveListAdapter.MyViewHolder>() {
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.tour_list_image)
         val country: TextView = view.findViewById(R.id.tour_list_country)
@@ -34,26 +34,26 @@ class FaveListAdapter (var tours: List<Tour>, var context: Context): RecyclerVie
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.country.text = tours[position].country
-        holder.date_start.text = tours[position].date_start
-        holder.price.text = tours[position].price_per_one
-        holder.date_end.text = tours[position].date_end
+//        holder.country.text = tours[position].country
+//        holder.date_start.text = tours[position].date_start
+        holder.price.text = tours[position].name
+//        holder.date_end.text = tours[position].date_end
 
-        val imageId = context.resources.getIdentifier(
-            tours[position].image,
-            "drawable",
-            context.packageName
-        )
-        holder.image.setImageResource(imageId)
+//        val imageId = context.resources.getIdentifier(
+//            tours[position].image,
+//            "drawable",
+//            context.packageName
+//        )
+//        holder.image.setImageResource(imageId)
 
         holder.btn.setOnClickListener{
             val intent = Intent(context, TourActivity::class.java)
-            intent.putExtra("tourTitle",tours[position].country)
-            intent.putExtra("tourCity",tours[position].city)
-            intent.putExtra("tourSDate",tours[position].date_start)
-            intent.putExtra("tourEDate",tours[position].date_end)
-            intent.putExtra("tourDesc",tours[position].description)
-            intent.putExtra("tourPrice",tours[position].price_per_one)
+//            intent.putExtra("tourTitle",tours[position].country)
+//            intent.putExtra("tourCity",tours[position].city)
+//            intent.putExtra("tourSDate",tours[position].date_start)
+//            intent.putExtra("tourEDate",tours[position].date_end)
+//            intent.putExtra("tourDesc",tours[position].description)
+            intent.putExtra("tourPrice",tours[position].name)
             context.startActivity(intent)
         }
         holder.btn_del.setOnClickListener{

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.adapters.BasketListAdapter
 import com.example.travel_agency.R
-import com.example.travel_agency.models.Tour
+import com.example.travel_agency.models.Tours
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,11 +30,10 @@ class BasketFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val toursList: RecyclerView = view.findViewById(R.id.toursList)
-        val tours = arrayListOf<Tour>()
+        val tours = arrayListOf<Tours>()
 
-        tours.add(Tour(1,"Нидерланды", "Амстердам", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse elit velit, venenatis tempus egestas in, iaculis sed mi. Praesent ultrices blandit elit id pellentesque. Nulla nec odio at eros vehicula eleifend. Etiam posuere bibendum ante eget facilisis. Quisque sed sollicitudin eros, non rhoncus nisi. Vestibulum posuere dui sit amet justo mollis, vel finibus mauris blandit. Aliquam tincidunt nunc ac erat mattis posuere. Proin pharetra ante eget urna rutrum molestie. Maecenas ante tellus, sodales ac molestie ac, vehicula eget ligula.","21-11-2023", "24-11-2023",2,"5500 руб.","amsterdam"))
-        tours.add(Tour(2,"Южная Корея", "Сеул", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse elit velit, venenatis tempus egestas in, iaculis sed mi. Praesent ultrices blandit elit id pellentesque. Nulla nec odio at eros vehicula eleifend. Etiam posuere bibendum ante eget facilisis. Quisque sed sollicitudin eros, non rhoncus nisi. Vestibulum posuere dui sit amet justo mollis, vel finibus mauris blandit. Aliquam tincidunt nunc ac erat mattis posuere. Proin pharetra ante eget urna rutrum molestie. Maecenas ante tellus, sodales ac molestie ac, vehicula eget ligula.","30-11-2023", "06-12-2023",1,"2500 руб.","southkorea"))
-
+        tours.add(Tours("fhfhfh",12, "Амстердам"))
+        tours.add(Tours("jfjjf",123, "Сеул"))
         toursList.layoutManager = LinearLayoutManager(requireContext())
         toursList.adapter = BasketListAdapter(tours, requireContext())
     }

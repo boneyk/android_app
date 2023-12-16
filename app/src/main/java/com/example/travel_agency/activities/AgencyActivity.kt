@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.travel_agency.ProfileFragment
 import com.example.travel_agency.fragments.BasketFragment
 import com.example.travel_agency.fragments.FaveFragment
@@ -12,20 +13,18 @@ import com.example.travel_agency.fragments.ToursFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class AgencyActivity : AppCompatActivity() {
-
+//    private lateinit var fragmentManager: FragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agency)
 
-
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.navigation)
         // handle navigation selection
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            lateinit var fragment: Fragment
-            when (item.itemId) {
+        bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
                 R.id.catalog -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame_place, ToursFragment())
+                        .replace(R.id.frame_place, ToursFragment.newInstance())
                         .commit()
                 }
                 R.id.basket -> {

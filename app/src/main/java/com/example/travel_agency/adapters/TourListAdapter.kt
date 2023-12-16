@@ -11,15 +11,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
 import com.example.travel_agency.activities.TourActivity
-import com.example.travel_agency.models.Tour
+import com.example.travel_agency.models.Tours
 
-class TourListAdapter(var tours: List<Tour>, var context: Context): RecyclerView.Adapter<TourListAdapter.MyViewHolder>() {
+class TourListAdapter(var tours: List<Tours>, var context: Context): RecyclerView.Adapter<TourListAdapter.MyViewHolder>() {
+
+    fun updateData(newTours: List<Tours>) {
+        tours = newTours
+        notifyDataSetChanged()
+    }
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.tour_list_image)
-        val country: TextView = view.findViewById(R.id.tour_list_country)
-        val date_start: TextView = view.findViewById(R.id.tour_list_datestart)
-        val date_end: TextView = view.findViewById(R.id.tour_list_dateend)
+        val name: TextView = view.findViewById(R.id.tour_list_name)
         val price: TextView = view.findViewById(R.id.tour_list_price)
+        val tour_type: TextView = view.findViewById(R.id.tour_list_tourtype)
         val btn: Button = view.findViewById(R.id.tour_list_button)
     }
 
@@ -33,26 +37,22 @@ class TourListAdapter(var tours: List<Tour>, var context: Context): RecyclerView
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.country.text = tours[position].country
-        holder.date_start.text = tours[position].date_start
-        holder.price.text = tours[position].price_per_one
-        holder.date_end.text = tours[position].date_end
+        holder.name.text = tours[position].name
+        holder.price.text = tours[position].capacity.toString()
+        holder.tour_type.text = tours[position].country
 
-        val imageId = context.resources.getIdentifier(
-            tours[position].image,
-            "drawable",
-            context.packageName
-        )
-        holder.image.setImageResource(imageId)
+
+//        val imageId = context.resources.getIdentifier(
+//            tours[position].image,
+//            "drawable",
+//            context.packageName
+//        )
+//        holder.image.setImageResource(imageId)
+
 
         holder.btn.setOnClickListener{
             val intent = Intent(context, TourActivity::class.java)
-            intent.putExtra("tourTitle",tours[position].country)
-            intent.putExtra("tourCity",tours[position].city)
-            intent.putExtra("tourSDate",tours[position].date_start)
-            intent.putExtra("tourEDate",tours[position].date_end)
-            intent.putExtra("tourDesc",tours[position].description)
-            intent.putExtra("tourPrice",tours[position].price_per_one)
+            intent.putExtra("tourPrice",tours[position].name)
             context.startActivity(intent)
         }
     }

@@ -8,9 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
-import com.example.travel_agency.models.Tour
+import com.example.travel_agency.models.Tours
 
-class BasketListAdapter(var tours: List<Tour>, var context: Context): RecyclerView.Adapter<BasketListAdapter.MyViewHolder>() {
+class BasketListAdapter(var tours: List<Tours>, var context: Context): RecyclerView.Adapter<BasketListAdapter.MyViewHolder>() {
     class MyViewHolder(view: View): RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.tour_list_image)
         val country: TextView = view.findViewById(R.id.tour_list_country)
@@ -29,16 +29,13 @@ class BasketListAdapter(var tours: List<Tour>, var context: Context): RecyclerVi
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.country.text = tours[position].country
-        holder.date_start.text = tours[position].date_start
-        holder.price.text = tours[position].price_per_one
-        holder.date_end.text = tours[position].date_end
+        holder.price.text = tours[position].name
 
-        val imageId = context.resources.getIdentifier(
-            tours[position].image,
-            "drawable",
-            context.packageName
-        )
-        holder.image.setImageResource(imageId)
+//        val imageId = context.resources.getIdentifier(
+//            tours[position].image,
+//            "drawable",
+//            context.packageName
+//        )
+//        holder.image.setImageResource(imageId)
     }
 }

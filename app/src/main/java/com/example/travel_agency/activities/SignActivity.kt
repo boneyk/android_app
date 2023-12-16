@@ -42,6 +42,7 @@ class SignActivity : AppCompatActivity(){
             userPassword.text.clear()
         }
         viewModel.startAgencyActivityEvent.observe(this) {
+            Toast.makeText(this, "Пользователь успешно авторизировался", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, AgencyActivity::class.java))
             finish()
         }
