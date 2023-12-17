@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,7 @@ class ToursFragment : Fragment() {
     private lateinit var binding: FragmentToursBinding
     private lateinit var mainViewModel: ToursFragmentViewModel
     private lateinit var tourListAdapter: TourListAdapter
-    private var list: List<Tours> = emptyList()
+    private var list: MutableLiveData<List<Tours>> = MutableLiveData()
 
 
     override fun onCreateView(
@@ -41,16 +42,18 @@ class ToursFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tourListAdapter = TourListAdapter(list,requireContext())
-        binding.toursList.layoutManager = LinearLayoutManager(requireContext())
-        binding.toursList.adapter = tourListAdapter
+        mainViewModel = ViewModelProvider(this).get(ToursFragmentViewModel::class.java)
 
         mainViewModel.tourList.observe(viewLifecycleOwner, Observer { tours ->
             if (tours.isNotEmpty()) {
+                Log.d("MyLog", "Запрос обновил данные в tourlistadapter")
                 tourListAdapter.updateData(tours)
             } else {
                 Toast.makeText(requireContext(), "Сегодня в нашем агентстве нет туров :(", Toast.LENGTH_LONG).show()
             }
         })
+        binding.toursList.layoutManager = LinearLayoutManager(requireContext())
+        binding.toursList.adapter = tourListAdapter
     }
     companion object {
         @JvmStatic

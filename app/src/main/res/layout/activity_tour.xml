@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/egypt_title" />
 
         <TextView
-            android:id="@+id/tour_title"
+            android:id="@+id/tour_country"
             android:fontFamily="@font/montserrat_alternates_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,6 +32,10 @@
             android:textSize="40sp"
             android:textStyle="bold" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <TextView
             android:id="@+id/tour_city"
             android:fontFamily="@font/montserrat_alternates_bold"
@@ -39,9 +43,22 @@
             android:paddingVertical="10dp"
             android:textSize="17sp"
             android:textStyle="italic"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tour_capacity"
+                android:layout_toRightOf="@+id/tour_city"
+                android:gravity="right"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:textSize="17sp"
+                android:textStyle="italic"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tour_list_dateS"

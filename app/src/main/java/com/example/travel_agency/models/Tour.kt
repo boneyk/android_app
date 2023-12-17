@@ -11,6 +11,6 @@ class Tour(
     val capacity:Int,
     val price_per_one: Int,
     val description: String,
-    val images:List<Image>
+    val images:List<Tour_Image>
 ) {
 }

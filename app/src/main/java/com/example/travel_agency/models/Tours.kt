@@ -6,6 +6,6 @@ class Tours(
     val name: String,
     val price_per_one:Int,
     val tour_type: String,
-    val image:List<Image>
+    val images: List<Tour_Image>
     ) {
 }

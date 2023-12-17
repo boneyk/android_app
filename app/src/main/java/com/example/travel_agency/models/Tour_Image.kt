@@ -1,6 +1,6 @@
 package com.example.travel_agency.models
 
-class Image(
+class Tour_Image(
     val id:Int,
     val filename:String,
     val path: String,

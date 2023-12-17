@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.adapters.BasketListAdapter
 import com.example.travel_agency.R
-import com.example.travel_agency.models.Image
 import com.example.travel_agency.models.Tours
 
 // TODO: Rename parameter arguments, choose names that match

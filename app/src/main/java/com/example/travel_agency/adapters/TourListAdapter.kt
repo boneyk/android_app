@@ -2,29 +2,33 @@ package com.example.travel_agency.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
 import com.example.travel_agency.ViewModel.TourWithIdViewModel
 import com.example.travel_agency.ViewModel.ToursFragmentViewModel
-import com.example.travel_agency.activities.ConfirmActivity
 import com.example.travel_agency.activities.TourActivity
+import com.example.travel_agency.models.Tour_Image
 import com.example.travel_agency.models.Tours
 
-class TourListAdapter(var tours: List<Tours>, var context: Context): RecyclerView.Adapter<TourListAdapter.MyViewHolder>() {
+class TourListAdapter(var tours: MutableLiveData<List<Tours>>, var context: Context): RecyclerView.Adapter<TourListAdapter.MyViewHolder>() {
 
-    private lateinit var toursViewModel: TourWithIdViewModel
+    private lateinit var tourIdModel: TourWithIdViewModel
+
     fun updateData(newTours: List<Tours>) {
-        tours = newTours
+        tours.value = newTours
         notifyDataSetChanged()
     }
+
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.tour_list_image)
         val name: TextView = view.findViewById(R.id.tour_list_name)
@@ -39,30 +43,34 @@ class TourListAdapter(var tours: List<Tours>, var context: Context): RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return tours.count()
+        return tours.value?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.name.text = tours[position].name
-        holder.price.text = tours[position].price_per_one.toString()
-        holder.tour_type.text = tours[position].tour_type
+        val currentTours = tours.value ?: emptyList()
+        holder.name.text = currentTours[position].name
+        holder.price.text = currentTours[position].price_per_one.toString()
+        holder.tour_type.text = currentTours[position].tour_type
 
+        val currentImage:List<Tour_Image> = currentTours[position].images
+        if(currentImage.isNullOrEmpty()) {
+            Log.d("MyLog", "список пустой")
+        } else {
+            Log.d("MyLog", "массив не пуст")
+            val imageId = context.resources.getIdentifier(
+                currentImage[0].filename,
+                "drawable",
+                context.packageName
+            )
+            holder.image.setImageResource(imageId)
+        }
 
-//        val imageId = context.resources.getIdentifier(
-//            tours[position].image,
-//            "drawable",
-//            context.packageName
-//        )
-//        holder.image.setImageResource(imageId)
-
-
-//        holder.btn.setOnClickListener{
-//            val tour_id = tours[position].id
-//            toursViewModel.findTourWithId(tour_id)
-//        }
-//        toursViewModel.StartTourActivityEvent.observe(this) {
-//            startActivity(Intent(this, ConfirmActivity::class.java))
-//            finish()
-//        }
+        holder.btn.setOnClickListener{
+//            val tour_id = currentTours[position].id
+//            tourIdModel = ViewModelProvider(this).get(TourWithIdViewModel::class.java)
+//            tourIdModel.findTourWithId(tour_id)
+            val intent = Intent(context, TourActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 }
