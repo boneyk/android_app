@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.adapters.TourListAdapter
 import com.example.travel_agency.databinding.FragmentToursBinding
 import com.example.travel_agency.fragments.ToursFragment
+import com.example.travel_agency.models.Tour
 import com.example.travel_agency.models.Tours
 import network_api.InitAPI
 
@@ -19,9 +20,6 @@ class ToursFragmentViewModel(val context: Application) : AndroidViewModel(contex
     lateinit var binding: FragmentToursBinding
     private val apiService = InitAPI()
     val tourList: MutableLiveData<List<Tours>> = MutableLiveData()
-
-    //    private val toursList: RecyclerView = binding.toursList
-    private var list : List<Tours> = emptyList()
 
     fun tryTours() {
         apiService.findTours(object : InitAPI.ToursCallback {
@@ -43,12 +41,5 @@ class ToursFragmentViewModel(val context: Application) : AndroidViewModel(contex
             }
         })
     }
-//    fun rcViewInit(rcView: RecyclerView, roadmapFragment: ToursFragment,requireContext: Context) {
-//        if (list.isNotEmpty()) {
-//            rcView.layoutManager = LinearLayoutManager(requireContext)
-//            val adapter = TourListAdapter(list,requireContext)
-//            rcView.adapter = adapter
-//        }
-//    }
 
 }

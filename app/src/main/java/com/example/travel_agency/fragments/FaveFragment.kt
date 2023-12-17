@@ -31,9 +31,9 @@ class FaveFragment : Fragment() {
 
         val toursList: RecyclerView = view.findViewById(R.id.toursList)
         val tours = arrayListOf<Tours>()
-
-        tours.add(Tours("jgjjgf",12314, "Каир"))
-        tours.add(Tours("gkfgk",12124, "Острова Велиганду"))
+//
+//        tours.add(Tours("jgjjgf",12314, "Каир"))
+//        tours.add(Tours("gkfgk",12124, "Острова Велиганду"))
         toursList.layoutManager = LinearLayoutManager(requireContext())
         toursList.adapter = FaveListAdapter(tours, requireContext())
     }

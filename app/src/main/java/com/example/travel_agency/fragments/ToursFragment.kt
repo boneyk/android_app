@@ -21,7 +21,6 @@ class ToursFragment : Fragment() {
 
     private lateinit var binding: FragmentToursBinding
     private lateinit var mainViewModel: ToursFragmentViewModel
-//    private val toursList: RecyclerView = binding.toursList
     private lateinit var tourListAdapter: TourListAdapter
     private var list: List<Tours> = emptyList()
 

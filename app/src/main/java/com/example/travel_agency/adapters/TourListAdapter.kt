@@ -8,13 +8,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
+import com.example.travel_agency.ViewModel.TourWithIdViewModel
+import com.example.travel_agency.ViewModel.ToursFragmentViewModel
+import com.example.travel_agency.activities.ConfirmActivity
 import com.example.travel_agency.activities.TourActivity
 import com.example.travel_agency.models.Tours
 
 class TourListAdapter(var tours: List<Tours>, var context: Context): RecyclerView.Adapter<TourListAdapter.MyViewHolder>() {
 
+    private lateinit var toursViewModel: TourWithIdViewModel
     fun updateData(newTours: List<Tours>) {
         tours = newTours
         notifyDataSetChanged()
@@ -38,8 +44,8 @@ class TourListAdapter(var tours: List<Tours>, var context: Context): RecyclerVie
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.name.text = tours[position].name
-        holder.price.text = tours[position].capacity.toString()
-        holder.tour_type.text = tours[position].country
+        holder.price.text = tours[position].price_per_one.toString()
+        holder.tour_type.text = tours[position].tour_type
 
 
 //        val imageId = context.resources.getIdentifier(
@@ -50,10 +56,13 @@ class TourListAdapter(var tours: List<Tours>, var context: Context): RecyclerVie
 //        holder.image.setImageResource(imageId)
 
 
-        holder.btn.setOnClickListener{
-            val intent = Intent(context, TourActivity::class.java)
-            intent.putExtra("tourPrice",tours[position].name)
-            context.startActivity(intent)
-        }
+//        holder.btn.setOnClickListener{
+//            val tour_id = tours[position].id
+//            toursViewModel.findTourWithId(tour_id)
+//        }
+//        toursViewModel.StartTourActivityEvent.observe(this) {
+//            startActivity(Intent(this, ConfirmActivity::class.java))
+//            finish()
+//        }
     }
 }

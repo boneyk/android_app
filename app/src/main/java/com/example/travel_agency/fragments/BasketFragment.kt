@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.adapters.BasketListAdapter
 import com.example.travel_agency.R
+import com.example.travel_agency.models.Image
 import com.example.travel_agency.models.Tours
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,8 +33,8 @@ class BasketFragment : Fragment() {
         val toursList: RecyclerView = view.findViewById(R.id.toursList)
         val tours = arrayListOf<Tours>()
 
-        tours.add(Tours("fhfhfh",12, "Амстердам"))
-        tours.add(Tours("jfjjf",123, "Сеул"))
+//        tours.add(Tours(1,"fhfhfh",12, "Амстердам", ))
+//        tours.add(Tours(1,"jfjjf",123, "Сеул",Image))
         toursList.layoutManager = LinearLayoutManager(requireContext())
         toursList.adapter = BasketListAdapter(tours, requireContext())
     }
