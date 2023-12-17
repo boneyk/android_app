@@ -19,7 +19,9 @@ class TourWithIdViewModel(val context: Application) : AndroidViewModel(context) 
     fun findTourWithId(id: Int) {
         apiService.findTourWithId(id, object : InitAPI.TourCallback {
             override fun onSuccess(response: Tour) {
+                Log.d("MyLog", "перешел в tourwithidviewmodel и получил успешный ответ, далее переписывает его в livedata")
                 tourWithId.value = response
+                Log.d("MyLog", "записал ответ в livedata")
             }
 
             override fun onError() {
