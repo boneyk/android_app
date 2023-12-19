@@ -20,7 +20,6 @@ class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
         val name = binding.profName.text.toString()
         val phone = binding.profPhone.text.toString()
         updateUserProf(storage.getUserId(),name,phone)
-        getUserInfo(storage.getUserId())
     }
     fun getUserInfo(id : Int){
         apiService.getUserInfo(id ,object : InitAPI.InfoCallback {

@@ -116,6 +116,7 @@ class ProfileFragment : Fragment() {
             val editProfPassword = view.findViewById(R.id.prof_password) as EditText
             editProfPassword.isEnabled = false
             viewModel.tryUpdateProf(binding)
+            finallyGetIt()
         }
 
 

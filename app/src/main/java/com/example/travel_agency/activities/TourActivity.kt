@@ -59,6 +59,7 @@ class TourActivity : AppCompatActivity() {
         val linkToFave: TextView = findViewById(R.id.button_toFave)
         val linkFromFave: TextView = findViewById(R.id.button_fromFave)
         linkToConfirm.setOnClickListener {
+            storage.saveTourId(tourId)
             Toast.makeText(this, "Давайте подтвердим заказ!", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, ConfirmActivity::class.java))
             finish()

@@ -1,5 +1,6 @@
 package network_api
 
+import com.example.travel_agency.models.ConfirmResponse
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.PersInfo
 import com.example.travel_agency.models.ProfRequest
@@ -47,4 +48,7 @@ interface APIService {
 
     @GET("tours/history")
     fun findHistTour(@Query("user_id") user_id: Int): Call<List<TourFav>>
+
+    @GET("tours/order")
+    fun orderTour(@Query("user_id") user_id: Int, @Query("tour_id") tour_id : Int): Call<ConfirmResponse>
 }

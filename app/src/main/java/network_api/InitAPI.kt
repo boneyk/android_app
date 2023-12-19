@@ -1,6 +1,7 @@
 package network_api
 
 import android.util.Log
+import com.example.travel_agency.models.ConfirmResponse
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.PersInfo
 import com.example.travel_agency.models.ProfRequest
@@ -70,6 +71,11 @@ class InitAPI(){
     }
     interface ProfCallback {
         fun onSuccess()
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
+    interface ConfCallback {
+        fun onSuccess(response: ConfirmResponse)
         fun onError()
         fun onFailure(error: Throwable)
     }
@@ -279,6 +285,27 @@ class InitAPI(){
                 }
 
                 override fun onFailure(call: Call<List<TourFav>>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+
+    fun orderTour(user_id: Int,tour_id: Int, callback: ConfCallback){
+        api.orderTour(user_id,tour_id)
+            .enqueue(object : Callback <ConfirmResponse> {
+                override fun onResponse(
+                    call: Call<ConfirmResponse>,
+                    response: Response<ConfirmResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(response.body()!!)
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<ConfirmResponse>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                 }
