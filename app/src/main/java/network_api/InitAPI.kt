@@ -73,6 +73,7 @@ class InitAPI(){
                     response: Response<Int>
                 ) {
                     if (response.isSuccessful) {
+                        Log.d("MyLog", "значение = $response.body()!!")
                         callback.onSuccess(response.body()!!)
                     } else {
                         callback.onError()
@@ -173,6 +174,27 @@ class InitAPI(){
 
     fun updateFave(tour_id: Int, user_id: Int, callback: UpdateFaveCallback){
         api.updateFave(tour_id, user_id)
+            .enqueue(object : Callback <Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+
+    fun deleteFave(tour_id: Int, user_id: Int, callback: UpdateFaveCallback){
+        api.deleteFave(tour_id, user_id)
             .enqueue(object : Callback <Void> {
                 override fun onResponse(
                     call: Call<Void>,

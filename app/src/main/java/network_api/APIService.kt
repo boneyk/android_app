@@ -7,6 +7,7 @@ import com.example.travel_agency.models.TourFav
 import com.example.travel_agency.models.Tours
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -33,5 +34,7 @@ interface APIService {
     @PATCH("tours/favorite/{tour_id}/to/{user_id}")
     fun updateFave(@Path("tour_id") tour_id: Int, @Path("user_id") user_id: Int): Call<Void>
 
+    @DELETE("tours/favorite/{tour_id}/from/{user_id}")
+    fun deleteFave(@Path("tour_id") tour_id: Int, @Path("user_id") user_id: Int): Call<Void>
 
 }

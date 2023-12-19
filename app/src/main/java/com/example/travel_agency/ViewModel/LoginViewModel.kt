@@ -1,10 +1,13 @@
 package com.example.travel_agency.ViewModel
 
 import android.app.Application
+import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.R
+import com.example.travel_agency.Storage
 import com.example.travel_agency.adapters.TourListAdapter
 import com.example.travel_agency.databinding.ActivitySignBinding
 import com.example.travel_agency.fragments.FaveFragment
@@ -14,7 +17,9 @@ class LoginViewModel(val context: Application) : AndroidViewModel(context){
 
     val startAgencyActivityEvent: MutableLiveData<StartAgencyActivityEvent> = MutableLiveData()
     val id_token: MutableLiveData<Int> = MutableLiveData()
+    private val storage = Storage(context)
     private lateinit var faveFragment: FaveFragment
+    var id : Int = 1
     class StartAgencyActivityEvent
     private val apiService = InitAPI()
     fun tryEnter(binding: ActivitySignBinding) {
@@ -32,11 +37,14 @@ class LoginViewModel(val context: Application) : AndroidViewModel(context){
             loginUser(login, password)
         }
     }
-
-    private fun loginUser(login: String, password: String) {
+    fun loginUser(login: String, password: String) {
         apiService.loginUser(login, password, object : InitAPI.LoginCallback {
             override fun onSuccess(response: Int) {
-//                id_token.postValue(response)
+                Log.d("MyLog", "значение2 = $response")
+                storage.saveUserId(response)
+                id = response
+                id_token.setValue(response)
+                Log.d("MyLog", "значение2.2 = ${id_token.value}")
                 startAgencyActivityEvent.value = StartAgencyActivityEvent()
             }
 
