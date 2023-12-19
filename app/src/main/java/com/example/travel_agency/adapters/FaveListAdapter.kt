@@ -69,8 +69,7 @@ class FaveListAdapter (var tours: List<TourFav>, var context: Context): Recycler
         }
 
         holder.del_btn.setOnClickListener{
-            tours.toMutableList().removeAt(position)
-            notifyItemRemoved(position)
+
         }
     }
 }

@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
+import com.example.travel_agency.Storage
+import com.example.travel_agency.ViewModel.FaveViewModel
 import com.example.travel_agency.ViewModel.TourWithIdViewModel
 import com.example.travel_agency.databinding.ActivityTourBinding
 import com.example.travel_agency.models.Tour
@@ -18,6 +20,8 @@ class TourActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTourBinding
     private lateinit var viewModel: TourWithIdViewModel
     private lateinit var tourIdModel: TourWithIdViewModel
+    private lateinit var faveViewModel: FaveViewModel
+    val storage = Storage(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +63,10 @@ class TourActivity : AppCompatActivity() {
             finish()
         }
         linkToFave.setOnClickListener {
-
+            val tour_id = storage.getTourId()
+            val user_id = storage.getUserId()
+            faveViewModel = ViewModelProvider(this)[FaveViewModel::class.java]
+            faveViewModel.updateFave(tour_id,user_id)
         }
     }
 }

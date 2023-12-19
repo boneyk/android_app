@@ -48,7 +48,7 @@ class RegActivity : AppCompatActivity() {
             userPassword.text.clear()
             userEmail.text.clear()
             userPasswordCopy.text.clear()
-            startActivity(Intent(this, AgencyActivity::class.java))
+            startActivity(Intent(this, SignActivity::class.java))
             finish()
         }
     }
