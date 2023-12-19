@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="230dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/egypt_title" />
+        app:srcCompat="@drawable/egyptanoubis" />
 
     <TextView
         android:id="@+id/tour_list_country"
@@ -87,7 +87,7 @@
             android:layout_gravity="center"
             android:backgroundTint="#3C5A5C"
             android:layout_height="wrap_content"
-            android:text="Удалить" />
+            android:text="Купить" />
 
     </RelativeLayout>
 </LinearLayout>

@@ -9,8 +9,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
+import com.example.travel_agency.Storage
+import com.example.travel_agency.ViewModel.FaveViewModel
+import com.example.travel_agency.activities.ConfirmActivity
 import com.example.travel_agency.activities.TourActivity
 import com.example.travel_agency.models.TourFav
 import com.example.travel_agency.models.Tour_Image
@@ -69,7 +76,8 @@ class FaveListAdapter (var tours: List<TourFav>, var context: Context): Recycler
         }
 
         holder.del_btn.setOnClickListener{
-
+            val intent = Intent(context, ConfirmActivity::class.java)
+            context.startActivity(intent)
         }
     }
 }

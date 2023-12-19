@@ -2,47 +2,95 @@ package com.example.travel_agency
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.ViewModelProvider
+import com.example.travel_agency.ViewModel.LoginViewModel
+import com.example.travel_agency.ViewModel.ProfileViewModel
 import com.example.travel_agency.activities.DockActivity
+import com.example.travel_agency.databinding.ActivitySignBinding
+import com.example.travel_agency.databinding.FragmentProfileBinding
+import com.example.travel_agency.fragments.FaveFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var user_id: Int  = 2
+    private lateinit var viewModel: ProfileViewModel
+    private lateinit var binding: FragmentProfileBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    fun finallyGetIt(){
+        user_id = Storage(requireContext()).getUserId()
+        Log.d("MyLog", "user_id = ${user_id}")
+        viewModel.getUserInfo(user_id)
+    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
+        binding = FragmentProfileBinding.inflate(layoutInflater)
+        user_id = Storage(requireContext()).getUserId()
+        Log.d("MyLog", "user_id = ${user_id}")
+        viewModel.getUserInfo(user_id)
+        finallyGetIt()
+//        Log.d("MyLog", "user_id = ${(}")
+        return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val editProfButton = view.findViewById(R.id.prof_edit_button) as Button
+        val cancelProfButton = view.findViewById(R.id.prof_cancelbutton) as Button
+        val saveProfButton = view.findViewById(R.id.prof_okbutton) as Button
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        //        ОТМЕНА И СОХРАНИТЬ
+        val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+        passCancel.visibility = View.GONE
+        val passSave: View = view.findViewById(R.id.prof_okbutton)
+        passSave.visibility = View.GONE
 
-            val editProfButton = view.findViewById(R.id.prof_edit_button) as Button
-            val cancelProfButton = view.findViewById(R.id.prof_cancelbutton) as Button
-            val saveProfButton = view.findViewById(R.id.prof_okbutton) as Button
+        val info = Storage(requireContext()).getPersInfo()
+        Log.d("MyLog", "info = ${info.email}")
+        val editProfName = view.findViewById(R.id.prof_name) as EditText
+        editProfName.isEnabled = false
+        editProfName.setText(info.fullname)
+        val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+        editProfLogin.isEnabled = false
+        editProfLogin.setText(info.login)
+        val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+        editProfEmail.isEnabled = false
+        editProfEmail.setText(info.email)
+        val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+        editProfPhone.isEnabled = false
+        editProfPhone.setText(info.phone_number)
+        val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+        editProfPassword.isEnabled = false
+        editProfPassword.setText(info.password)
 
-            //        ОТМЕНА И СОХРАНИТЬ
+        editProfButton.setOnClickListener{
+            val editProfName = view.findViewById(R.id.prof_name) as EditText
+            editProfName.isEnabled = true
+            val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+            editProfLogin.isEnabled = true
+            val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+            editProfEmail.isEnabled = true
+            val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+            editProfPhone.isEnabled = true
+            val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+            editProfPassword.isEnabled = true
+            val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+            passCancel.visibility = View.VISIBLE
+            val passSave: View = view.findViewById(R.id.prof_okbutton)
+            passSave.visibility = View.VISIBLE
+        }
+        cancelProfButton.setOnClickListener{
             val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
             passCancel.visibility = View.GONE
             val passSave: View = view.findViewById(R.id.prof_okbutton)
             passSave.visibility = View.GONE
+            val editProfName = view.findViewById(R.id.prof_name) as EditText
+            editProfName.isEnabled = false
             val editProfLogin = view.findViewById(R.id.prof_login) as EditText
             editProfLogin.isEnabled = false
             val editProfEmail = view.findViewById(R.id.prof_email) as EditText
@@ -51,76 +99,34 @@ class ProfileFragment : Fragment() {
             editProfPhone.isEnabled = false
             val editProfPassword = view.findViewById(R.id.prof_password) as EditText
             editProfPassword.isEnabled = false
-
-            editProfButton.setOnClickListener{
-                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
-                editProfLogin.isEnabled = true
-                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
-                editProfEmail.isEnabled = true
-                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
-                editProfPhone.isEnabled = true
-                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
-                editProfPassword.isEnabled = true
-                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
-                passCancel.visibility = View.VISIBLE
-                val passSave: View = view.findViewById(R.id.prof_okbutton)
-                passSave.visibility = View.VISIBLE
-            }
-            cancelProfButton.setOnClickListener{
-                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
-                passCancel.visibility = View.GONE
-                val passSave: View = view.findViewById(R.id.prof_okbutton)
-                passSave.visibility = View.GONE
-                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
-                editProfLogin.isEnabled = false
-                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
-                editProfEmail.isEnabled = false
-                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
-                editProfPhone.isEnabled = false
-                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
-                editProfPassword.isEnabled = false
-            }
-            saveProfButton.setOnClickListener{
-                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
-                passCancel.visibility = View.GONE
-                val passSave: View = view.findViewById(R.id.prof_okbutton)
-                passSave.visibility = View.GONE
-                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
-                editProfLogin.isEnabled = false
-                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
-                editProfEmail.isEnabled = false
-                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
-                editProfPhone.isEnabled = false
-                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
-                editProfPassword.isEnabled = false
-            }
-
-
-            val buttonDock: Button = view.findViewById(R.id.button_dock)
-            buttonDock.setOnClickListener {
-                val intent = Intent(activity, DockActivity::class.java)
-                startActivity(intent)
-            }
-            return view
+        }
+        saveProfButton.setOnClickListener{
+            val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+            passCancel.visibility = View.GONE
+            val passSave: View = view.findViewById(R.id.prof_okbutton)
+            passSave.visibility = View.GONE
+            val editProfName = view.findViewById(R.id.prof_name) as EditText
+            editProfName.isEnabled = false
+            val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+            editProfLogin.isEnabled = false
+            val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+            editProfEmail.isEnabled = false
+            val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+            editProfPhone.isEnabled = false
+            val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+            editProfPassword.isEnabled = false
+            viewModel.tryUpdateProf(binding)
         }
 
+
+        val buttonDock: Button = view.findViewById(R.id.button_dock)
+        buttonDock.setOnClickListener {
+            val intent = Intent(activity, DockActivity::class.java)
+            startActivity(intent)
+        }
+    }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = ProfileFragment()
     }
 }

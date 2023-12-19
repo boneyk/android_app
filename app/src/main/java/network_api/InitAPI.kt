@@ -1,8 +1,9 @@
 package network_api
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.models.LoginRequest
+import com.example.travel_agency.models.PersInfo
+import com.example.travel_agency.models.ProfRequest
 import com.example.travel_agency.models.RegRequest
 import com.example.travel_agency.models.Tour
 import com.example.travel_agency.models.TourFav
@@ -14,7 +15,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Path
 
 
 class InitAPI(){
@@ -59,6 +59,16 @@ class InitAPI(){
         fun onFailure(error: Throwable)
     }
     interface UpdateFaveCallback {
+        fun onSuccess()
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
+    interface InfoCallback {
+        fun onSuccess(response: PersInfo)
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
+    interface ProfCallback {
         fun onSuccess()
         fun onError()
         fun onFailure(error: Throwable)
@@ -213,6 +223,66 @@ class InitAPI(){
                 }
             })
     }
+    fun getUserInfo(id: Int, callback: InfoCallback){
+        api.getUserInfo(id)
+            .enqueue(object : Callback<PersInfo> {
+                override fun onResponse(
+                    call: Call<PersInfo>,
+                    response: Response<PersInfo>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(response.body()!!)
+                    } else {
+                        callback.onError()
+                    }
+                }
 
+                override fun onFailure(call: Call<PersInfo>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+
+    fun putUserInfo(user_id: Int,name : String, phone : String, callback: ProfCallback){
+        api.putUserInfo(user_id, ProfRequest(name,phone))
+            .enqueue(object : Callback <Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+    fun findHistTour(user_id: Int, callback: TourFavCallback){
+        api.findHistTour(user_id)
+            .enqueue(object : Callback <List<TourFav>> {
+                override fun onResponse(
+                    call: Call<List<TourFav>>,
+                    response: Response<List<TourFav>>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(response.body()!!)
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<TourFav>>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
 
 }

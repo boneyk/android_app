@@ -18,7 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_height="320dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/egypt_title" />
+            app:srcCompat="@drawable/egyptanoubis" />
 
         <TextView
             android:id="@+id/tour_country"
@@ -119,10 +119,6 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
         <Button
             android:id="@+id/button_buy"
             android:layout_width="150dp"
@@ -133,16 +129,31 @@
             android:layout_marginLeft="15dp"
             android:backgroundTint="#EC7063"
             android:text="Купить" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Button
+            android:id="@+id/button_fromFave"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="17dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="15dp"
+            android:backgroundTint="#3C5A5C"
+            android:text="Удалить из избранного" />
             <Button
                 android:id="@+id/button_toFave"
-                android:layout_toRightOf="@+id/button_buy"
+                android:layout_toRightOf="@+id/button_fromFave"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="17dp"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="70dp"
-                android:backgroundTint="#EC7063"
+                android:backgroundTint="#3C5A5C"
                 android:text="В избранное" />
         </RelativeLayout>
 

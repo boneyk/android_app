@@ -1,68 +1,70 @@
 package com.example.travel_agency.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.adapters.BasketListAdapter
 import com.example.travel_agency.R
+import com.example.travel_agency.Storage
+import com.example.travel_agency.ViewModel.BasketViewModel
+import com.example.travel_agency.ViewModel.FaveViewModel
+import com.example.travel_agency.ViewModel.LoginViewModel
+import com.example.travel_agency.ViewModel.RegViewModel
+import com.example.travel_agency.adapters.FaveListAdapter
+import com.example.travel_agency.databinding.FragmentBasketBinding
+import com.example.travel_agency.databinding.FragmentFaveBinding
+import com.example.travel_agency.models.TourFav
 import com.example.travel_agency.models.Tours
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BasketFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BasketFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentBasketBinding
+    private lateinit var baskViewModel: BasketViewModel
+    private lateinit var baskFaveAdapter: BasketListAdapter
+    private var list: List<TourFav> = emptyList()
+    private var user_id: Int  = 2
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentBasketBinding.inflate(inflater, container, false)
+        baskViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
+        Log.d("MyLog", "binding = FragmentFaveBinding.inflate(inflater, container, false)")
+        Log.d("MyLog", "создана viewmodelprovider в faveviewmodel")
+        user_id = Storage(requireContext()).getUserId()
+        Log.d("MyLog", "значение3 = ${user_id}")
+        baskViewModel.findHistTour(user_id)
+        return binding.root
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toursList: RecyclerView = view.findViewById(R.id.toursList)
-        val tours = arrayListOf<Tours>()
+        baskViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
+        Log.d("MyLog", "создана onViewCreate")
 
-//        tours.add(Tours(1,"fhfhfh",12, "Амстердам", ))
-//        tours.add(Tours(1,"jfjjf",123, "Сеул",Image))
-        toursList.layoutManager = LinearLayoutManager(requireContext())
-        toursList.adapter = BasketListAdapter(tours, requireContext())
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_basket, container, false)
+        baskFaveAdapter = BasketListAdapter(list,requireContext())
+        baskViewModel.Histtours.observe(viewLifecycleOwner, { tours ->
+            if (tours.isNotEmpty()) {
+                Log.d("MyLog", "туры получены, передаются в FaveAdapter")
+                baskFaveAdapter.updateData(tours)
+            } else {
+                Toast.makeText(requireContext(), "Сегодня в нашем агентстве нет туров :(", Toast.LENGTH_LONG).show()
+            }
+        })
+        binding.toursList.layoutManager = LinearLayoutManager(requireContext())
+        binding.toursList.adapter = baskFaveAdapter
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BasketFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BasketFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = BasketFragment()
     }
 }

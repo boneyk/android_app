@@ -1,6 +1,8 @@
 package network_api
 
 import com.example.travel_agency.models.LoginRequest
+import com.example.travel_agency.models.PersInfo
+import com.example.travel_agency.models.ProfRequest
 import com.example.travel_agency.models.RegRequest
 import com.example.travel_agency.models.Tour
 import com.example.travel_agency.models.TourFav
@@ -37,4 +39,12 @@ interface APIService {
     @DELETE("tours/favorite/{tour_id}/from/{user_id}")
     fun deleteFave(@Path("tour_id") tour_id: Int, @Path("user_id") user_id: Int): Call<Void>
 
+    @GET("users/info")
+    fun getUserInfo(@Query("user_id") user_id: Int): Call<PersInfo>
+
+    @PATCH("users/{user_id}/info")
+    fun putUserInfo(@Path("user_id") user_id: Int, @Body request : ProfRequest): Call<Void>
+
+    @GET("tours/history")
+    fun findHistTour(@Query("user_id") user_id: Int): Call<List<TourFav>>
 }

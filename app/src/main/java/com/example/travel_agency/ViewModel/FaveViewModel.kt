@@ -29,7 +29,7 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
             }
 
             override fun onError() {
-                Toast.makeText(context, "Возникла ошибка с получением туров", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "В избранном еще нет туров", Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(error: Throwable) {
@@ -55,13 +55,13 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
     }
 
     fun deleteFave(tour_id: Int, user_id: Int) {
-        apiService.updateFave(tour_id, user_id, object : InitAPI.UpdateFaveCallback {
+        apiService.deleteFave(tour_id, user_id, object : InitAPI.UpdateFaveCallback {
             override fun onSuccess() {
                 Toast.makeText(context, "Тур удален из избранного", Toast.LENGTH_LONG).show()
             }
 
             override fun onError() {
-                Toast.makeText(context, "Возникла ошибка с удалением тура", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Такого тура нет в списке избранного", Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(error: Throwable) {

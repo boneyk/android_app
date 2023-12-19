@@ -44,7 +44,7 @@ class TourActivity : AppCompatActivity() {
         tourIdModel.findTourWithId(tourId)
         tourIdModel.tourWithId.observe(this, Observer { tour ->
             country.text = tour?.country
-            city.text = tour?.city
+            city.text = "Город: " + tour?.city
             capacity.text = "Количество человек: " + tour?.capacity.toString()
             sDate.text = "Начало: " + tour?.date_start
             fDate.text = "Конец: " + tour?.date_end
@@ -57,6 +57,7 @@ class TourActivity : AppCompatActivity() {
 
         val linkToConfirm: TextView = findViewById(R.id.button_buy)
         val linkToFave: TextView = findViewById(R.id.button_toFave)
+        val linkFromFave: TextView = findViewById(R.id.button_fromFave)
         linkToConfirm.setOnClickListener {
             Toast.makeText(this, "Давайте подтвердим заказ!", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, ConfirmActivity::class.java))
@@ -67,6 +68,13 @@ class TourActivity : AppCompatActivity() {
             val user_id = storage.getUserId()
             faveViewModel = ViewModelProvider(this)[FaveViewModel::class.java]
             faveViewModel.updateFave(tour_id,user_id)
+        }
+        linkFromFave.setOnClickListener {
+            val tour_id = storage.getTourId()
+            val user_id = storage.getUserId()
+            faveViewModel = ViewModelProvider(this)[FaveViewModel::class.java]
+            faveViewModel.deleteFave(tour_id,user_id)
+            faveViewModel.findFavetour(user_id)
         }
     }
 }
