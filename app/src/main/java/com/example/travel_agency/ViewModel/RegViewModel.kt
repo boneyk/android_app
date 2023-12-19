@@ -10,6 +10,7 @@ import network_api.InitAPI
 
 class RegViewModel(val context: Application) : AndroidViewModel(context){
     val startAgencyActivityEvent: MutableLiveData<StartAgencyActivityEvent> = MutableLiveData()
+    val id_regToken: MutableLiveData<Int> = MutableLiveData()
     class StartAgencyActivityEvent
     private val apiService = InitAPI()
 
@@ -37,8 +38,9 @@ class RegViewModel(val context: Application) : AndroidViewModel(context){
     }
     private fun regUser(login: String,email:String,password: String,password_confirm:String) {
         apiService.regUser(login,email,password,password_confirm, object : InitAPI.RegCallback {
-            override fun onSuccess(response: Any) {
+            override fun onSuccess(response: Int) {
                 startAgencyActivityEvent.value = RegViewModel.StartAgencyActivityEvent()
+                id_regToken.value = response
             }
 
             override fun onError() {

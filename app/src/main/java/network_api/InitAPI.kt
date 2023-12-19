@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.RegRequest
 import com.example.travel_agency.models.Tour
+import com.example.travel_agency.models.TourFav
 import com.example.travel_agency.models.Tours
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,12 +34,12 @@ class InitAPI(){
     }
 
     interface LoginCallback {
-        fun onSuccess(response: Any)
+        fun onSuccess(response: Int)
         fun onError()
         fun onFailure(error: Throwable)
     }
     interface RegCallback {
-        fun onSuccess(response: Any)
+        fun onSuccess(response: Int)
         fun onError()
         fun onFailure(error: Throwable)
     }
@@ -52,24 +53,34 @@ class InitAPI(){
         fun onError()
         fun onFailure(error: Throwable)
     }
+    interface TourFavCallback {
+        fun onSuccess(response: List<TourFav>)
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
+    interface UpdateFaveCallback {
+        fun onSuccess()
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
 
     fun loginUser(login: String, password: String, callback: LoginCallback) {
 
         api.loginUser(LoginRequest(login, password))
-            .enqueue(object : Callback<Void> {
+            .enqueue(object : Callback<Int> {
                 override fun onResponse(
-                    call: Call<Void>,
-                    response: Response<Void>
+                    call: Call<Int>,
+                    response: Response<Int>
                 ) {
                     if (response.isSuccessful) {
-                        callback.onSuccess(response)
+                        callback.onSuccess(response.body()!!)
                     } else {
                         callback.onError()
                     }
                 }
 
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+                override fun onFailure(call: Call<Int>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                     callback.onFailure(t)
@@ -80,19 +91,19 @@ class InitAPI(){
     }
     fun regUser(login: String, email: String, password: String, password_confirm: String, callback: RegCallback){
         api.regUser(RegRequest(login,email,password,password_confirm))
-            .enqueue(object : Callback<Void> {
+            .enqueue(object : Callback<Int> {
                 override fun onResponse(
-                    call: Call<Void>,
-                    response: Response<Void>
+                    call: Call<Int>,
+                    response: Response<Int>
                 ) {
                     if (response.isSuccessful) {
-                        callback.onSuccess(response)
+                        callback.onSuccess(response.body()!!)
                     } else {
                         callback.onError()
                     }
                 }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+                override fun onFailure(call: Call<Int>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                     callback.onFailure(t)
@@ -134,6 +145,47 @@ class InitAPI(){
                 }
 
                 override fun onFailure(call: Call<Tour>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+    fun findFavTour(user_id: Int, callback: TourFavCallback){
+        api.findFavTour(user_id)
+            .enqueue(object : Callback <List<TourFav>> {
+                override fun onResponse(
+                    call: Call<List<TourFav>>,
+                    response: Response<List<TourFav>>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(response.body()!!)
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<TourFav>>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+
+    fun updateFave(tour_id: Int, user_id: Int, callback: UpdateFaveCallback){
+        api.updateFave(tour_id, user_id)
+            .enqueue(object : Callback <Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                 }

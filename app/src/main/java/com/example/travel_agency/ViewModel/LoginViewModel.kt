@@ -5,12 +5,16 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.R
+import com.example.travel_agency.adapters.TourListAdapter
 import com.example.travel_agency.databinding.ActivitySignBinding
+import com.example.travel_agency.fragments.FaveFragment
 import network_api.InitAPI
 
 class LoginViewModel(val context: Application) : AndroidViewModel(context){
 
     val startAgencyActivityEvent: MutableLiveData<StartAgencyActivityEvent> = MutableLiveData()
+    val id_token: MutableLiveData<Int> = MutableLiveData()
+    private lateinit var faveFragment: FaveFragment
     class StartAgencyActivityEvent
     private val apiService = InitAPI()
     fun tryEnter(binding: ActivitySignBinding) {
@@ -31,7 +35,8 @@ class LoginViewModel(val context: Application) : AndroidViewModel(context){
 
     private fun loginUser(login: String, password: String) {
         apiService.loginUser(login, password, object : InitAPI.LoginCallback {
-            override fun onSuccess(response: Any) {
+            override fun onSuccess(response: Int) {
+//                id_token.postValue(response)
                 startAgencyActivityEvent.value = StartAgencyActivityEvent()
             }
 

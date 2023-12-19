@@ -67,17 +67,12 @@ class TourListAdapter(var tours: MutableLiveData<List<Tours>>, var context: Cont
         }
 
         holder.btn.setOnClickListener{
-//            tourIdModel = ViewModelProvider(context as ViewModelStoreOwner).get(TourWithIdViewModel::class.java)
-//            Log.d("MyLog", "создал viewmodelprovider в адаптере и отправляет запрос на поиск тура по id")
-//            tourIdModel.findTourWithId(tour_id)
-//            Log.d("MyLog", "начинает touractivity")
-//            val intent = Intent(context, TourActivity::class.java)
-//            context.startActivity(intent)
             val tour_id = currentTours[position].id
             val intent = Intent(context, TourActivity::class.java)
             intent.putExtra("tour_id", tour_id)
             context.startActivity(intent)
         }
+
 
     }
 }
