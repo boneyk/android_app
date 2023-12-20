@@ -9,14 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travel_agency.Memory
 import com.example.travel_agency.R
-import com.example.travel_agency.Storage
-import com.example.travel_agency.ViewModel.FaveViewModel
+import com.example.travel_agency.ViewModel.BasketViewModel
 import com.example.travel_agency.activities.ConfirmActivity
 import com.example.travel_agency.activities.TourActivity
 import com.example.travel_agency.models.TourFav
@@ -24,6 +22,7 @@ import com.example.travel_agency.models.Tour_Image
 
 class FaveListAdapter (var tours: List<TourFav>, var context: Context): RecyclerView.Adapter<FaveListAdapter.MyViewHolder>() {
 
+    private lateinit var basketAdapter: BasketListAdapter
     fun updateData(newTours: List<TourFav>) {
         tours = newTours
         notifyDataSetChanged()
@@ -76,6 +75,10 @@ class FaveListAdapter (var tours: List<TourFav>, var context: Context): Recycler
         }
 
         holder.del_btn.setOnClickListener{
+            val tour_id = currentTour.id
+            Memory(context).saveTourId(tour_id)
+//            basketAdapter = ViewModelProvider(context).get(BasketViewModel::class.java)
+//            basketAdapter.updateHist(Memory(context).getTourId(),Memory(context).getUserId())
             val intent = Intent(context, ConfirmActivity::class.java)
             context.startActivity(intent)
         }

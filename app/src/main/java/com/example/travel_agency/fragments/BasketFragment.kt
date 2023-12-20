@@ -9,19 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.adapters.BasketListAdapter
-import com.example.travel_agency.R
-import com.example.travel_agency.Storage
+import com.example.travel_agency.Memory
 import com.example.travel_agency.ViewModel.BasketViewModel
-import com.example.travel_agency.ViewModel.FaveViewModel
-import com.example.travel_agency.ViewModel.LoginViewModel
-import com.example.travel_agency.ViewModel.RegViewModel
-import com.example.travel_agency.adapters.FaveListAdapter
 import com.example.travel_agency.databinding.FragmentBasketBinding
-import com.example.travel_agency.databinding.FragmentFaveBinding
 import com.example.travel_agency.models.TourFav
-import com.example.travel_agency.models.Tours
 
 class BasketFragment : Fragment() {
     private lateinit var binding: FragmentBasketBinding
@@ -39,7 +31,7 @@ class BasketFragment : Fragment() {
         baskViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
         Log.d("MyLog", "binding = FragmentFaveBinding.inflate(inflater, container, false)")
         Log.d("MyLog", "создана viewmodelprovider в faveviewmodel")
-        user_id = Storage(requireContext()).getUserId()
+        user_id = Memory(requireContext()).getUserId()
         Log.d("MyLog", "значение3 = ${user_id}")
         baskViewModel.findHistTour(user_id)
         return binding.root

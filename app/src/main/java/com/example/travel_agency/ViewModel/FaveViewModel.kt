@@ -1,24 +1,18 @@
 package com.example.travel_agency.ViewModel
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.travel_agency.databinding.FragmentToursBinding
 import com.example.travel_agency.models.TourFav
-import com.example.travel_agency.models.Tours
-import network_api.InitAPI
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import network_api.APIBuilder
 
 class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
-    private val apiService = InitAPI()
+    private val apiService = APIBuilder()
     val Favetours: MutableLiveData<List<TourFav>> = MutableLiveData()
 
     fun findFavetour(user_id: Int) {
-        apiService.findFavTour(user_id, object : InitAPI.TourFavCallback{
+        apiService.findFavTour(user_id, object : APIBuilder.TourFavCallback{
             override fun onSuccess(response: List<TourFav>) {
                 if (response.isNotEmpty()){
 //                    Log.d("MyLog", "Запрос перешел в ToursVIewModel в функцию getTours()")
@@ -39,7 +33,7 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
     }
 
     fun updateFave(tour_id: Int, user_id: Int) {
-        apiService.updateFave(tour_id, user_id, object : InitAPI.UpdateFaveCallback {
+        apiService.updateFave(tour_id, user_id, object : APIBuilder.UpdateFaveCallback {
             override fun onSuccess() {
                 Toast.makeText(context, "Тур добавлен в избранное", Toast.LENGTH_LONG).show()
             }
@@ -55,7 +49,7 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
     }
 
     fun deleteFave(tour_id: Int, user_id: Int) {
-        apiService.deleteFave(tour_id, user_id, object : InitAPI.UpdateFaveCallback {
+        apiService.deleteFave(tour_id, user_id, object : APIBuilder.UpdateFaveCallback {
             override fun onSuccess() {
                 Toast.makeText(context, "Тур удален из избранного", Toast.LENGTH_LONG).show()
             }

@@ -1,25 +1,21 @@
 package com.example.travel_agency.ViewModel
 
 import android.app.Application
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.travel_agency.Storage
-import com.example.travel_agency.activities.ConfirmActivity
-import com.example.travel_agency.adapters.TourListAdapter
+import com.example.travel_agency.Memory
 import com.example.travel_agency.models.Tour
-import com.example.travel_agency.models.Tours
-import network_api.InitAPI
+import network_api.APIBuilder
 
 class TourWithIdViewModel(val context: Application) : AndroidViewModel(context) {
     val tourWithId: MutableLiveData<Tour> = MutableLiveData()
-    private val apiService = InitAPI()
-    private val storage = Storage(context)
+    private val apiService = APIBuilder()
+    private val storage = Memory(context)
 
     fun findTourWithId(id: Int) {
-        apiService.findTourWithId(id, object : InitAPI.TourCallback {
+        apiService.findTourWithId(id, object : APIBuilder.TourCallback {
             override fun onSuccess(response: Tour) {
                 Log.d("MyLog", "перешел в tourwithidviewmodel и получил успешный ответ, далее переписывает его в livedata")
                 tourWithId.value = response

@@ -1,27 +1,25 @@
 package com.example.travel_agency.ViewModel
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.R
-import com.example.travel_agency.Storage
-import com.example.travel_agency.adapters.TourListAdapter
+import com.example.travel_agency.Memory
 import com.example.travel_agency.databinding.ActivitySignBinding
 import com.example.travel_agency.fragments.FaveFragment
-import network_api.InitAPI
+import network_api.APIBuilder
 
 class LoginViewModel(val context: Application) : AndroidViewModel(context){
 
     val startAgencyActivityEvent: MutableLiveData<StartAgencyActivityEvent> = MutableLiveData()
     val id_token: MutableLiveData<Int> = MutableLiveData()
-    private val storage = Storage(context)
+    private val storage = Memory(context)
     private lateinit var faveFragment: FaveFragment
     var id : Int = 1
     class StartAgencyActivityEvent
-    private val apiService = InitAPI()
+    private val apiService = APIBuilder()
     fun tryEnter(binding: ActivitySignBinding) {
         val login = binding.userLoginAuth.text.toString().trim()
         val password = binding.userPasswordAuth.text.toString()
@@ -38,7 +36,7 @@ class LoginViewModel(val context: Application) : AndroidViewModel(context){
         }
     }
     fun loginUser(login: String, password: String) {
-        apiService.loginUser(login, password, object : InitAPI.LoginCallback {
+        apiService.loginUser(login, password, object : APIBuilder.LoginCallback {
             override fun onSuccess(response: Int) {
                 Log.d("MyLog", "значение2 = $response")
                 storage.saveUserId(response)

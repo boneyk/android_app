@@ -7,25 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.travel_agency.R
-import com.example.travel_agency.Storage
+import com.example.travel_agency.Memory
 import com.example.travel_agency.ViewModel.FaveViewModel
 import com.example.travel_agency.ViewModel.LoginViewModel
 import com.example.travel_agency.ViewModel.RegViewModel
 //import com.example.travel_agency.ViewModel.FaveViewModel
-import com.example.travel_agency.ViewModel.ToursFragmentViewModel
 import com.example.travel_agency.adapters.FaveListAdapter
 //import com.example.travel_agency.adapters.FaveListAdapter
-import com.example.travel_agency.adapters.TourListAdapter
 import com.example.travel_agency.databinding.FragmentFaveBinding
-import com.example.travel_agency.databinding.FragmentToursBinding
 import com.example.travel_agency.models.TourFav
-import com.example.travel_agency.models.Tours
 
 class FaveFragment : Fragment() {
 
@@ -47,7 +39,7 @@ class FaveFragment : Fragment() {
         faveViewModel = ViewModelProvider(this)[FaveViewModel::class.java]
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         Log.d("MyLog", "создана viewmodelprovider в faveviewmodel")
-        user_id = Storage(requireContext()).getUserId()
+        user_id = Memory(requireContext()).getUserId()
         Log.d("MyLog", "значение3 = ${user_id}")
         faveViewModel.findFavetour(user_id)
         return binding.root

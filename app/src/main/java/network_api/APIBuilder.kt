@@ -18,7 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class InitAPI(){
+class APIBuilder(){
     private val url: String = "http://89.223.122.223:8080/api/"
     private val interceptor = HttpLoggingInterceptor()
     private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
@@ -306,6 +306,27 @@ class InitAPI(){
                 }
 
                 override fun onFailure(call: Call<ConfirmResponse>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+
+    fun updateHist(tour_id: Int, user_id: Int, callback: UpdateFaveCallback){
+        api.updateHist(tour_id,user_id)
+            .enqueue(object : Callback <Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                 }

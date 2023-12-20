@@ -2,10 +2,9 @@ package com.example.travel_agency
 
 import android.content.Context
 import android.util.Log
-import com.example.travel_agency.models.ConfirmResponse
 import com.example.travel_agency.models.PersInfo
 
-class Storage(context: Context) {
+class Memory(context: Context) {
     companion object {
         var user_id: Int = 1
         var tour_id : Int = 1

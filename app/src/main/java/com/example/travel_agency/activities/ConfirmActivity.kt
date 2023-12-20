@@ -1,34 +1,32 @@
 package com.example.travel_agency.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
-import com.example.travel_agency.Storage
+import com.example.travel_agency.Memory
+import com.example.travel_agency.ViewModel.BasketViewModel
 import com.example.travel_agency.ViewModel.ConfViewModel
-import com.example.travel_agency.ViewModel.TourWithIdViewModel
 import com.example.travel_agency.databinding.ActivityConfirmBinding
-import com.example.travel_agency.databinding.ActivityTourBinding
 
 class ConfirmActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityConfirmBinding
     private lateinit var viewModel: ConfViewModel
-    val storage = Storage(this)
+    private lateinit var basketviewModel: BasketViewModel
+    private lateinit var basketViewModel: BasketViewModel
+    val storage = Memory(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_confirm)
+        basketViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
+        basketViewModel.updateHist(storage.getTourId(),storage.getUserId())
         viewModel = ViewModelProvider(this).get(ConfViewModel::class.java)
         val tour_id = storage.getTourId()
         val user_id = storage.getUserId()

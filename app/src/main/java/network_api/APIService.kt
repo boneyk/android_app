@@ -51,4 +51,9 @@ interface APIService {
 
     @GET("tours/order")
     fun orderTour(@Query("user_id") user_id: Int, @Query("tour_id") tour_id : Int): Call<ConfirmResponse>
+
+    @PATCH("tours/history/{tour_id}/to/{user_id}")
+    fun updateHist(@Path("tour_id") tour_id: Int, @Path("user_id") user_id: Int): Call<Void>
+
+
 }

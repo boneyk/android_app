@@ -72,7 +72,5 @@ class TourListAdapter(var tours: MutableLiveData<List<Tours>>, var context: Cont
             intent.putExtra("tour_id", tour_id)
             context.startActivity(intent)
         }
-
-
     }
 }
