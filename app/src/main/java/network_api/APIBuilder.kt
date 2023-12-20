@@ -2,6 +2,7 @@ package network_api
 
 import android.util.Log
 import com.example.travel_agency.models.ConfirmResponse
+import com.example.travel_agency.models.DocksInfo
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.PersInfo
 import com.example.travel_agency.models.ProfRequest
@@ -76,6 +77,11 @@ class APIBuilder(){
     }
     interface ConfCallback {
         fun onSuccess(response: ConfirmResponse)
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
+    interface DockCallback {
+        fun onSuccess(response: DocksInfo)
         fun onError()
         fun onFailure(error: Throwable)
     }
@@ -332,5 +338,46 @@ class APIBuilder(){
                 }
             })
     }
+    fun getDocks(user_id: Int, callback: DockCallback){
+        api.getDocks(user_id)
+            .enqueue(object : Callback <DocksInfo> {
+                override fun onResponse(
+                    call: Call<DocksInfo>,
+                    response: Response<DocksInfo>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(response.body()!!)
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<DocksInfo>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+    fun uploadDocks(user_id: Int, callback: UpdateFaveCallback){
+        api.uploadDocks(user_id)
+            .enqueue(object : Callback <Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+
 
 }

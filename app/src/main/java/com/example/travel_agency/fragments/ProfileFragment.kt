@@ -41,89 +41,80 @@ class ProfileFragment : Fragment() {
         val editProfButton = view.findViewById(R.id.prof_edit_button) as Button
         val cancelProfButton = view.findViewById(R.id.prof_cancelbutton) as Button
         val saveProfButton = view.findViewById(R.id.prof_okbutton) as Button
+        var name : String
+        var phone : String
+
+        val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
+        passCancel.visibility = View.GONE
+        val passSave: View = view.findViewById(R.id.prof_okbutton)
+        passSave.visibility = View.GONE
+
+        val editProfName = view.findViewById(R.id.prof_name) as EditText
+        val editProfLogin = view.findViewById(R.id.prof_login) as EditText
+        val editProfEmail = view.findViewById(R.id.prof_email) as EditText
+        val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
+        val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+
 
         viewModel.Infolist.observe(requireActivity(), Observer { tours ->
             //        ОТМЕНА И СОХРАНИТЬ
-            val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
             passCancel.visibility = View.GONE
-            val passSave: View = view.findViewById(R.id.prof_okbutton)
             passSave.visibility = View.GONE
 
-            val info = Memory(requireContext()).getPersInfo()
-            Log.d("MyLog", "info = ${info.email}")
-            val editProfName = view.findViewById(R.id.prof_name) as EditText
+            Log.d("MyLog", "зашел в viewModel.Infolist.observe = ${tours.fullname}")
             editProfName.isEnabled = false
             editProfName.setText(tours.fullname)
-            val editProfLogin = view.findViewById(R.id.prof_login) as EditText
             editProfLogin.isEnabled = false
             editProfLogin.setText(tours.login)
-            val editProfEmail = view.findViewById(R.id.prof_email) as EditText
             editProfEmail.isEnabled = false
             editProfEmail.setText(tours.email)
-            val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
             editProfPhone.isEnabled = false
             editProfPhone.setText(tours.phone_number)
-            val editProfPassword = view.findViewById(R.id.prof_password) as EditText
             editProfPassword.isEnabled = false
             editProfPassword.setText(tours.password)
 
-            editProfButton.setOnClickListener{
-                viewModel.tryUpdateProf(binding)
-                editProfPhone.setText(tours.phone_number)
-                editProfName.setText(tours.fullname)
-                val editProfName = view.findViewById(R.id.prof_name) as EditText
-                editProfName.isEnabled = true
-                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
-                editProfLogin.isEnabled = true
-                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
-                editProfEmail.isEnabled = true
-                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
-                editProfPhone.isEnabled = true
-                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
-                editProfPassword.isEnabled = true
-                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
-                passCancel.visibility = View.VISIBLE
-                val passSave: View = view.findViewById(R.id.prof_okbutton)
-                passSave.visibility = View.VISIBLE
-            }
-            cancelProfButton.setOnClickListener{
-                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
-                passCancel.visibility = View.GONE
-                val passSave: View = view.findViewById(R.id.prof_okbutton)
-                passSave.visibility = View.GONE
-                val editProfName = view.findViewById(R.id.prof_name) as EditText
-                editProfName.isEnabled = false
-                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
-                editProfLogin.isEnabled = false
-                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
-                editProfEmail.isEnabled = false
-                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
-                editProfPhone.isEnabled = false
-                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
-                editProfPassword.isEnabled = false
-            }
-            saveProfButton.setOnClickListener{
-                viewModel.tryUpdateProf(binding)
-                val passCancel: View = view.findViewById(R.id.prof_cancelbutton)
-                passCancel.visibility = View.GONE
-                val passSave: View = view.findViewById(R.id.prof_okbutton)
-                passSave.visibility = View.GONE
-                val editProfName = view.findViewById(R.id.prof_name) as EditText
-                editProfName.isEnabled = false
-                val editProfLogin = view.findViewById(R.id.prof_login) as EditText
-                editProfLogin.isEnabled = false
-                val editProfEmail = view.findViewById(R.id.prof_email) as EditText
-                editProfEmail.isEnabled = false
-                val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
-                editProfPhone.isEnabled = false
-                val editProfPassword = view.findViewById(R.id.prof_password) as EditText
-                editProfPassword.isEnabled = false
-                viewModel.getUserInfo(user_id)
-                onViewCreated(view,savedInstanceState)
-//                requireActivity().supportFragmentManager.beginTransaction().detach(this).attach(this).commit()
-            }
         })
 
+        editProfButton.setOnClickListener{
+            editProfName.isEnabled = true
+            editProfLogin.isEnabled = true
+            editProfEmail.isEnabled = true
+            editProfPhone.isEnabled = true
+            editProfPassword.isEnabled = true
+            passCancel.visibility = View.VISIBLE
+            passSave.visibility = View.VISIBLE
+        }
+        cancelProfButton.setOnClickListener{
+            passCancel.visibility = View.GONE
+            passSave.visibility = View.GONE
+            editProfName.isEnabled = false
+            editProfLogin.isEnabled = false
+            editProfEmail.isEnabled = false
+            editProfPhone.isEnabled = false
+            editProfPassword.isEnabled = false
+        }
+        saveProfButton.setOnClickListener{
+            name = editProfName.text.toString()
+            phone = editProfPhone.text.toString()
+            binding.profName.setText(name)
+            binding.profPhone.setText(phone)
+            Log.d("MyLog", "телефон отредактирован = ${editProfPhone.text.toString()}")
+            Log.d("MyLog", "имя отредактировано = ${editProfName.text.toString()}")
+            Log.d("MyLog", "v binding это выглядит так = ${binding.profName.text.toString()}")
+            passCancel.visibility = View.GONE
+            passSave.visibility = View.GONE
+            editProfName.isEnabled = false
+            editProfLogin.isEnabled = false
+            editProfEmail.isEnabled = false
+            editProfPhone.isEnabled = false
+            editProfPassword.isEnabled = false
+            viewModel.tryUpdateProf(binding)
+            Log.d("MyLog", "телефон отредактирован = ${binding.profName.text.toString()}")
+
+//                viewModel.getUserInfo(user_id)
+//                onViewCreated(view,savedInstanceState)
+//                requireActivity().supportFragmentManager.beginTransaction().detach(this).attach(this).commit()
+        }
         val buttonDock: Button = view.findViewById(R.id.button_dock)
         buttonDock.setOnClickListener {
             val intent = Intent(activity, DockActivity::class.java)

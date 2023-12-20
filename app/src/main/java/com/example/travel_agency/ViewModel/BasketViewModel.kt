@@ -34,7 +34,6 @@ class BasketViewModel(val context: Application) : AndroidViewModel(context)   {
     fun updateHist(tour_id: Int, user_id: Int) {
         apiService.updateHist(tour_id, user_id, object : APIBuilder.UpdateFaveCallback {
             override fun onSuccess() {
-                Toast.makeText(context, "Тур добавлен в корзину", Toast.LENGTH_LONG).show()
             }
 
             override fun onError() {

@@ -18,7 +18,9 @@ class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
 
     fun tryUpdateProf(binding: FragmentProfileBinding) {
         val name = binding.profName.text.toString()
+        Log.d("MyLog", "имя = ${name}")
         val phone = binding.profPhone.text.toString()
+        Log.d("MyLog", "телефон = ${phone}")
         updateUserProf(storage.getUserId(),name,phone)
     }
     fun getUserInfo(id : Int){
