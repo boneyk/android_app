@@ -14,7 +14,7 @@ class ConfViewModel(val context: Application) : AndroidViewModel(context) {
     private val storage = Memory(context)
     var Conflist: MutableLiveData<ConfirmResponse> = MutableLiveData()
 
-    fun orderTour(id_user : Int,id_tour : Int){
+    fun orderTour(id_user : String,id_tour : Int){
         apiService.orderTour(id_user, id_tour, object : APIBuilder.ConfCallback {
             override fun onSuccess(response: ConfirmResponse) {
                 Log.d("MyLog", "info!! = ${response.tour.country}")

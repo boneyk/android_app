@@ -16,7 +16,7 @@ import com.example.travel_agency.activities.DockActivity
 import com.example.travel_agency.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
-    private var user_id: Int  = 2
+    private var user_id: String  = "1"
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
 

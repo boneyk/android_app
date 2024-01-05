@@ -2,8 +2,10 @@ package network_api
 
 import android.util.Log
 import com.example.travel_agency.models.ConfirmResponse
+import com.example.travel_agency.models.DockRequest
 import com.example.travel_agency.models.DocksInfo
 import com.example.travel_agency.models.LoginRequest
+import com.example.travel_agency.models.LoginResponse
 import com.example.travel_agency.models.PersInfo
 import com.example.travel_agency.models.ProfRequest
 import com.example.travel_agency.models.RegRequest
@@ -36,12 +38,12 @@ class APIBuilder(){
     }
 
     interface LoginCallback {
-        fun onSuccess(response: Int)
+        fun onSuccess(response: LoginResponse)
         fun onError()
         fun onFailure(error: Throwable)
     }
     interface RegCallback {
-        fun onSuccess(response: Int)
+        fun onSuccess(response: LoginResponse)
         fun onError()
         fun onFailure(error: Throwable)
     }
@@ -89,10 +91,10 @@ class APIBuilder(){
     fun loginUser(login: String, password: String, callback: LoginCallback) {
 
         api.loginUser(LoginRequest(login, password))
-            .enqueue(object : Callback<Int> {
+            .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
-                    call: Call<Int>,
-                    response: Response<Int>
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
                 ) {
                     if (response.isSuccessful) {
                         Log.d("MyLog", "значение = $response.body()!!")
@@ -103,7 +105,7 @@ class APIBuilder(){
                 }
 
 
-                override fun onFailure(call: Call<Int>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                     callback.onFailure(t)
@@ -114,10 +116,10 @@ class APIBuilder(){
     }
     fun regUser(login: String, email: String, password: String, password_confirm: String, callback: RegCallback){
         api.regUser(RegRequest(login,email,password,password_confirm))
-            .enqueue(object : Callback<Int> {
+            .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
-                    call: Call<Int>,
-                    response: Response<Int>
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
                 ) {
                     if (response.isSuccessful) {
                         callback.onSuccess(response.body()!!)
@@ -126,7 +128,7 @@ class APIBuilder(){
                     }
                 }
 
-                override fun onFailure(call: Call<Int>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                     callback.onFailure(t)
@@ -173,7 +175,7 @@ class APIBuilder(){
                 }
             })
     }
-    fun findFavTour(user_id: Int, callback: TourFavCallback){
+    fun findFavTour(user_id: String, callback: TourFavCallback){
         api.findFavTour(user_id)
             .enqueue(object : Callback <List<TourFav>> {
                 override fun onResponse(
@@ -194,7 +196,7 @@ class APIBuilder(){
             })
     }
 
-    fun updateFave(tour_id: Int, user_id: Int, callback: UpdateFaveCallback){
+    fun updateFave(tour_id: Int, user_id: String, callback: UpdateFaveCallback){
         api.updateFave(tour_id, user_id)
             .enqueue(object : Callback <Void> {
                 override fun onResponse(
@@ -215,7 +217,7 @@ class APIBuilder(){
             })
     }
 
-    fun deleteFave(tour_id: Int, user_id: Int, callback: UpdateFaveCallback){
+    fun deleteFave(tour_id: Int, user_id: String, callback: UpdateFaveCallback){
         api.deleteFave(tour_id, user_id)
             .enqueue(object : Callback <Void> {
                 override fun onResponse(
@@ -235,7 +237,7 @@ class APIBuilder(){
                 }
             })
     }
-    fun getUserInfo(id: Int, callback: InfoCallback){
+    fun getUserInfo(id: String, callback: InfoCallback){
         api.getUserInfo(id)
             .enqueue(object : Callback<PersInfo> {
                 override fun onResponse(
@@ -256,7 +258,7 @@ class APIBuilder(){
             })
     }
 
-    fun putUserInfo(user_id: Int,name : String, phone : String, callback: ProfCallback){
+    fun putUserInfo(user_id: String,name : String, phone : String, callback: ProfCallback){
         api.putUserInfo(user_id, ProfRequest(name,phone))
             .enqueue(object : Callback <Void> {
                 override fun onResponse(
@@ -276,7 +278,7 @@ class APIBuilder(){
                 }
             })
     }
-    fun findHistTour(user_id: Int, callback: TourFavCallback){
+    fun findHistTour(user_id: String, callback: TourFavCallback){
         api.findHistTour(user_id)
             .enqueue(object : Callback <List<TourFav>> {
                 override fun onResponse(
@@ -297,7 +299,7 @@ class APIBuilder(){
             })
     }
 
-    fun orderTour(user_id: Int,tour_id: Int, callback: ConfCallback){
+    fun orderTour(user_id: String,tour_id: Int, callback: ConfCallback){
         api.orderTour(user_id,tour_id)
             .enqueue(object : Callback <ConfirmResponse> {
                 override fun onResponse(
@@ -318,7 +320,7 @@ class APIBuilder(){
             })
     }
 
-    fun updateHist(tour_id: Int, user_id: Int, callback: UpdateFaveCallback){
+    fun updateHist(tour_id: Int, user_id: String, callback: UpdateFaveCallback){
         api.updateHist(tour_id,user_id)
             .enqueue(object : Callback <Void> {
                 override fun onResponse(
@@ -338,7 +340,7 @@ class APIBuilder(){
                 }
             })
     }
-    fun getDocks(user_id: Int, callback: DockCallback){
+    fun getDocks(user_id: String, callback: DockCallback){
         api.getDocks(user_id)
             .enqueue(object : Callback <DocksInfo> {
                 override fun onResponse(
@@ -346,6 +348,7 @@ class APIBuilder(){
                     response: Response<DocksInfo>
                 ) {
                     if (response.isSuccessful) {
+                        Log.d("MyLog", "успешно ${response.body()!!.passport.date_of_given}")
                         callback.onSuccess(response.body()!!)
                     } else {
                         callback.onError()
@@ -358,8 +361,11 @@ class APIBuilder(){
                 }
             })
     }
-    fun uploadDocks(user_id: Int, callback: UpdateFaveCallback){
-        api.uploadDocks(user_id)
+    fun uploadDocks(user_id: String, fullname:String,sex:String,
+                    citizenship:String,serial:String,number:String,
+                    registration:String,date_of_birth:String,date_of_given:String,
+                    who_gave:String, callback: UpdateFaveCallback){
+        api.uploadDocks(user_id, DockRequest(fullname,sex,citizenship,serial,number,registration,date_of_birth,date_of_given,who_gave))
             .enqueue(object : Callback <Void> {
                 override fun onResponse(
                     call: Call<Void>,

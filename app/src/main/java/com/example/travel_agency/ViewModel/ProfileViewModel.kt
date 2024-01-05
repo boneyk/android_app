@@ -23,11 +23,11 @@ class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
         Log.d("MyLog", "телефон = ${phone}")
         updateUserProf(storage.getUserId(),name,phone)
     }
-    fun getUserInfo(id : Int){
+    fun getUserInfo(id : String){
         apiService.getUserInfo(id ,object : APIBuilder.InfoCallback {
             override fun onSuccess(response: PersInfo) {
                 Log.d("MyLog", "info!! = ${response.email}")
-                storage.savePersInfo(response)
+//                storage.savePersInfo(response)
                 Infolist.value = response
             }
 
@@ -43,7 +43,7 @@ class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
         })
     }
 
-    private fun updateUserProf(id : Int, name : String, phone : String) {
+    private fun updateUserProf(id : String, name : String, phone : String) {
         apiService.putUserInfo(id,name,phone, object : APIBuilder.ProfCallback {
             override fun onSuccess() {
                 Toast.makeText(context, "Информация успешно обновлена", Toast.LENGTH_LONG).show()

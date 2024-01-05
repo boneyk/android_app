@@ -20,7 +20,7 @@ class BasketFragment : Fragment() {
     private lateinit var baskViewModel: BasketViewModel
     private lateinit var baskFaveAdapter: BasketListAdapter
     private var list: List<TourFav> = emptyList()
-    private var user_id: Int  = 2
+    private var user_id: String  = "1"
 
     override fun onCreateView(
         inflater: LayoutInflater,

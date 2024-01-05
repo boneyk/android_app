@@ -9,6 +9,7 @@ import com.example.travel_agency.R
 import com.example.travel_agency.Memory
 import com.example.travel_agency.databinding.ActivitySignBinding
 import com.example.travel_agency.fragments.FaveFragment
+import com.example.travel_agency.models.LoginResponse
 import network_api.APIBuilder
 
 class LoginViewModel(val context: Application) : AndroidViewModel(context){
@@ -37,11 +38,11 @@ class LoginViewModel(val context: Application) : AndroidViewModel(context){
     }
     fun loginUser(login: String, password: String) {
         apiService.loginUser(login, password, object : APIBuilder.LoginCallback {
-            override fun onSuccess(response: Int) {
+            override fun onSuccess(response: LoginResponse) {
                 Log.d("MyLog", "значение2 = $response")
                 storage.saveUserId(response)
-                id = response
-                id_token.setValue(response)
+//                id = response
+//                id_token.setValue(response)
                 Log.d("MyLog", "значение2.2 = ${id_token.value}")
                 startAgencyActivityEvent.value = StartAgencyActivityEvent()
             }

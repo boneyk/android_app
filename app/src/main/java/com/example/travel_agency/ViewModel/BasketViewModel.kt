@@ -11,7 +11,7 @@ class BasketViewModel(val context: Application) : AndroidViewModel(context)   {
     private val apiService = APIBuilder()
     val Histtours: MutableLiveData<List<TourFav>> = MutableLiveData()
 
-    fun findHistTour(user_id: Int) {
+    fun findHistTour(user_id: String) {
         apiService.findHistTour(user_id, object : APIBuilder.TourFavCallback{
             override fun onSuccess(response: List<TourFav>) {
                 if (response.isNotEmpty()){
@@ -31,7 +31,7 @@ class BasketViewModel(val context: Application) : AndroidViewModel(context)   {
             }
         })
     }
-    fun updateHist(tour_id: Int, user_id: Int) {
+    fun updateHist(tour_id: Int, user_id: String) {
         apiService.updateHist(tour_id, user_id, object : APIBuilder.UpdateFaveCallback {
             override fun onSuccess() {
             }

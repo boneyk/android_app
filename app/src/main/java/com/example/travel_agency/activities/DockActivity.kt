@@ -1,122 +1,157 @@
 package com.example.travel_agency.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.travel_agency.Memory
 import com.example.travel_agency.R
+import com.example.travel_agency.ViewModel.DocksViewModel
+import com.example.travel_agency.ViewModel.ProfileViewModel
+import com.example.travel_agency.databinding.ActivityDockBinding
+import com.example.travel_agency.databinding.FragmentProfileBinding
 
 
 class DockActivity : AppCompatActivity() {
+    private var user_id: String  = "1"
+    private lateinit var viewModel: DocksViewModel
+    private lateinit var binding: ActivityDockBinding
+
+    fun finallyGetIt(){
+        user_id = Memory(this).getUserId()
+        viewModel.getDocks(user_id)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dock)
 
-        val editPassButton = findViewById<View>(R.id.passport_edit_button) as Button
-        val cancelPassButton = findViewById<View>(R.id.pass_cancelbutton) as Button
-        val savePassButton = findViewById<View>(R.id.pass_okbutton) as Button
+        var fullname : String
+        var sex : String
+        var dob: String
+        var citizenship:String
+        var serial: String
+        var number: String
+        var dog: String
+        var wg: String
+        var registration: String
 
-        cancelPassButton.setOnClickListener {
-            val passCancel = findViewById<View>(R.id.pass_cancelbutton)
-            passCancel.visibility = View.GONE
-            val passSave = findViewById<View>(R.id.pass_okbutton)
-            passSave.visibility = View.GONE
-            val editPassName = findViewById<View>(R.id.info_passport_name) as EditText
+        binding = ActivityDockBinding.inflate(layoutInflater)
+        val cancelPassButton: View = findViewById(R.id.pass_cancelbutton)
+        cancelPassButton.visibility = View.GONE
+        val savePassButton: View = findViewById(R.id.pass_okbutton)
+        savePassButton.visibility = View.GONE
+        val editPassButton: View = findViewById(R.id.passport_edit_button)
+
+        viewModel = ViewModelProvider(this)[DocksViewModel::class.java]
+        user_id = Memory(this).getUserId()
+        viewModel.getDocks(user_id)
+        finallyGetIt()
+
+        val editPassName =findViewById(R.id.info_passport_name) as EditText
+        val editPassSex = findViewById(R.id.info_passport_sex) as EditText
+        val editPassBirth = findViewById(R.id.info_passport_birth) as EditText
+        val editPassCitizenship = findViewById(R.id.info_passport_citizenship) as EditText
+        val editPassSeria = findViewById(R.id.info_passport_seria) as EditText
+        val editPassNumber = findViewById(R.id.info_passport_number) as EditText
+        val editPassDateReg = findViewById(R.id.info_passport_datereg) as EditText
+        val editPassPeopleReg = findViewById(R.id.info_passport_peoplereg) as EditText
+        val editPassPlace = findViewById(R.id.info_passport_place) as EditText
+
+        viewModel.docks.observe(this, Observer { tours ->
+            //  паспорт
             editPassName.isEnabled = false
-            val editPassSex = findViewById<View>(R.id.info_passport_sex) as EditText
+            editPassName.setText(tours.passport.fullname)
             editPassSex.isEnabled = false
-            val editPassBirth = findViewById<View>(R.id.info_passport_birth) as EditText
+            editPassSex.setText(tours.passport.sex)
             editPassBirth.isEnabled = false
-            val editPassCitizenship = findViewById<View>(R.id.info_passport_citizenship) as EditText
+            editPassBirth.setText(tours.passport.date_of_birth)
             editPassCitizenship.isEnabled = false
-            val editPassSeria = findViewById<View>(R.id.info_passport_seria) as EditText
+            editPassCitizenship.setText(tours.passport.citizenship)
             editPassSeria.isEnabled = false
-            val editPassNumber = findViewById<View>(R.id.info_passport_number) as EditText
+            editPassSeria.setText(tours.passport.serial)
             editPassNumber.isEnabled = false
-            val editPassDateReg = findViewById<View>(R.id.info_passport_datereg) as EditText
+            editPassNumber.setText(tours.passport.number)
             editPassDateReg.isEnabled = false
-            val editPassPeopleReg = findViewById<View>(R.id.info_passport_peoplereg) as EditText
+            editPassDateReg.setText(tours.passport.date_of_given)
             editPassPeopleReg.isEnabled = false
-            val editPassPlace = findViewById<View>(R.id.info_passport_place) as EditText
+            editPassPeopleReg.setText(tours.passport.who_gave)
             editPassPlace.isEnabled = false
-        }
-        savePassButton.setOnClickListener {
-            val passCancel = findViewById<View>(R.id.pass_cancelbutton)
-            passCancel.visibility = View.GONE
-            val passSave = findViewById<View>(R.id.pass_okbutton)
-            passSave.visibility = View.GONE
-            val editPassName = findViewById<View>(R.id.info_passport_name) as EditText
-            editPassName.isEnabled = false
-            val editPassSex = findViewById<View>(R.id.info_passport_sex) as EditText
-            editPassSex.isEnabled = false
-            val editPassBirth = findViewById<View>(R.id.info_passport_birth) as EditText
-            editPassBirth.isEnabled = false
-            val editPassCitizenship = findViewById<View>(R.id.info_passport_citizenship) as EditText
-            editPassCitizenship.isEnabled = false
-            val editPassSeria = findViewById<View>(R.id.info_passport_seria) as EditText
-            editPassSeria.isEnabled = false
-            val editPassNumber = findViewById<View>(R.id.info_passport_number) as EditText
-            editPassNumber.isEnabled = false
-            val editPassDateReg = findViewById<View>(R.id.info_passport_datereg) as EditText
-            editPassDateReg.isEnabled = false
-            val editPassPeopleReg = findViewById<View>(R.id.info_passport_peoplereg) as EditText
-            editPassPeopleReg.isEnabled = false
-            val editPassPlace = findViewById<View>(R.id.info_passport_place) as EditText
-            editPassPlace.isEnabled = false
-        }
-//        Кнопка - редактировать для паспорта
+            editPassPlace.setText(tours.passport.registration)
+            //        ОТМЕНА И СОХРАНИТЬ - паспорт
+            cancelPassButton.visibility = View.GONE
+            savePassButton.visibility = View.GONE
+        })
+
+        //        Кнопка - редактировать для паспорта
         editPassButton.setOnClickListener {
             //  паспорт
-            val editPassName = findViewById<View>(R.id.info_passport_name) as EditText
             editPassName.isEnabled = true
-            val editPassSex = findViewById<View>(R.id.info_passport_sex) as EditText
             editPassSex.isEnabled = true
-            val editPassBirth = findViewById<View>(R.id.info_passport_birth) as EditText
             editPassBirth.isEnabled = true
-            val editPassCitizenship = findViewById<View>(R.id.info_passport_citizenship) as EditText
             editPassCitizenship.isEnabled = true
-            val editPassSeria = findViewById<View>(R.id.info_passport_seria) as EditText
             editPassSeria.isEnabled = true
-            val editPassNumber = findViewById<View>(R.id.info_passport_number) as EditText
             editPassNumber.isEnabled = true
-            val editPassDateReg = findViewById<View>(R.id.info_passport_datereg) as EditText
             editPassDateReg.isEnabled = true
-            val editPassPeopleReg = findViewById<View>(R.id.info_passport_peoplereg) as EditText
             editPassPeopleReg.isEnabled = true
-            val editPassPlace = findViewById<View>(R.id.info_passport_place) as EditText
             editPassPlace.isEnabled = true
             //        ОТМЕНА И СОХРАНИТЬ - паспорт
-            val passCancel = findViewById<View>(R.id.pass_cancelbutton)
-            passCancel.visibility = View.VISIBLE
-            val passSave = findViewById<View>(R.id.pass_okbutton)
-            passSave.visibility = View.VISIBLE
+            cancelPassButton.visibility = View.VISIBLE
+            savePassButton.visibility = View.VISIBLE
         }
-//  паспорт
-        //        ОТМЕНА И СОХРАНИТЬ - паспорт
-        val passCancel = findViewById<View>(R.id.pass_cancelbutton)
-        passCancel.visibility = View.GONE
-        val passSave = findViewById<View>(R.id.pass_okbutton)
-        passSave.visibility = View.GONE
-        val editPassName = findViewById<View>(R.id.info_passport_name) as EditText
-        editPassName.isEnabled = false
-        val editPassSex = findViewById<View>(R.id.info_passport_sex) as EditText
-        editPassSex.isEnabled = false
-        val editPassBirth = findViewById<View>(R.id.info_passport_birth) as EditText
-        editPassBirth.isEnabled = false
-        val editPassCitizenship = findViewById<View>(R.id.info_passport_citizenship) as EditText
-        editPassCitizenship.isEnabled = false
-        val editPassSeria = findViewById<View>(R.id.info_passport_seria) as EditText
-        editPassSeria.isEnabled = false
-        val editPassNumber = findViewById<View>(R.id.info_passport_number) as EditText
-        editPassNumber.isEnabled = false
-        val editPassDateReg = findViewById<View>(R.id.info_passport_datereg) as EditText
-        editPassDateReg.isEnabled = false
-        val editPassPeopleReg = findViewById<View>(R.id.info_passport_peoplereg) as EditText
-        editPassPeopleReg.isEnabled = false
-        val editPassPlace = findViewById<View>(R.id.info_passport_place) as EditText
-        editPassPlace.isEnabled = false
+        savePassButton.setOnClickListener {
+            fullname = editPassName.text.toString()
+            sex = editPassSex.text.toString()
+            dob = editPassBirth.text.toString()
+            citizenship = editPassCitizenship.text.toString()
+            serial = editPassSeria.text.toString()
+            number = editPassNumber.text.toString()
+            dog = editPassDateReg.text.toString()
+            wg = editPassPeopleReg.text.toString()
+            registration = editPassPlace.text.toString()
+
+            binding.infoPassportName.setText(fullname)
+            binding.infoPassportSex.setText(sex)
+            binding.infoPassportBirth.setText(dob)
+            binding.infoPassportCitizenship.setText(citizenship)
+            binding.infoPassportSeria.setText(serial)
+            binding.infoPassportNumber.setText(number)
+            binding.infoPassportDatereg.setText(dog)
+            binding.infoPassportPeoplereg.setText(wg)
+            binding.infoPassportPlace.setText(registration)
+
+            cancelPassButton.visibility = View.GONE
+            savePassButton.visibility = View.GONE
+
+            editPassName.isEnabled = false
+            editPassSex.isEnabled = false
+            editPassBirth.isEnabled = false
+            editPassCitizenship.isEnabled = false
+            editPassSeria.isEnabled = false
+            editPassNumber.isEnabled = false
+            editPassDateReg.isEnabled = false
+            editPassPeopleReg.isEnabled = false
+            editPassPlace.isEnabled = false
+            viewModel.tryUpdateDock(binding)
+        }
+        cancelPassButton.setOnClickListener {
+            cancelPassButton.visibility = View.GONE
+            savePassButton.visibility = View.GONE
+
+            editPassName.isEnabled = false
+            editPassSex.isEnabled = false
+            editPassBirth.isEnabled = false
+            editPassCitizenship.isEnabled = false
+            editPassSeria.isEnabled = false
+            editPassNumber.isEnabled = false
+            editPassDateReg.isEnabled = false
+            editPassPeopleReg.isEnabled = false
+            editPassPlace.isEnabled = false
+        }
     }
 }

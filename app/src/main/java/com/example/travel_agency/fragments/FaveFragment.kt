@@ -27,7 +27,7 @@ class FaveFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var tourFaveAdapter: FaveListAdapter
     private var list: List<TourFav> = emptyList()
-    private var user_id: Int  = 2
+    private var user_id: String  = "1"
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -11,7 +11,7 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
     private val apiService = APIBuilder()
     val Favetours: MutableLiveData<List<TourFav>> = MutableLiveData()
 
-    fun findFavetour(user_id: Int) {
+    fun findFavetour(user_id: String) {
         apiService.findFavTour(user_id, object : APIBuilder.TourFavCallback{
             override fun onSuccess(response: List<TourFav>) {
                 if (response.isNotEmpty()){
@@ -32,7 +32,7 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
         })
     }
 
-    fun updateFave(tour_id: Int, user_id: Int) {
+    fun updateFave(tour_id: Int, user_id: String) {
         apiService.updateFave(tour_id, user_id, object : APIBuilder.UpdateFaveCallback {
             override fun onSuccess() {
                 Toast.makeText(context, "Тур добавлен в избранное", Toast.LENGTH_LONG).show()
@@ -48,7 +48,7 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
         })
     }
 
-    fun deleteFave(tour_id: Int, user_id: Int) {
+    fun deleteFave(tour_id: Int, user_id: String) {
         apiService.deleteFave(tour_id, user_id, object : APIBuilder.UpdateFaveCallback {
             override fun onSuccess() {
                 Toast.makeText(context, "Тур удален из избранного", Toast.LENGTH_LONG).show()
