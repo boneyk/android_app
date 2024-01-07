@@ -27,19 +27,4 @@ class Memory(context: Context) {
     fun getTourId() : Int{
         return tour_id
     }
-
-    fun savePersInfo(info : PersInfo){
-        pers_info = info
-        Log.d("MyLog", "info в хранилище = ${pers_info.email}")
-    }
-    fun getPersInfo(): PersInfo{
-        return pers_info
-    }
-
-//    fun saveConf(info : ConfirmResponse){
-//        conf_info = info
-//    }
-//    fun getConf() : ConfirmResponse{
-//        return conf_info
-//    }
 }

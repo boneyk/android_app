@@ -87,6 +87,11 @@ class APIBuilder(){
         fun onError()
         fun onFailure(error: Throwable)
     }
+    interface UpdateDocksCallback {
+        fun onSuccess()
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
 
     fun loginUser(login: String, password: String, callback: LoginCallback) {
 
@@ -361,11 +366,11 @@ class APIBuilder(){
                 }
             })
     }
-    fun uploadDocks(user_id: String, fullname:String,sex:String,
-                    citizenship:String,serial:String,number:String,
-                    registration:String,date_of_birth:String,date_of_given:String,
-                    who_gave:String, callback: UpdateFaveCallback){
-        api.uploadDocks(user_id, DockRequest(fullname,sex,citizenship,serial,number,registration,date_of_birth,date_of_given,who_gave))
+    fun uploadDocks(user_id: String, fullname: String,sex: String,
+                    dob:String, citizenship:String,serial:String,
+                    number:String,dog:String, wg:String,
+                    registration:String, callback: UpdateDocksCallback){
+        api.uploadDocks(user_id, DockRequest(fullname,sex,dob,citizenship,serial,number,dog, wg, registration))
             .enqueue(object : Callback <Void> {
                 override fun onResponse(
                     call: Call<Void>,
@@ -374,6 +379,7 @@ class APIBuilder(){
                     if (response.isSuccessful) {
                         callback.onSuccess()
                     } else {
+                        Log.e("MyLog", "Ошибка при выполнении запроса: ${callback.onError()}")
                         callback.onError()
                     }
                 }

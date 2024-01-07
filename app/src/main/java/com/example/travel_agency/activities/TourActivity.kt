@@ -1,7 +1,9 @@
 package com.example.travel_agency.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -21,14 +23,19 @@ class TourActivity : AppCompatActivity() {
     private lateinit var tourIdModel: TourWithIdViewModel
     private lateinit var faveViewModel: FaveViewModel
     private lateinit var basketViewModel: BasketViewModel
-    val storage = Memory(this)
+
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTourBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Log.d("MyLog", "создал sharedPref и editor")
         viewModel = ViewModelProvider(this).get(TourWithIdViewModel::class.java)
+        sharedPref = getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
+        editor = sharedPref.edit()
+
 
         val curImage: ImageView = binding.tourListImage
         val country: TextView = binding.tourCountry
@@ -40,6 +47,7 @@ class TourActivity : AppCompatActivity() {
         val price: TextView = binding.tourPrice
 
         val tourId = intent.getIntExtra("tour_id", 0)
+        Log.d("MyLog", "tour_id = $tourId")
         tourIdModel = ViewModelProvider(this).get(TourWithIdViewModel::class.java)
         tourIdModel.findTourWithId(tourId)
         tourIdModel.tourWithId.observe(this, Observer { tour ->
@@ -59,24 +67,24 @@ class TourActivity : AppCompatActivity() {
         val linkToFave: TextView = findViewById(R.id.button_toFave)
         val linkFromFave: TextView = findViewById(R.id.button_fromFave)
         linkToConfirm.setOnClickListener {
-            storage.saveTourId(tourId)
+            editor.putInt("tour_id", tourId).apply()
             basketViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
-            basketViewModel.updateHist(storage.getTourId(),storage.getUserId())
+            basketViewModel.updateHist(sharedPref.getInt("tour_id", 0),sharedPref.getString("token", null)!!)
             Toast.makeText(this, "Давайте подтвердим заказ!", Toast.LENGTH_LONG).show()
             startActivity(Intent(this, ConfirmActivity::class.java))
             finish()
         }
         linkToFave.setOnClickListener {
-            val tour_id = storage.getTourId()
-            val user_id = storage.getUserId()
+            val tour_id = sharedPref.getInt("tour_id", 0)
+            val user_id = sharedPref.getString("token", null)
             faveViewModel = ViewModelProvider(this)[FaveViewModel::class.java]
-            faveViewModel.updateFave(tour_id,user_id)
+            faveViewModel.updateFave(tour_id,user_id!!)
         }
         linkFromFave.setOnClickListener {
-            val tour_id = storage.getTourId()
-            val user_id = storage.getUserId()
+            val tour_id = sharedPref.getInt("tour_id", 0)
+            val user_id = sharedPref.getString("token", null)
             faveViewModel = ViewModelProvider(this)[FaveViewModel::class.java]
-            faveViewModel.deleteFave(tour_id,user_id)
+            faveViewModel.deleteFave(tour_id,user_id!!)
             faveViewModel.findFavetour(user_id)
         }
     }

@@ -41,6 +41,15 @@
                 android:textStyle="italic"
                 android:text="Паспорт" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:text="ФИО"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="43dp"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
             <EditText
                 android:id="@+id/info_passport_name"
                 android:background="#FFFFFF"
@@ -49,7 +58,6 @@
                 android:ems="10"
                 android:inputType="text"
                 android:textColorHint="#6a6a6a"
-                android:layout_marginTop="20sp"
                 android:layout_gravity="center"
                 android:textColor="#1f1317"
                 android:hint="  ФИО" />
@@ -59,6 +67,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates_bold"
+                    android:text="Пол"
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:textStyle="normal"/>
                 <EditText
                     android:id="@+id/info_passport_sex"
                     android:background="#FFFFFF"
@@ -67,11 +84,21 @@
                     android:ems="10"
                     android:inputType="text"
                     android:textColorHint="#6a6a6a"
-                    android:layout_marginTop="20sp"
                     android:layout_marginLeft="45dp"
+                    android:layout_marginTop="30sp"
+
                     android:layout_gravity="center"
                     android:textColor="#1f1317"
                     android:hint="  Пол" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates_bold"
+                    android:text="Дата рождения"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:textStyle="normal"/>
                 <EditText
                     android:id="@+id/info_passport_birth"
                     android:layout_toRightOf="@+id/info_passport_sex"
@@ -81,12 +108,21 @@
                     android:ems="10"
                     android:inputType="text"
                     android:textColorHint="#6a6a6a"
-                    android:layout_marginTop="20sp"
+                    android:layout_marginTop="30sp"
                     android:layout_marginLeft="22dp"
                     android:layout_gravity="center"
                     android:textColor="#1f1317"
                     android:hint="  Дата рождения" />
             </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:text="Гражданство"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="43dp"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
             <EditText
                 android:id="@+id/info_passport_citizenship"
                 android:background="#FFFFFF"
@@ -95,7 +131,6 @@
                 android:ems="10"
                 android:inputType="text"
                 android:textColorHint="#6a6a6a"
-                android:layout_marginTop="20sp"
                 android:layout_gravity="center"
                 android:textColor="#1f1317"
                 android:hint="  Гражданство" />
@@ -105,6 +140,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates_bold"
+                    android:text="Серия"
+                    android:layout_marginLeft="43dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:textStyle="normal"/>
                 <EditText
                     android:id="@+id/info_passport_seria"
                     android:background="#FFFFFF"
@@ -113,12 +157,21 @@
                     android:ems="10"
                     android:inputType="text"
                     android:textColorHint="#6a6a6a"
-                    android:layout_marginTop="20sp"
+                    android:layout_marginTop="30sp"
                     android:layout_marginLeft="45dp"
                     android:layout_gravity="center"
                     android:textColor="#1f1317"
                     android:hint="  Серия" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates_bold"
+                    android:text="Номер"
+                    android:layout_marginLeft="220dp"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="normal"/>
                 <EditText
                     android:id="@+id/info_passport_number"
                     android:layout_toRightOf="@+id/info_passport_seria"
@@ -128,12 +181,21 @@
                     android:ems="10"
                     android:inputType="text"
                     android:textColorHint="#6a6a6a"
-                    android:layout_marginTop="20sp"
+                    android:layout_marginTop="30sp"
                     android:layout_marginLeft="22dp"
                     android:layout_gravity="center"
                     android:textColor="#1f1317"
                     android:hint="  Номер" />
             </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:text="Дата выдачи"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="43dp"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
             <EditText
                 android:id="@+id/info_passport_datereg"
                 android:background="#FFFFFF"
@@ -142,10 +204,18 @@
                 android:ems="10"
                 android:inputType="text"
                 android:textColorHint="#6a6a6a"
-                android:layout_marginTop="20sp"
                 android:layout_gravity="center"
                 android:textColor="#1f1317"
                 android:hint="  Дата выдачи" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:text="Кем выдан"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="43dp"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
             <EditText
                 android:id="@+id/info_passport_peoplereg"
                 android:background="#FFFFFF"
@@ -154,21 +224,30 @@
                 android:ems="10"
                 android:inputType="text"
                 android:textColorHint="#6a6a6a"
-                android:layout_marginTop="20sp"
                 android:layout_gravity="center"
                 android:textColor="#1f1317"
                 android:hint="  Кем выдан" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:text="Регистрация"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="43dp"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
             <EditText
                 android:id="@+id/info_passport_place"
                 android:background="#FFFFFF"
                 android:layout_width="320dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textMultiLine|text"
                 android:textColorHint="#6a6a6a"
-                android:layout_marginTop="20sp"
                 android:layout_gravity="center"
                 android:textColor="#1f1317"
+                android:lines="3"
+                android:autoSizeTextType="uniform"
                 android:hint="  Регистрация" />
 
             <RelativeLayout

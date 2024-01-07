@@ -1,5 +1,6 @@
 package com.example.travel_agency.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,15 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.travel_agency.Memory
 import com.example.travel_agency.ViewModel.FaveViewModel
 import com.example.travel_agency.ViewModel.LoginViewModel
 import com.example.travel_agency.ViewModel.RegViewModel
-//import com.example.travel_agency.ViewModel.FaveViewModel
 import com.example.travel_agency.adapters.FaveListAdapter
-//import com.example.travel_agency.adapters.FaveListAdapter
 import com.example.travel_agency.databinding.FragmentFaveBinding
 import com.example.travel_agency.models.TourFav
 
@@ -29,6 +28,9 @@ class FaveFragment : Fragment() {
     private var list: List<TourFav> = emptyList()
     private var user_id: String  = "1"
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,8 +40,10 @@ class FaveFragment : Fragment() {
         Log.d("MyLog", "binding = FragmentFaveBinding.inflate(inflater, container, false)")
         faveViewModel = ViewModelProvider(this)[FaveViewModel::class.java]
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        sharedPref = requireContext().getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
+        editor = sharedPref.edit()
         Log.d("MyLog", "создана viewmodelprovider в faveviewmodel")
-        user_id = Memory(requireContext()).getUserId()
+        user_id = sharedPref.getString("token", null)!!
         Log.d("MyLog", "значение3 = ${user_id}")
         faveViewModel.findFavetour(user_id)
         return binding.root

@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#b8cbe9"
-    tools:context=".activities.SignActivity">
+    tools:context=".activities.LoginActivity">
 
     <TextView
         android:id="@+id/title_text"

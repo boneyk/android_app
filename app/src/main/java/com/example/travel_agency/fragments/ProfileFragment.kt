@@ -1,6 +1,7 @@
 package com.example.travel_agency
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.ViewModel.ProfileViewModel
@@ -20,8 +22,10 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
     fun finallyGetIt(){
-        user_id = Memory(requireContext()).getUserId()
+        user_id = sharedPref.getString("token", null)!!
         Log.d("MyLog", "user_id = ${user_id}")
         viewModel.getUserInfo(user_id)
     }
@@ -29,7 +33,9 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         binding = FragmentProfileBinding.inflate(layoutInflater)
-        user_id = Memory(requireContext()).getUserId()
+        sharedPref = requireContext().getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
+        editor = sharedPref.edit()
+        user_id = sharedPref.getString("token", null)!!
         Log.d("MyLog", "user_id = ${user_id}")
         viewModel.getUserInfo(user_id)
         finallyGetIt()
@@ -53,7 +59,7 @@ class ProfileFragment : Fragment() {
         val editProfLogin = view.findViewById(R.id.prof_login) as EditText
         val editProfEmail = view.findViewById(R.id.prof_email) as EditText
         val editProfPhone = view.findViewById(R.id.prof_phone) as EditText
-        val editProfPassword = view.findViewById(R.id.prof_password) as EditText
+//        val editProfPassword = view.findViewById(R.id.prof_password) as EditText
 
 
         viewModel.Infolist.observe(requireActivity(), Observer { tours ->
@@ -70,8 +76,8 @@ class ProfileFragment : Fragment() {
             editProfEmail.setText(tours.email)
             editProfPhone.isEnabled = false
             editProfPhone.setText(tours.phone_number)
-            editProfPassword.isEnabled = false
-            editProfPassword.setText(tours.password)
+//            editProfPassword.isEnabled = false
+//            editProfPassword.setText(tours.password)
 
         })
 
@@ -80,7 +86,7 @@ class ProfileFragment : Fragment() {
             editProfLogin.isEnabled = true
             editProfEmail.isEnabled = true
             editProfPhone.isEnabled = true
-            editProfPassword.isEnabled = true
+//            editProfPassword.isEnabled = true
             passCancel.visibility = View.VISIBLE
             passSave.visibility = View.VISIBLE
         }
@@ -91,7 +97,7 @@ class ProfileFragment : Fragment() {
             editProfLogin.isEnabled = false
             editProfEmail.isEnabled = false
             editProfPhone.isEnabled = false
-            editProfPassword.isEnabled = false
+//            editProfPassword.isEnabled = false
         }
         saveProfButton.setOnClickListener{
             name = editProfName.text.toString()
@@ -107,7 +113,7 @@ class ProfileFragment : Fragment() {
             editProfLogin.isEnabled = false
             editProfEmail.isEnabled = false
             editProfPhone.isEnabled = false
-            editProfPassword.isEnabled = false
+//            editProfPassword.isEnabled = false
             viewModel.tryUpdateProf(binding)
             Log.d("MyLog", "телефон отредактирован = ${binding.profName.text.toString()}")
 

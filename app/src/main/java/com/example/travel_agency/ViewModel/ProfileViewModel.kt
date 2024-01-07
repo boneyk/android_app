@@ -1,11 +1,12 @@
 package com.example.travel_agency.ViewModel
 
 import android.app.Application
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.travel_agency.Memory
 import com.example.travel_agency.databinding.FragmentProfileBinding
 import com.example.travel_agency.models.ConfirmResponse
 import com.example.travel_agency.models.PersInfo
@@ -13,21 +14,24 @@ import network_api.APIBuilder
 
 class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
     private val apiService = APIBuilder()
-    private val storage = Memory(context)
     var Infolist: MutableLiveData<PersInfo> = MutableLiveData()
+
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     fun tryUpdateProf(binding: FragmentProfileBinding) {
         val name = binding.profName.text.toString()
         Log.d("MyLog", "имя = ${name}")
         val phone = binding.profPhone.text.toString()
         Log.d("MyLog", "телефон = ${phone}")
-        updateUserProf(storage.getUserId(),name,phone)
+        sharedPref = context.getSharedPreferences("myPref", MODE_PRIVATE)
+        editor = sharedPref.edit()
+        updateUserProf(sharedPref.getString("token", null)!!,name,phone)
     }
     fun getUserInfo(id : String){
         apiService.getUserInfo(id ,object : APIBuilder.InfoCallback {
             override fun onSuccess(response: PersInfo) {
                 Log.d("MyLog", "info!! = ${response.email}")
-//                storage.savePersInfo(response)
                 Infolist.value = response
             }
 

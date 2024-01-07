@@ -6,11 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.R
 import com.example.travel_agency.databinding.ActivityRegBinding
+import com.example.travel_agency.models.LoginResponse
 import network_api.APIBuilder
 
 class RegViewModel(val context: Application) : AndroidViewModel(context){
     val startAgencyActivityEvent: MutableLiveData<StartAgencyActivityEvent> = MutableLiveData()
-    val id_regToken: MutableLiveData<Int> = MutableLiveData()
     class StartAgencyActivityEvent
     private val apiService = APIBuilder()
 
@@ -38,9 +38,8 @@ class RegViewModel(val context: Application) : AndroidViewModel(context){
     }
     private fun regUser(login: String,email:String,password: String,password_confirm:String) {
         apiService.regUser(login,email,password,password_confirm, object : APIBuilder.RegCallback {
-            override fun onSuccess(response: Int) {
+            override fun onSuccess(response: LoginResponse) {
                 startAgencyActivityEvent.value = RegViewModel.StartAgencyActivityEvent()
-                id_regToken.value = response
             }
 
             override fun onError() {

@@ -10,10 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
-import com.example.travel_agency.ViewModel.LoginViewModel
 import com.example.travel_agency.ViewModel.RegViewModel
 import com.example.travel_agency.databinding.ActivityRegBinding
-import com.example.travel_agency.models.User
 
 class RegActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegBinding
@@ -34,7 +32,7 @@ class RegActivity : AppCompatActivity() {
         val linkToAuth: TextView = findViewById(R.id.link_to_auth)
 
         linkToAuth.setOnClickListener {
-            val intent = Intent(this, SignActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
@@ -48,7 +46,7 @@ class RegActivity : AppCompatActivity() {
             userPassword.text.clear()
             userEmail.text.clear()
             userPasswordCopy.text.clear()
-            startActivity(Intent(this, SignActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }

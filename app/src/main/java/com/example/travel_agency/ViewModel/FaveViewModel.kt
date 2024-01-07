@@ -11,6 +11,7 @@ class FaveViewModel(val context: Application) : AndroidViewModel(context)  {
     private val apiService = APIBuilder()
     val Favetours: MutableLiveData<List<TourFav>> = MutableLiveData()
 
+
     fun findFavetour(user_id: String) {
         apiService.findFavTour(user_id, object : APIBuilder.TourFavCallback{
             override fun onSuccess(response: List<TourFav>) {

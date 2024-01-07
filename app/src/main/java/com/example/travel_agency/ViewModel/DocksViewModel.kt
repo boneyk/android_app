@@ -1,11 +1,12 @@
 package com.example.travel_agency.ViewModel
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.travel_agency.Memory
 import com.example.travel_agency.databinding.ActivityDockBinding
 import com.example.travel_agency.databinding.FragmentProfileBinding
 import com.example.travel_agency.models.DocksInfo
@@ -15,21 +16,24 @@ import network_api.APIBuilder
 
 class DocksViewModel(val context: Application) : AndroidViewModel(context) {
     private val apiService = APIBuilder()
-    private val storage = Memory(context)
     var docks: MutableLiveData<DocksInfo> = MutableLiveData()
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
     fun tryUpdateDock(binding: ActivityDockBinding) {
-        val name = binding.infoPassportName.text.toString()
-        Log.d("MyLog", "имя = ${name}")
+        sharedPref = context.getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
+        editor = sharedPref.edit()
+        val fullname = binding.infoPassportName.text.toString()
+        Log.d("MyLog", "имя = ${fullname}")
         val sex = binding.infoPassportSex.text.toString()
+        val dob = binding.infoPassportBirth.text.toString()
         val citizenship = binding.infoPassportCitizenship.text.toString()
         val serial = binding.infoPassportSeria.text.toString()
         val number = binding.infoPassportNumber.text.toString()
+        val dog = binding.infoPassportDatereg.text.toString()
+        val wg = binding.infoPassportPeoplereg.text.toString()
         val registration = binding.infoPassportPlace.text.toString()
-        val date_of_birth = binding.infoPassportBirth.text.toString()
-        val date_of_given = binding.infoPassportDatereg.text.toString()
-        val who_gave = binding.infoPassportPeoplereg.text.toString()
-        uploadDocks(storage.getUserId(),name,sex,citizenship,serial,number,registration,date_of_birth,date_of_given,who_gave)
+        uploadDocks(sharedPref.getString("token", null)!!,fullname,sex,dob,citizenship,serial,number,dog,wg,registration)
     }
     fun getDocks(user_id: String){
         apiService.getDocks(user_id, object : APIBuilder.DockCallback{
@@ -46,11 +50,10 @@ class DocksViewModel(val context: Application) : AndroidViewModel(context) {
             }
         })
     }
-    private fun uploadDocks(id : String, fullname:String,sex:String,
+    private fun uploadDocks(id : String, fullname:String,sex:String,dob:String,
                             citizenship:String,serial:String,number:String,
-                            registration:String,date_of_birth:String,date_of_given:String,
-                            who_gave:String) {
-        apiService.uploadDocks(id,fullname,sex,citizenship,serial,number,registration,date_of_birth,date_of_given,who_gave, object : APIBuilder.UpdateFaveCallback {
+                            dog:String,wg:String, registration:String) {
+        apiService.uploadDocks(id,fullname,sex,dob,citizenship,serial,number,dog,wg,registration,object : APIBuilder.UpdateDocksCallback {
             override fun onSuccess() {
                 Toast.makeText(context, "Информация успешно обновлена", Toast.LENGTH_LONG).show()
             }

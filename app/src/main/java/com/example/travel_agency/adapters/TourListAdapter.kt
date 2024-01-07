@@ -22,9 +22,6 @@ import com.example.travel_agency.models.Tour_Image
 import com.example.travel_agency.models.Tours
 
 class TourListAdapter(var tours: MutableLiveData<List<Tours>>, var context: Context): RecyclerView.Adapter<TourListAdapter.MyViewHolder>() {
-
-    private lateinit var tourIdModel: TourWithIdViewModel
-
     fun updateData(newTours: List<Tours>) {
         tours.value = newTours
         notifyDataSetChanged()

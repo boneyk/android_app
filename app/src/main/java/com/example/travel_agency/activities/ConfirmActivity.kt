@@ -1,5 +1,6 @@
 package com.example.travel_agency.activities
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -8,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
-import com.example.travel_agency.Memory
 import com.example.travel_agency.ViewModel.BasketViewModel
 import com.example.travel_agency.ViewModel.ConfViewModel
 import com.example.travel_agency.databinding.ActivityConfirmBinding
@@ -19,17 +19,21 @@ class ConfirmActivity : AppCompatActivity() {
     private lateinit var viewModel: ConfViewModel
     private lateinit var basketviewModel: BasketViewModel
     private lateinit var basketViewModel: BasketViewModel
-    val storage = Memory(this)
+
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_confirm)
         basketViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
-        basketViewModel.updateHist(storage.getTourId(),storage.getUserId())
+        sharedPref = getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
+        editor = sharedPref.edit()
+        basketViewModel.updateHist(sharedPref.getInt("tour_id", 0),sharedPref.getString("token", null)!!)
         viewModel = ViewModelProvider(this).get(ConfViewModel::class.java)
-        val tour_id = storage.getTourId()
-        val user_id = storage.getUserId()
+        val tour_id = sharedPref.getInt("tour_id", 0)
+        val user_id = sharedPref.getString("token", null)!!
         viewModel.orderTour(user_id,tour_id)
 
         viewModel.Conflist.observe(this, Observer { tours ->

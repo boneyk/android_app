@@ -5,13 +5,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.travel_agency.Memory
 import com.example.travel_agency.models.ConfirmResponse
 import network_api.APIBuilder
 
 class ConfViewModel(val context: Application) : AndroidViewModel(context) {
     private val apiService = APIBuilder()
-    private val storage = Memory(context)
     var Conflist: MutableLiveData<ConfirmResponse> = MutableLiveData()
 
     fun orderTour(id_user : String,id_tour : Int){

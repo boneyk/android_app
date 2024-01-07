@@ -1,21 +1,19 @@
 package com.example.travel_agency.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
 import com.example.travel_agency.ViewModel.LoginViewModel
 import com.example.travel_agency.databinding.ActivitySignBinding
-import com.example.travel_agency.models.User
 
-class SignActivity : AppCompatActivity(){
+class LoginActivity : AppCompatActivity(){
     private lateinit var binding: ActivitySignBinding
     private lateinit var viewModel: LoginViewModel
 
@@ -25,6 +23,7 @@ class SignActivity : AppCompatActivity(){
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
 
         val userLogin: EditText = findViewById(R.id.user_login_auth)
         val userPassword: EditText = findViewById(R.id.user_password_auth)

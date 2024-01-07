@@ -1,5 +1,6 @@
 package com.example.travel_agency.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travel_agency.adapters.BasketListAdapter
@@ -22,6 +24,9 @@ class BasketFragment : Fragment() {
     private var list: List<TourFav> = emptyList()
     private var user_id: String  = "1"
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,7 +36,9 @@ class BasketFragment : Fragment() {
         baskViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
         Log.d("MyLog", "binding = FragmentFaveBinding.inflate(inflater, container, false)")
         Log.d("MyLog", "создана viewmodelprovider в faveviewmodel")
-        user_id = Memory(requireContext()).getUserId()
+        sharedPref = requireContext().getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
+        editor = sharedPref.edit()
+        user_id = sharedPref.getString("token", null)!!
         Log.d("MyLog", "значение3 = ${user_id}")
         baskViewModel.findHistTour(user_id)
         return binding.root

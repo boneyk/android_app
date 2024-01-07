@@ -1,5 +1,6 @@
 package com.example.travel_agency.activities
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.travel_agency.Memory
 import com.example.travel_agency.R
 import com.example.travel_agency.ViewModel.DocksViewModel
 import com.example.travel_agency.ViewModel.ProfileViewModel
@@ -22,8 +22,10 @@ class DockActivity : AppCompatActivity() {
     private lateinit var viewModel: DocksViewModel
     private lateinit var binding: ActivityDockBinding
 
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
     fun finallyGetIt(){
-        user_id = Memory(this).getUserId()
+        user_id = sharedPref.getString("token", null)!!
         viewModel.getDocks(user_id)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,8 +50,11 @@ class DockActivity : AppCompatActivity() {
         savePassButton.visibility = View.GONE
         val editPassButton: View = findViewById(R.id.passport_edit_button)
 
+        sharedPref = getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
+        editor = sharedPref.edit()
+
         viewModel = ViewModelProvider(this)[DocksViewModel::class.java]
-        user_id = Memory(this).getUserId()
+        user_id = sharedPref.getString("token", null)!!
         viewModel.getDocks(user_id)
         finallyGetIt()
 

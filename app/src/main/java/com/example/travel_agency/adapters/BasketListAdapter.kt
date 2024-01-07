@@ -1,6 +1,7 @@
 package com.example.travel_agency.adapters
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
 import com.example.travel_agency.models.TourFav
 import com.example.travel_agency.models.Tour_Image
-import com.example.travel_agency.models.Tours
 
 class BasketListAdapter(var tours: List<TourFav>, var context: Context): RecyclerView.Adapter<BasketListAdapter.MyViewHolder>() {
     fun updateData(newTours: List<TourFav>) {
