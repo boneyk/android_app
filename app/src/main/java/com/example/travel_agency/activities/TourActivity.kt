@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
-import com.example.travel_agency.Memory
 import com.example.travel_agency.ViewModel.BasketViewModel
 import com.example.travel_agency.ViewModel.FaveViewModel
 import com.example.travel_agency.ViewModel.TourWithIdViewModel

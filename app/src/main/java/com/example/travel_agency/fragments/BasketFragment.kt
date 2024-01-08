@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travel_agency.adapters.BasketListAdapter
-import com.example.travel_agency.Memory
 import com.example.travel_agency.ViewModel.BasketViewModel
 import com.example.travel_agency.databinding.FragmentBasketBinding
 import com.example.travel_agency.models.TourFav
