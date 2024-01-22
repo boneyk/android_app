@@ -29,6 +29,85 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:text="ФИО"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="43dp"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
+            <EditText
+                android:id="@+id/info_name"
+                android:background="#FFFFFF"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:textColorHint="#6a6a6a"
+                android:layout_gravity="center"
+                android:textColor="#1f1317"
+                android:hint="  Введите ФИО" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:text="Номер телефона"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="43dp"
+                android:textSize="15sp"
+                android:textStyle="normal"/>
+            <EditText
+                android:id="@+id/info_phone"
+                android:background="#FFFFFF"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:textColorHint="#6a6a6a"
+                android:layout_gravity="center"
+                android:textColor="#1f1317"
+                android:hint="  Введите номер телефона" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/info2_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_weight="1"
+                    android:onClick="cancelButtonClick"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="40dp"
+                    android:text="Отменить" />
+                <Button
+                    android:id="@+id/info2_edit_button"
+
+                    android:layout_toRightOf="@+id/info2_cancelbutton"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Редактировать" />
+
+                <Button
+                    android:id="@+id/info2_okbutton"
+                    android:layout_toRightOf="@+id/info2_cancelbutton"
+                    android:backgroundTint="#3C5A5C"
+                    android:layout_width="160dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="okButtonClick"
+                    android:text="Сохранить" />
+            </RelativeLayout>
 <!--            Паспорт-->
             <TextView
                 android:layout_width="wrap_content"

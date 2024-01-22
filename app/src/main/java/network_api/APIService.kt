@@ -4,10 +4,12 @@ import com.example.travel_agency.models.ConfRequest
 import com.example.travel_agency.models.ConfirmResponse
 import com.example.travel_agency.models.DockRequest
 import com.example.travel_agency.models.DocksInfo
+import com.example.travel_agency.models.Docksmall
 import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.LoginResponse
 import com.example.travel_agency.models.PersInfo
+import com.example.travel_agency.models.Person
 import com.example.travel_agency.models.ProfRequest
 import com.example.travel_agency.models.RegRequest
 import com.example.travel_agency.models.Tour
@@ -73,11 +75,21 @@ interface APIService {
     @POST("trip/add")
     fun updateHist(@Body request : ConfRequest): Call<Any>
 
-    //получение личных документов пользователя
+    //получение списка туристов
     @GET("documents")
-    fun getDocks(@Query("token") user_id: String): Call<DocksInfo>
+    fun getDocks(@Query("token") user_id: String): Call<List<Person>>
+
+//   добавление нового туриста
+    @POST("documents/add")
+    fun putPeop(@Query("token") user_id: String): Call<LoginResponse>
+
+    @GET("documents/person")
+    fun getDocksInfo(@Query("doc_token") doc_token: String): Call<DocksInfo>
 
     //добавление личных документов пользователя
-    @PATCH("documents/passport")
-    fun uploadDocks(@Query("token") user_id: String, @Body request : DockRequest): Call<Void>
+//    @POST("documents/personalInfo")
+//    fun uploadDocks(@Query("doc_token") user_id: String, @Body request : Docksmall): Call<Void>
+
+    @POST("documents/personalInfo")
+    fun setPersInfo(@Query("doc_token") user_id: String, @Body request : Docksmall): Call<Void>
 }

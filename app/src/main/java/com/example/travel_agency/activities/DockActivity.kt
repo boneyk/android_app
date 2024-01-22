@@ -25,13 +25,16 @@ class DockActivity : AppCompatActivity() {
     private lateinit var sharedPref: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
     fun finallyGetIt(){
-        user_id = sharedPref.getString("token", null)!!
-        viewModel.getDocks(user_id)
+        user_id = sharedPref.getString("doc_token", null)!!
+        viewModel.getDocksInfo(user_id)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dock)
+
+        var name : String
+        var phone : String
 
         var fullname : String
         var sex : String
@@ -54,9 +57,18 @@ class DockActivity : AppCompatActivity() {
         editor = sharedPref.edit()
 
         viewModel = ViewModelProvider(this)[DocksViewModel::class.java]
-        user_id = sharedPref.getString("token", null)!!
-        viewModel.getDocks(user_id)
+        user_id = sharedPref.getString("doc_token", null)!!
+        viewModel.getDocksInfo(user_id)
         finallyGetIt()
+
+        val editName =findViewById(R.id.info_name) as EditText
+        val editPhone =findViewById(R.id.info_phone) as EditText
+
+        val cancelInfoButton: View = findViewById(R.id.info2_cancelbutton)
+        cancelInfoButton.visibility = View.GONE
+        val saveInfoButton: View = findViewById(R.id.info2_okbutton)
+        saveInfoButton.visibility = View.GONE
+        val editInfoButton: View = findViewById(R.id.info2_edit_button)
 
         val editPassName =findViewById(R.id.info_passport_name) as EditText
         val editPassSex = findViewById(R.id.info_passport_sex) as EditText
@@ -69,29 +81,60 @@ class DockActivity : AppCompatActivity() {
         val editPassPlace = findViewById(R.id.info_passport_place) as EditText
 
         viewModel.docks.observe(this, Observer { tours ->
+            editName.isEnabled = false
+            editName.setText(tours?.fullname)
+            editPhone.isEnabled = false
+            editPhone.setText(tours?.phone_number)
             //  паспорт
-            editPassName.isEnabled = false
-            editPassName.setText(tours.passport.fullname)
-            editPassSex.isEnabled = false
-            editPassSex.setText(tours.passport.sex)
-            editPassBirth.isEnabled = false
-            editPassBirth.setText(tours.passport.date_of_birth)
-            editPassCitizenship.isEnabled = false
-            editPassCitizenship.setText(tours.passport.citizenship)
-            editPassSeria.isEnabled = false
-            editPassSeria.setText(tours.passport.serial)
-            editPassNumber.isEnabled = false
-            editPassNumber.setText(tours.passport.number)
-            editPassDateReg.isEnabled = false
-            editPassDateReg.setText(tours.passport.date_of_given)
-            editPassPeopleReg.isEnabled = false
-            editPassPeopleReg.setText(tours.passport.who_gave)
-            editPassPlace.isEnabled = false
-            editPassPlace.setText(tours.passport.registration)
-            //        ОТМЕНА И СОХРАНИТЬ - паспорт
-            cancelPassButton.visibility = View.GONE
-            savePassButton.visibility = View.GONE
+            if(tours.passport != null) {
+                editPassName.isEnabled = false
+                editPassName.setText(tours.passport?.fullname)
+                editPassSex.isEnabled = false
+                editPassSex.setText(tours.passport?.sex)
+                editPassBirth.isEnabled = false
+                editPassBirth.setText(tours.passport?.date_of_birth)
+                editPassCitizenship.isEnabled = false
+                editPassCitizenship.setText(tours.passport?.citizenship)
+                editPassSeria.isEnabled = false
+                editPassSeria.setText(tours.passport!!.serial)
+                editPassNumber.isEnabled = false
+                editPassNumber.setText(tours.passport!!.number)
+                editPassDateReg.isEnabled = false
+                editPassDateReg.setText(tours.passport!!.date_of_given)
+                editPassPeopleReg.isEnabled = false
+                editPassPeopleReg.setText(tours.passport!!.who_gave)
+                editPassPlace.isEnabled = false
+                editPassPlace.setText(tours.passport!!.registration)
+                //        ОТМЕНА И СОХРАНИТЬ - паспорт
+                cancelPassButton.visibility = View.GONE
+                savePassButton.visibility = View.GONE
+            }
         })
+
+        editInfoButton.setOnClickListener {
+            editName.isEnabled = true
+            editPhone.isEnabled = true
+            cancelInfoButton.visibility = View.VISIBLE
+            saveInfoButton.visibility = View.VISIBLE
+        }
+        saveInfoButton.setOnClickListener {
+            name = editName.text.toString()
+            phone = editPhone.text.toString()
+            binding.infoName.setText(name)
+            binding.infoPhone.setText(phone)
+            cancelInfoButton.visibility = View.GONE
+            saveInfoButton.visibility = View.GONE
+            editName.isEnabled = false
+            editPhone.isEnabled = false
+            viewModel.setPersInfo(user_id,name,phone)
+//            viewModel.getDocksInfo(user_id)
+        }
+        cancelInfoButton.setOnClickListener {
+            cancelInfoButton.visibility = View.GONE
+            saveInfoButton.visibility = View.GONE
+            editName.isEnabled = false
+            editPhone.isEnabled = false
+        }
 
         //        Кнопка - редактировать для паспорта
         editPassButton.setOnClickListener {

@@ -10,9 +10,13 @@ import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.databinding.ActivityDockBinding
 import com.example.travel_agency.databinding.FragmentProfileBinding
 import com.example.travel_agency.models.DocksInfo
+import com.example.travel_agency.models.Docksmall
 import com.example.travel_agency.models.PersInfo
 import com.example.travel_agency.models.TourFav
 import network_api.APIBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DocksViewModel(val context: Application) : AndroidViewModel(context) {
     private val apiService = APIBuilder()
@@ -33,10 +37,10 @@ class DocksViewModel(val context: Application) : AndroidViewModel(context) {
         val dog = binding.infoPassportDatereg.text.toString()
         val wg = binding.infoPassportPeoplereg.text.toString()
         val registration = binding.infoPassportPlace.text.toString()
-        uploadDocks(sharedPref.getString("token", null)!!,fullname,sex,dob,citizenship,serial,number,dog,wg,registration)
+//        uploadDocks(sharedPref.getString("token", null)!!,fullname,sex,dob,citizenship,serial,number,dog,wg,registration)
     }
-    fun getDocks(user_id: String){
-        apiService.getDocks(user_id, object : APIBuilder.DockCallback{
+    fun getDocksInfo(user_id: String){
+        apiService.getDocksInfo(user_id, object : APIBuilder.DockInfoCallback{
             override fun onSuccess(response: DocksInfo) {
                 docks.value = response
             }
@@ -50,21 +54,37 @@ class DocksViewModel(val context: Application) : AndroidViewModel(context) {
             }
         })
     }
-    private fun uploadDocks(id : String, fullname:String,sex:String,dob:String,
-                            citizenship:String,serial:String,number:String,
-                            dog:String,wg:String, registration:String) {
-        apiService.uploadDocks(id,fullname,sex,dob,citizenship,serial,number,dog,wg,registration,object : APIBuilder.UpdateDocksCallback {
+    fun setPersInfo(user_id: String, fullname: String,
+                    phone_number:String){
+        apiService.setPersInfo(user_id,fullname,phone_number, object : APIBuilder.UpdateDocksCallback{
             override fun onSuccess() {
                 Toast.makeText(context, "Информация успешно обновлена", Toast.LENGTH_LONG).show()
             }
 
             override fun onError() {
-                Toast.makeText(context, "Ошибка при обновлении паспорта", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Произошла ошибка с обновлением информации", Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(error: Throwable) {
-                Toast.makeText(context, "Ошибка подключения", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Ошибка подключения к серверу", Toast.LENGTH_LONG).show()
             }
         })
     }
+//    private fun uploadDocks(id : String, fullname:String,sex:String,dob:String,
+//                            citizenship:String,serial:String,number:String,
+//                            dog:String,wg:String, registration:String) {
+//        apiService.uploadDocks(id,fullname,sex,dob,citizenship,serial,number,dog,wg,registration,object : APIBuilder.UpdateDocksCallback {
+//            override fun onSuccess() {
+//                Toast.makeText(context, "Информация успешно обновлена", Toast.LENGTH_LONG).show()
+//            }
+//
+//            override fun onError() {
+//                Toast.makeText(context, "Ошибка при обновлении паспорта", Toast.LENGTH_LONG).show()
+//            }
+//
+//            override fun onFailure(error: Throwable) {
+//                Toast.makeText(context, "Ошибка подключения", Toast.LENGTH_LONG).show()
+//            }
+//        })
+//    }
 }

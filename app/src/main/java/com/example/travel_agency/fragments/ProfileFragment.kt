@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.ViewModel.ProfileViewModel
 import com.example.travel_agency.activities.DockActivity
+import com.example.travel_agency.activities.TouristsActivity
 import com.example.travel_agency.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -108,7 +109,7 @@ class ProfileFragment : Fragment() {
         }
         val buttonDock: Button = view.findViewById(R.id.button_dock)
         buttonDock.setOnClickListener {
-            val intent = Intent(activity, DockActivity::class.java)
+            val intent = Intent(activity, TouristsActivity::class.java)
             startActivity(intent)
         }
     }
