@@ -1,8 +1,11 @@
 package com.example.travel_agency.activities
 
+import Memory
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
 import com.example.travel_agency.ViewModel.BasketViewModel
 import com.example.travel_agency.ViewModel.ConfViewModel
+import com.example.travel_agency.ViewModel.FaveViewModel
 import com.example.travel_agency.databinding.ActivityConfirmBinding
+import com.example.travel_agency.models.ConfRequest
 
 class ConfirmActivity : AppCompatActivity() {
 
@@ -30,25 +35,17 @@ class ConfirmActivity : AppCompatActivity() {
         basketViewModel = ViewModelProvider(this)[BasketViewModel::class.java]
         sharedPref = getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
         editor = sharedPref.edit()
-        basketViewModel.updateHist(sharedPref.getInt("tour_id", 0),sharedPref.getString("token", null)!!)
+//        basketViewModel.updateHist(sharedPref.getInt("tour_id", 0),sharedPref.getString("token", null)!!)
         viewModel = ViewModelProvider(this).get(ConfViewModel::class.java)
-        val tour_id = sharedPref.getInt("tour_id", 0)
-        val user_id = sharedPref.getString("token", null)!!
-        viewModel.orderTour(user_id,tour_id)
+        val info = Memory(this).getConf()
+        viewModel.orderTour(info.date_id,info.tour_id,info.token,info.person_list)
 
         viewModel.Conflist.observe(this, Observer { tours ->
-            val editConfName = findViewById<View>(R.id.conf_name) as TextView
-            editConfName.isEnabled = false
-            editConfName.text = tours.user.fullname
-            val editConfLogin = findViewById<View>(R.id.conf_login) as TextView
-            editConfLogin.isEnabled = false
-            editConfLogin.text = tours.user.login
-            val editConfEmail = findViewById<View>(R.id.conf_email) as TextView
-            editConfEmail.isEnabled = false
-            editConfEmail.text = tours.user.email
-            val editConfPhone = findViewById<View>(R.id.conf_phone) as TextView
-            editConfPhone.isEnabled = false
-            editConfPhone.text = tours.user.phone_number
+
+            val tourists: List<String> = tours.person_list.map { it.fullname }
+            val listView: ListView = findViewById(R.id.personslist)
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, tourists)
+            listView.adapter = adapter
             val editConfCountry = findViewById<View>(R.id.conf_country) as TextView
             editConfCountry.isEnabled = false
             editConfCountry.text = tours.tour.country
@@ -57,18 +54,22 @@ class ConfirmActivity : AppCompatActivity() {
             editConfCity.text = tours.tour.city
             val editConfDateS = findViewById<View>(R.id.conf_dateS) as TextView
             editConfDateS.isEnabled = false
-            editConfDateS.text = tours.tour.date_start
+            editConfDateS.text = tours.date.dateStart
             val editDateE = findViewById<View>(R.id.conf_dateE) as TextView
             editDateE.isEnabled = false
-            editDateE.text = tours.tour.date_end
+            editDateE.text = tours.date.dateEnd
             val editConfPrice = findViewById<View>(R.id.conf_price) as TextView
             editConfPrice.isEnabled = false
-            editConfPrice.text = tours.tour.price_per_one.toString()
+            editConfPrice.text = (tours.person_list.size * tours.tour.price_per_one).toString()
             val editConfDesc = findViewById<View>(R.id.conf_description) as TextView
             editConfDesc.isEnabled = false
             editConfDesc.text = tours.tour.description
         })
 
+        val linkToOrder: TextView = findViewById(R.id.button_conf)
+        linkToOrder.setOnClickListener {
+            viewModel.updateHist(info.date_id,info.tour_id,info.token,info.person_list)
+        }
 
     }
 }

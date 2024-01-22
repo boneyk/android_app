@@ -34,7 +34,6 @@ class FaveListAdapter (var tours: List<TourFav>, var context: Context): Recycler
         val price: TextView = view.findViewById(R.id.tour_list_price)
         val tour_type: TextView = view.findViewById(R.id.tour_list_tour_type)
         val btn: Button = view.findViewById(R.id.tour_list_button)
-        val del_btn: Button = view.findViewById(R.id.del_button_list)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -70,14 +69,6 @@ class FaveListAdapter (var tours: List<TourFav>, var context: Context): Recycler
             val tour_id = currentTour.id
             val intent = Intent(context, TourActivity::class.java)
             intent.putExtra("tour_id", tour_id)
-            context.startActivity(intent)
-        }
-
-        holder.del_btn.setOnClickListener{
-            val tour_id = currentTour.id
-            editor.putInt("tour_id", tour_id).apply()
-
-            val intent = Intent(context, ConfirmActivity::class.java)
             context.startActivity(intent)
         }
     }

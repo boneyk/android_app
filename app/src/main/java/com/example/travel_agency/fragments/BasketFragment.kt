@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travel_agency.adapters.BasketListAdapter
 import com.example.travel_agency.ViewModel.BasketViewModel
 import com.example.travel_agency.databinding.FragmentBasketBinding
+import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.TourFav
 
 class BasketFragment : Fragment() {
     private lateinit var binding: FragmentBasketBinding
     private lateinit var baskViewModel: BasketViewModel
     private lateinit var baskFaveAdapter: BasketListAdapter
-    private var list: List<TourFav> = emptyList()
+    private var list: List<HistElement> = emptyList()
     private var user_id: String  = "1"
 
     private lateinit var sharedPref: SharedPreferences

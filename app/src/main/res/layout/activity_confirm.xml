@@ -36,63 +36,15 @@
                 android:textColor="#1f1317"
                 android:textSize="20sp"
                 android:textStyle="italic"
-                android:text="Личная информация" />
-    <TextView
-        android:id="@+id/conf_name"
-        android:background="#ffffff"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:textSize="20dp"
-        android:inputType="text"
-        android:textColorHint="#6a6a6a"
-        android:layout_marginTop="20sp"
-        android:layout_gravity="center"
-        android:textColor="#1f1317"
-        android:hint="  Полное имя" />
+                android:text="Список туристов:" />
 
-    <TextView
-        android:id="@+id/conf_login"
-        android:background="#ffffff"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:textSize="20dp"
-        android:inputType="text"
-        android:textColorHint="#6a6a6a"
-        android:layout_marginTop="20sp"
-        android:layout_gravity="center"
-        android:textColor="#1f1317"
-        android:hint="  Login" />
-
-    <TextView
-        android:id="@+id/conf_email"
-        android:background="#ffffff"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:textSize="20dp"
-        android:ems="10"
-        android:inputType="text"
-        android:textColorHint="#6a6a6a"
-        android:layout_marginTop="20sp"
-        android:layout_gravity="center"
-        android:textColor="#1f1317"
-        android:hint="  Email" />
-
-    <TextView
-        android:id="@+id/conf_phone"
-        android:background="#ffffff"
-        android:layout_width="320dp"
-        android:textSize="20dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="text"
-        android:textColorHint="#6a6a6a"
-        android:layout_marginTop="20sp"
-        android:layout_gravity="center"
-        android:textColor="#1f1317"
-        android:hint="  Номер телефона" />
-
+            <ListView
+                android:id="@+id/personslist"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_alternates_bold"
+                android:choiceMode="none" />
 
 
             <TextView
@@ -195,17 +147,16 @@
                 android:textColor="#1f1317"
                 android:hint="  Описание тура" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/button_conf"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="40dp"
-                android:fontFamily="@font/montserrat_alternates_bold"
-                android:textColor="#1f1317"
                 android:layout_gravity="center"
-                android:textSize="30sp"
-                android:textStyle="italic"
-                android:text="Спасибо за покупку!" />
+                android:textSize="17dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#8BB2BB"
+                android:text="Подтвердить" />
 
 
         </LinearLayout>

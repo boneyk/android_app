@@ -1,8 +1,10 @@
 package network_api
 
+import com.example.travel_agency.models.ConfRequest
 import com.example.travel_agency.models.ConfirmResponse
 import com.example.travel_agency.models.DockRequest
 import com.example.travel_agency.models.DocksInfo
+import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.LoginResponse
 import com.example.travel_agency.models.PersInfo
@@ -10,6 +12,7 @@ import com.example.travel_agency.models.ProfRequest
 import com.example.travel_agency.models.RegRequest
 import com.example.travel_agency.models.Tour
 import com.example.travel_agency.models.TourFav
+import com.example.travel_agency.models.TourResponse
 import com.example.travel_agency.models.Tours
 import retrofit2.Call
 import retrofit2.http.Body
@@ -36,7 +39,7 @@ interface APIService {
 
     //получение определенного тура по его id
     @GET("tours/{id}")
-    fun findTourWithId(@Path("id") id: Int): Call<Tour>
+    fun findTourWithId(@Path("id") id: Int, @Query("token") user_id: String): Call<TourResponse>
 
     //получение списка туров из избранного
     @GET("tours/favorite")
@@ -56,19 +59,19 @@ interface APIService {
 
     //добавление личной информации о пользователе в личном кабинете
     @PATCH("users/info")
-    fun putUserInfo(@Query("token") user_id: String, @Body request : ProfRequest): Call<Void>
+    fun putUserInfo(@Query("token") user_id: String, @Body request : ProfRequest): Call<LoginResponse>
 
     //получение списка туров из истории покупок
-    @GET("tours/history")
-    fun findHistTour(@Query("token") user_id: String): Call<List<TourFav>>
+    @GET("trip/history")
+    fun findHistTour(@Query("token") user_id: String): Call<List<HistElement>>
 
     //получение информации о пользователе и туре для подтверждения покупки
-    @GET("tours/order")
-    fun orderTour(@Query("token") user_id: String, @Query("tour_id") tour_id : Int): Call<ConfirmResponse>
+    @POST("trip")
+    fun orderTour(@Body request : ConfRequest): Call<ConfirmResponse>
 
     //добавление тура в историю покупки определенного пользователя
-    @PATCH("tours/history/{tour_id}/to/{token}")
-    fun updateHist(@Path("tour_id") tour_id: Int, @Path("token") user_id: String): Call<Void>
+    @POST("trip/add")
+    fun updateHist(@Body request : ConfRequest): Call<Any>
 
     //получение личных документов пользователя
     @GET("documents")

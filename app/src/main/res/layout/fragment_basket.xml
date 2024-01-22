@@ -22,7 +22,7 @@
             android:layout_gravity="center"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:text="История покупок" />
+            android:text="История заказов" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/toursList"

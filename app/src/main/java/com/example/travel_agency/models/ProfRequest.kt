@@ -1,7 +1,8 @@
 package com.example.travel_agency.models
 
 class ProfRequest(
-    val fullname: String,
-    val phone_number:String
+    val login: String,
+    val email:String,
+    val password:String
 ) {
 }

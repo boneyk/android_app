@@ -24,10 +24,6 @@
         android:textStyle="bold"
         android:layout_gravity="center"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
             <ImageView
             android:id="@+id/prof_image"
@@ -37,32 +33,7 @@
             android:layout_marginLeft="20dp"/>
 
 
-        <TextView
-            android:id="@+id/label_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/prof_image"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/montserrat_alternates_bold"
-            android:text="ФИО"
-            android:textSize="22sp"
-            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/label_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/prof_image"
-                android:layout_marginTop="70dp"
-                android:layout_marginLeft="20dp"
-                android:text="Email"
-                android:fontFamily="@font/montserrat_alternates_bold"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:autoSizeTextType="uniform"/>
-        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,27 +45,6 @@
             android:textStyle="italic"
             android:layout_gravity="center" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_alternates_bold"
-            android:text="ФИО"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:textSize="15sp"
-            android:textStyle="normal"/>
-        <EditText
-            android:id="@+id/prof_name"
-            android:background="#dddfeb"
-            android:layout_width="320dp"
-            android:layout_height="50dp"
-            android:ems="10"
-            android:inputType="text"
-            android:textColorHint="#6a6a6a"
-            android:layout_marginTop="3sp"
-            android:layout_gravity="center"
-            android:textColor="#1f1317"
-            android:hint="  ФИО" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -142,13 +92,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_alternates_bold"
-            android:text="Номер телефона"
+            android:text="Пароль"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:textSize="15sp"
             android:textStyle="normal"/>
         <EditText
-            android:id="@+id/prof_phone"
+            android:id="@+id/prof_password"
             android:background="#dddfeb"
             android:layout_width="320dp"
             android:layout_height="50dp"
@@ -157,28 +107,7 @@
             android:textColorHint="#6a6a6a"
             android:layout_gravity="center"
             android:textColor="#1f1317"
-            android:hint="  Номер телефона" />
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/montserrat_alternates_bold"-->
-<!--            android:text="Пароль"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginLeft="30dp"-->
-<!--            android:textSize="15sp"-->
-<!--            android:textStyle="normal"/>-->
-<!--        <EditText-->
-<!--            android:id="@+id/prof_password"-->
-<!--            android:background="#dddfeb"-->
-<!--            android:layout_width="320dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:ems="10"-->
-<!--            android:inputType="text"-->
-<!--            android:textColorHint="#6a6a6a"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:textColor="#1f1317"-->
-<!--            android:hint="  Password" />-->
+            android:hint="  Измените пароль" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -229,7 +158,7 @@
             android:layout_gravity="center"
             android:textStyle="bold"
             android:backgroundTint="#3C5A5C"
-            android:text="Документы" />
+            android:text="Туристы и Документы" />
 
     </LinearLayout>
 </FrameLayout>

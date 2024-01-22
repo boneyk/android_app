@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.databinding.FragmentProfileBinding
 import com.example.travel_agency.models.ConfirmResponse
+import com.example.travel_agency.models.LoginResponse
 import com.example.travel_agency.models.PersInfo
 import network_api.APIBuilder
 
@@ -20,13 +21,12 @@ class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
     private lateinit var editor: SharedPreferences.Editor
 
     fun tryUpdateProf(binding: FragmentProfileBinding) {
-        val name = binding.profName.text.toString()
-        Log.d("MyLog", "имя = ${name}")
-        val phone = binding.profPhone.text.toString()
-        Log.d("MyLog", "телефон = ${phone}")
+        val login = binding.profLogin.text.toString()
+        val email = binding.profEmail.text.toString()
+        var password = binding.profPassword.text.toString()
         sharedPref = context.getSharedPreferences("myPref", MODE_PRIVATE)
         editor = sharedPref.edit()
-        updateUserProf(sharedPref.getString("token", null)!!,name,phone)
+        updateUserProf(sharedPref.getString("token", null)!!,login,email,password)
     }
     fun getUserInfo(id : String){
         apiService.getUserInfo(id ,object : APIBuilder.InfoCallback {
@@ -37,7 +37,7 @@ class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
 
             override fun onError() {
                 Log.d("MyLog", "onError() ")
-                Toast.makeText(context, "Возникла ошибка с получением туров", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Возникла ошибка с получением информации о пользователе", Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(error: Throwable) {
@@ -47,9 +47,10 @@ class ProfileViewModel(val context: Application) : AndroidViewModel(context) {
         })
     }
 
-    private fun updateUserProf(id : String, name : String, phone : String) {
-        apiService.putUserInfo(id,name,phone, object : APIBuilder.ProfCallback {
-            override fun onSuccess() {
+    private fun updateUserProf(id : String, login : String, email : String, password: String) {
+        apiService.putUserInfo(id,login,email,password, object : APIBuilder.ProfCallback {
+            override fun onSuccess(response: LoginResponse) {
+                editor.putString("token", response.token.toString()).apply()
                 Toast.makeText(context, "Информация успешно обновлена", Toast.LENGTH_LONG).show()
             }
 

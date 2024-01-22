@@ -1,16 +1,20 @@
 package network_api
 
 import android.util.Log
+import com.example.travel_agency.models.ConfRequest
 import com.example.travel_agency.models.ConfirmResponse
 import com.example.travel_agency.models.DockRequest
 import com.example.travel_agency.models.DocksInfo
+import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.LoginResponse
 import com.example.travel_agency.models.PersInfo
+import com.example.travel_agency.models.Person
 import com.example.travel_agency.models.ProfRequest
 import com.example.travel_agency.models.RegRequest
 import com.example.travel_agency.models.Tour
 import com.example.travel_agency.models.TourFav
+import com.example.travel_agency.models.TourResponse
 import com.example.travel_agency.models.Tours
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -53,7 +57,7 @@ class APIBuilder(){
         fun onFailure(error: Throwable)
     }
     interface TourCallback {
-        fun onSuccess(response: Tour)
+        fun onSuccess(response: TourResponse)
         fun onError()
         fun onFailure(error: Throwable)
     }
@@ -73,7 +77,7 @@ class APIBuilder(){
         fun onFailure(error: Throwable)
     }
     interface ProfCallback {
-        fun onSuccess()
+        fun onSuccess(response: LoginResponse)
         fun onError()
         fun onFailure(error: Throwable)
     }
@@ -89,6 +93,16 @@ class APIBuilder(){
     }
     interface UpdateDocksCallback {
         fun onSuccess()
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
+    interface ConfTourCallback {
+        fun onSuccess(response: Any)
+        fun onError()
+        fun onFailure(error: Throwable)
+    }
+    interface HistTourCallback {
+        fun onSuccess(response: List<HistElement>)
         fun onError()
         fun onFailure(error: Throwable)
     }
@@ -160,12 +174,12 @@ class APIBuilder(){
                 }
             })
     }
-    fun findTourWithId(id: Int, callback: TourCallback){
-        api.findTourWithId(id)
-            .enqueue(object : Callback<Tour> {
+    fun findTourWithId(id: Int,user_id: String, callback: TourCallback){
+        api.findTourWithId(id,user_id)
+            .enqueue(object : Callback<TourResponse> {
                 override fun onResponse(
-                    call: Call<Tour>,
-                    response: Response<Tour>
+                    call: Call<TourResponse>,
+                    response: Response<TourResponse>
                 ) {
                     if (response.isSuccessful) {
                         callback.onSuccess(response.body()!!)
@@ -174,7 +188,7 @@ class APIBuilder(){
                     }
                 }
 
-                override fun onFailure(call: Call<Tour>, t: Throwable) {
+                override fun onFailure(call: Call<TourResponse>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                 }
@@ -263,32 +277,12 @@ class APIBuilder(){
             })
     }
 
-    fun putUserInfo(user_id: String,name : String, phone : String, callback: ProfCallback){
-        api.putUserInfo(user_id, ProfRequest(name,phone))
-            .enqueue(object : Callback <Void> {
+    fun putUserInfo(user_id: String,login : String, email : String,password : String, callback: ProfCallback){
+        api.putUserInfo(user_id, ProfRequest(login,email,password))
+            .enqueue(object : Callback <LoginResponse> {
                 override fun onResponse(
-                    call: Call<Void>,
-                    response: Response<Void>
-                ) {
-                    if (response.isSuccessful) {
-                        callback.onSuccess()
-                    } else {
-                        callback.onError()
-                    }
-                }
-
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    callback.onFailure(t)
-                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
-                }
-            })
-    }
-    fun findHistTour(user_id: String, callback: TourFavCallback){
-        api.findHistTour(user_id)
-            .enqueue(object : Callback <List<TourFav>> {
-                override fun onResponse(
-                    call: Call<List<TourFav>>,
-                    response: Response<List<TourFav>>
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
                 ) {
                     if (response.isSuccessful) {
                         callback.onSuccess(response.body()!!)
@@ -297,20 +291,37 @@ class APIBuilder(){
                     }
                 }
 
-                override fun onFailure(call: Call<List<TourFav>>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
+    fun findHistTour(user_id: String, callback: HistTourCallback){
+        api.findHistTour(user_id)
+            .enqueue(object : Callback <List<HistElement>> {
+                override fun onResponse(
+                    call: Call<List<HistElement>>,
+                    response: Response<List<HistElement>>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess(response.body()!!)
+                    } else {
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<HistElement>>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                 }
             })
     }
 
-    fun orderTour(user_id: String,tour_id: Int, callback: ConfCallback){
-        api.orderTour(user_id,tour_id)
-            .enqueue(object : Callback <ConfirmResponse> {
-                override fun onResponse(
-                    call: Call<ConfirmResponse>,
-                    response: Response<ConfirmResponse>
-                ) {
+    fun orderTour(date_id: Int, tour_id: Int, user_id: String, selectedPeople: List<Person>, callback: ConfCallback) {
+        api.orderTour(ConfRequest(date_id, tour_id, user_id, selectedPeople))
+            .enqueue(object : Callback<ConfirmResponse> {
+                override fun onResponse(call: Call<ConfirmResponse>, response: Response<ConfirmResponse>) {
                     if (response.isSuccessful) {
                         callback.onSuccess(response.body()!!)
                     } else {
@@ -325,26 +336,24 @@ class APIBuilder(){
             })
     }
 
-    fun updateHist(tour_id: Int, user_id: String, callback: UpdateFaveCallback){
-        api.updateHist(tour_id,user_id)
-            .enqueue(object : Callback <Void> {
-                override fun onResponse(
-                    call: Call<Void>,
-                    response: Response<Void>
-                ) {
+    fun updateHist(date_id: Int, tour_id: Int, user_id: String, selectedPeople: List<Person>, callback: ConfTourCallback) {
+        api.updateHist(ConfRequest(date_id, tour_id, user_id, selectedPeople))
+            .enqueue(object : Callback<Any> {
+                override fun onResponse(call: Call<Any>, response: Response<Any>) {
                     if (response.isSuccessful) {
-                        callback.onSuccess()
+                        callback.onSuccess(response.body()!!)
                     } else {
                         callback.onError()
                     }
                 }
 
-                override fun onFailure(call: Call<Void>, t: Throwable) {
+                override fun onFailure(call: Call<Any>, t: Throwable) {
                     callback.onFailure(t)
                     Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
                 }
             })
     }
+
     fun getDocks(user_id: String, callback: DockCallback){
         api.getDocks(user_id)
             .enqueue(object : Callback <DocksInfo> {

@@ -10,11 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
+import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.TourFav
 import com.example.travel_agency.models.Tour_Image
 
-class BasketListAdapter(var tours: List<TourFav>, var context: Context): RecyclerView.Adapter<BasketListAdapter.MyViewHolder>() {
-    fun updateData(newTours: List<TourFav>) {
+class BasketListAdapter(var tours: List<HistElement>, var context: Context): RecyclerView.Adapter<BasketListAdapter.MyViewHolder>() {
+    fun updateData(newTours: List<HistElement>) {
         tours = newTours
         notifyDataSetChanged()
     }
@@ -37,12 +38,12 @@ class BasketListAdapter(var tours: List<TourFav>, var context: Context): Recycle
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentTour = tours[position]
-        holder.country.text = currentTour.country
-        holder.city.text = currentTour.city
-        holder.tour_type.text = currentTour.tour_type
-        holder.price.text = currentTour.price_per_one.toString()
+        holder.country.text = currentTour.status
+        holder.city.text = currentTour.bookingEntity.tour.city
+        holder.tour_type.text = currentTour.bookingEntity.tour.country
+        holder.price.text = (currentTour.people_amount * currentTour.bookingEntity.tour.price_per_one).toString()
 
-        val currentImage:List<Tour_Image> = tours[position].images
+        val currentImage:List<Tour_Image> = tours[position].bookingEntity.tour.images
         if(currentImage.isNullOrEmpty()) {
             Log.d("MyLog", "список пустой")
         } else {

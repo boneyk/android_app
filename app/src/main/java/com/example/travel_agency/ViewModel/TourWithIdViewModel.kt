@@ -7,20 +7,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.travel_agency.models.Tour
+import com.example.travel_agency.models.TourResponse
 import network_api.APIBuilder
 
 class TourWithIdViewModel(val context: Application) : AndroidViewModel(context) {
-    val tourWithId: MutableLiveData<Tour> = MutableLiveData()
+    val tourWithId: MutableLiveData<TourResponse> = MutableLiveData()
     private val apiService = APIBuilder()
     private val sharedPref = context.getSharedPreferences("myPref", AppCompatActivity.MODE_PRIVATE)
     private val editor = sharedPref.edit()
 
-    fun findTourWithId(id: Int) {
-        apiService.findTourWithId(id, object : APIBuilder.TourCallback {
-            override fun onSuccess(response: Tour) {
+    fun findTourWithId(id: Int, user_id: String) {
+        apiService.findTourWithId(id,user_id, object : APIBuilder.TourCallback {
+            override fun onSuccess(response: TourResponse) {
                 Log.d("MyLog", "перешел в tourwithidviewmodel и получил успешный ответ, далее переписывает его в livedata")
                 tourWithId.value = response
-                editor.putInt("tour_id", response.id).apply()
+                editor.putInt("tour_id", response.tour.id).apply()
                 Log.d("MyLog", "записал ответ в livedata")
             }
 
