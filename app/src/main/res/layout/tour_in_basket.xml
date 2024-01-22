@@ -64,4 +64,13 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
+    <Button
+        android:id="@+id/basket_list_button"
+        android:layout_marginLeft="10dp"
+        android:layout_width="170dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#3C5A5C"
+        android:layout_height="wrap_content"
+        android:text="Просмотр" />
+
 </LinearLayout>

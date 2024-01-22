@@ -8,6 +8,8 @@ import com.example.travel_agency.models.Docksmall
 import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.LoginResponse
+import com.example.travel_agency.models.Pass
+import com.example.travel_agency.models.Passport
 import com.example.travel_agency.models.PersInfo
 import com.example.travel_agency.models.Person
 import com.example.travel_agency.models.ProfRequest
@@ -86,9 +88,11 @@ interface APIService {
     @GET("documents/person")
     fun getDocksInfo(@Query("doc_token") doc_token: String): Call<DocksInfo>
 
+    //добавление паспорта пользователю
+    @POST("documents/passport")
+    fun uploadDocks(@Query("doc_token") user_id: String, @Body request : Passport): Call<Void>
+
     //добавление личных документов пользователя
-//    @POST("documents/personalInfo")
-//    fun uploadDocks(@Query("doc_token") user_id: String, @Body request : Docksmall): Call<Void>
 
     @POST("documents/personalInfo")
     fun setPersInfo(@Query("doc_token") user_id: String, @Body request : Docksmall): Call<Void>

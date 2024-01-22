@@ -9,6 +9,8 @@ import com.example.travel_agency.models.Docksmall
 import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.LoginRequest
 import com.example.travel_agency.models.LoginResponse
+import com.example.travel_agency.models.Pass
+import com.example.travel_agency.models.Passport
 import com.example.travel_agency.models.PersInfo
 import com.example.travel_agency.models.Person
 import com.example.travel_agency.models.ProfRequest
@@ -401,30 +403,30 @@ class APIBuilder(){
                 }
             })
     }
-//    fun uploadDocks(user_id: String, fullname: String,sex: String,
-//                    dob:String, citizenship:String,serial:String,
-//                    number:String,dog:String, wg:String,
-//                    registration:String, callback: UpdateDocksCallback){
-//        api.uploadDocks(user_id, DockRequest(fullname,sex,dob,citizenship,serial,number,dog, wg, registration))
-//            .enqueue(object : Callback <Void> {
-//                override fun onResponse(
-//                    call: Call<Void>,
-//                    response: Response<Void>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        callback.onSuccess()
-//                    } else {
-//                        Log.e("MyLog", "Ошибка при выполнении запроса: ${callback.onError()}")
-//                        callback.onError()
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<Void>, t: Throwable) {
-//                    callback.onFailure(t)
-//                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
-//                }
-//            })
-//    }
+    fun uploadDocks(user_id: String, fullname: String,sex: String,
+                    dob:String, citizenship:String,serial:String,
+                    number:String,dog:String, wg:String,
+                    registration:String, callback: UpdateDocksCallback){
+        api.uploadDocks(user_id, Passport(fullname,sex,dob,citizenship,serial,number,dog, wg, registration))
+            .enqueue(object : Callback <Void> {
+                override fun onResponse(
+                    call: Call<Void>,
+                    response: Response<Void>
+                ) {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        Log.e("MyLog", "Ошибка при выполнении запроса: ${callback.onError()}")
+                        callback.onError()
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    callback.onFailure(t)
+                    Log.d("MyLog", "Ошибка при выполнении запроса: ${t.message}")
+                }
+            })
+    }
 
     fun getDocksInfo(user_id: String, callback: DockInfoCallback){
         api.getDocksInfo(user_id)

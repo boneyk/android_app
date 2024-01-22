@@ -50,7 +50,9 @@ class FaveListAdapter (var tours: List<TourFav>, var context: Context): Recycler
         holder.country.text = currentTour.country
         holder.city.text = currentTour.city
         holder.tour_type.text = currentTour.tour_type
-        holder.price.text = currentTour.price_per_one.toString()
+        val pricePerOne = currentTour.price_per_one
+        val formattedPrice = String.format("%,d", pricePerOne).replace(",", " ")
+        holder.price.text = "$formattedPrice руб."
 
         val currentImage:List<Tour_Image> = tours[position].images
         if(currentImage.isNullOrEmpty()) {

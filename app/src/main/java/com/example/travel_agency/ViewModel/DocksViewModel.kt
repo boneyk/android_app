@@ -37,7 +37,7 @@ class DocksViewModel(val context: Application) : AndroidViewModel(context) {
         val dog = binding.infoPassportDatereg.text.toString()
         val wg = binding.infoPassportPeoplereg.text.toString()
         val registration = binding.infoPassportPlace.text.toString()
-//        uploadDocks(sharedPref.getString("token", null)!!,fullname,sex,dob,citizenship,serial,number,dog,wg,registration)
+        uploadDocks(sharedPref.getString("doc_token", null)!!, fullname, sex, dob, citizenship, serial, number, dog, wg, registration)
     }
     fun getDocksInfo(user_id: String){
         apiService.getDocksInfo(user_id, object : APIBuilder.DockInfoCallback{
@@ -70,21 +70,21 @@ class DocksViewModel(val context: Application) : AndroidViewModel(context) {
             }
         })
     }
-//    private fun uploadDocks(id : String, fullname:String,sex:String,dob:String,
-//                            citizenship:String,serial:String,number:String,
-//                            dog:String,wg:String, registration:String) {
-//        apiService.uploadDocks(id,fullname,sex,dob,citizenship,serial,number,dog,wg,registration,object : APIBuilder.UpdateDocksCallback {
-//            override fun onSuccess() {
-//                Toast.makeText(context, "Информация успешно обновлена", Toast.LENGTH_LONG).show()
-//            }
-//
-//            override fun onError() {
-//                Toast.makeText(context, "Ошибка при обновлении паспорта", Toast.LENGTH_LONG).show()
-//            }
-//
-//            override fun onFailure(error: Throwable) {
-//                Toast.makeText(context, "Ошибка подключения", Toast.LENGTH_LONG).show()
-//            }
-//        })
-//    }
+    private fun uploadDocks(id : String, fullname:String,sex:String,dob:String,
+                            citizenship:String,serial:String,number:String,
+                            dog:String,wg:String, registration:String) {
+        apiService.uploadDocks(id,fullname,sex,dob,citizenship,serial,number,dog,wg,registration,object : APIBuilder.UpdateDocksCallback {
+            override fun onSuccess() {
+                Toast.makeText(context, "Информация успешно обновлена", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onError() {
+                Toast.makeText(context, "Ошибка при обновлении паспорта", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onFailure(error: Throwable) {
+                Toast.makeText(context, "Ошибка подключения", Toast.LENGTH_LONG).show()
+            }
+        })
+    }
 }

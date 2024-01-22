@@ -17,6 +17,9 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="31">
         <activity
+            android:name=".activities.SeeConfActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.TouristsActivity"
             android:exported="false" />
 

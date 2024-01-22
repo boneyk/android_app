@@ -27,6 +27,7 @@ class TourListAdapter(var tours: MutableLiveData<List<Tours>>, var context: Cont
         notifyDataSetChanged()
     }
 
+
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
         val image: ImageView = view.findViewById(R.id.tour_list_image)
         val name: TextView = view.findViewById(R.id.tour_list_name)
@@ -45,9 +46,12 @@ class TourListAdapter(var tours: MutableLiveData<List<Tours>>, var context: Cont
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
         val currentTours = tours.value ?: emptyList()
         holder.name.text = currentTours[position].name
-        holder.price.text = currentTours[position].price_per_one.toString()
+        val pricePerOne = currentTours[position].price_per_one
+        val formattedPrice = String.format("%,d", pricePerOne).replace(",", " ")
+        holder.price.text = "$formattedPrice руб."
         holder.tour_type.text = currentTours[position].tour_type
 
         val currentImage:List<Tour_Image> = currentTours[position].images

@@ -1,15 +1,20 @@
 package com.example.travel_agency.adapters
 
+import Memory
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travel_agency.R
+import com.example.travel_agency.activities.SeeConfActivity
+import com.example.travel_agency.activities.TourActivity
 import com.example.travel_agency.models.HistElement
 import com.example.travel_agency.models.TourFav
 import com.example.travel_agency.models.Tour_Image
@@ -25,6 +30,7 @@ class BasketListAdapter(var tours: List<HistElement>, var context: Context): Rec
         val city: TextView = view.findViewById(R.id.tour_list_city)
         val price: TextView = view.findViewById(R.id.tour_list_price)
         val tour_type: TextView = view.findViewById(R.id.tour_list_tour_type)
+        val btn: Button = view.findViewById(R.id.basket_list_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -41,7 +47,9 @@ class BasketListAdapter(var tours: List<HistElement>, var context: Context): Rec
         holder.country.text = currentTour.status
         holder.city.text = currentTour.bookingEntity.tour.city
         holder.tour_type.text = currentTour.bookingEntity.tour.country
-        holder.price.text = (currentTour.people_amount * currentTour.bookingEntity.tour.price_per_one).toString()
+        val pricePerOne = (currentTour.people_amount * currentTour.bookingEntity.tour.price_per_one)
+        val formattedPrice = String.format("%,d", pricePerOne).replace(",", " ")
+        holder.price.text = "$formattedPrice руб."
 
         val currentImage:List<Tour_Image> = tours[position].bookingEntity.tour.images
         if(currentImage.isNullOrEmpty()) {
@@ -54,6 +62,16 @@ class BasketListAdapter(var tours: List<HistElement>, var context: Context): Rec
                 context.packageName
             )
             holder.image.setImageResource(imageId)
+        }
+        holder.btn.setOnClickListener{
+            val tour_id = currentTour.bookingEntity.tour.id
+            Log.d("MyLog", "tour_id = $tour_id")
+            val intent = Intent(context, SeeConfActivity::class.java)
+            intent.putExtra("tour_id", tour_id)
+            intent.putExtra("status", currentTour.status)
+            intent.putExtra("date_id", currentTour.bookingEntity.date.id)
+            Memory(context).savePers(currentTour.participants)
+            context.startActivity(intent)
         }
     }
 }

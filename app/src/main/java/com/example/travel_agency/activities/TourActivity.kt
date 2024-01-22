@@ -72,7 +72,10 @@ class TourActivity : AppCompatActivity() {
 //            sDate.text = "Начало: " + tour?.tour?.date?.getOrNull(0)?.dateStart
 //            fDate.text = "Конец: " + tour?.tour?.date?.getOrNull(0)?.dateEnd
             desc.text = tour?.tour?.description
-            price.text = tour?.tour?.price_per_one.toString() + " руб."
+            val pricePerOne = tour?.tour?.price_per_one ?: 0
+            val formattedPrice = String.format("%,d", pricePerOne).replace(",", " ") // Используем метод String.format для форматирования числа с разделителями тысяч и заменяем запятые на пробелы.
+
+            price.text = "$formattedPrice руб."
             // Установка изображения в соответствии с элементом массива tour.images
             val imageId = resources.getIdentifier(tour?.tour?.images?.get(0)?.filename, "drawable", packageName)
             curImage.setImageResource(imageId)
