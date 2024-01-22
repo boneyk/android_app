@@ -68,7 +68,7 @@ class BasketListAdapter(var tours: List<HistElement>, var context: Context): Rec
             Log.d("MyLog", "tour_id = $tour_id")
             val intent = Intent(context, SeeConfActivity::class.java)
             intent.putExtra("tour_id", tour_id)
-            intent.putExtra("status", currentTour.status)
+            Memory(context).saveStatus(currentTour.status)
             intent.putExtra("date_id", currentTour.bookingEntity.date.id)
             Memory(context).savePers(currentTour.participants)
             context.startActivity(intent)

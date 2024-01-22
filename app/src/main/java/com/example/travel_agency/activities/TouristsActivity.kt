@@ -45,8 +45,10 @@ class TouristsActivity : AppCompatActivity() {
 
         viewModel.peoplist.observe(this, Observer { tours ->
             touristsList.clear()
-            touristsList.addAll(tours.map{if(it.fullname == null) touristName else it.fullname})
-            adapter.notifyDataSetChanged()
+            if(tours.isNotEmpty()) {
+                touristsList.addAll(tours.map { if (it.fullname == null) touristName else it.fullname })
+                adapter.notifyDataSetChanged()
+            }
         })
 
         val addButton: Button = findViewById(R.id.button_add)

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.travel_agency.R
 import com.example.travel_agency.ViewModel.DocksViewModel
 import com.example.travel_agency.ViewModel.ProfileViewModel
+import com.example.travel_agency.ViewModel.TouristsViewModel
 import com.example.travel_agency.databinding.ActivityDockBinding
 import com.example.travel_agency.databinding.FragmentProfileBinding
 
@@ -20,6 +21,7 @@ import com.example.travel_agency.databinding.FragmentProfileBinding
 class DockActivity : AppCompatActivity() {
     private var user_id: String  = "1"
     private lateinit var viewModel: DocksViewModel
+    private lateinit var touristviewModel: TouristsViewModel
     private lateinit var binding: ActivityDockBinding
 
     private lateinit var sharedPref: SharedPreferences
@@ -57,7 +59,10 @@ class DockActivity : AppCompatActivity() {
         editor = sharedPref.edit()
 
         viewModel = ViewModelProvider(this)[DocksViewModel::class.java]
+        touristviewModel = ViewModelProvider(this).get(TouristsViewModel::class.java)
+
         user_id = sharedPref.getString("doc_token", null)!!
+        val token = sharedPref.getString("token", null)!!
         viewModel.getDocksInfo(user_id)
         finallyGetIt()
 
@@ -127,6 +132,7 @@ class DockActivity : AppCompatActivity() {
             editName.isEnabled = false
             editPhone.isEnabled = false
             viewModel.setPersInfo(user_id,name,phone)
+            touristviewModel.getDocks(token)
 //            viewModel.getDocksInfo(user_id)
         }
         cancelInfoButton.setOnClickListener {
@@ -185,7 +191,7 @@ class DockActivity : AppCompatActivity() {
             editPassDateReg.isEnabled = false
             editPassPeopleReg.isEnabled = false
             editPassPlace.isEnabled = false
-            viewModel.tryUpdateDock(binding)
+            viewModel.uploadDocks(sharedPref.getString("doc_token", null)!!, fullname, sex, dob, citizenship, serial, number, dog, wg, registration)
         }
         cancelPassButton.setOnClickListener {
             cancelPassButton.visibility = View.GONE

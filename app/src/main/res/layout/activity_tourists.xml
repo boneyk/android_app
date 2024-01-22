@@ -23,6 +23,7 @@
             android:fontFamily="@font/montserrat_alternates_bold"
             android:textColor="#1f1317"
             android:layout_gravity="center"
+            android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold"
             android:text="Личные документы туристов" />
@@ -34,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:choiceMode="none"
-        android:textSize="16sp"
+        android:textSize="30sp"
         android:fontFamily="@font/montserrat_alternates_bold" >
     </ListView>
 

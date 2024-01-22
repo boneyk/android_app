@@ -70,7 +70,7 @@ class DocksViewModel(val context: Application) : AndroidViewModel(context) {
             }
         })
     }
-    private fun uploadDocks(id : String, fullname:String,sex:String,dob:String,
+    fun uploadDocks(id : String, fullname:String,sex:String,dob:String,
                             citizenship:String,serial:String,number:String,
                             dog:String,wg:String, registration:String) {
         apiService.uploadDocks(id,fullname,sex,dob,citizenship,serial,number,dog,wg,registration,object : APIBuilder.UpdateDocksCallback {

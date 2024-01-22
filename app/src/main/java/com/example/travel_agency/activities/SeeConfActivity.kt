@@ -33,7 +33,6 @@ class SeeConfActivity : AppCompatActivity() {
         editor = sharedPref.edit()
         val tourId = intent.getIntExtra("tour_id", 0)
         val dateId = intent.getIntExtra("date_id", 0)
-        val status = intent.getIntExtra("status", 0)
         val persons = Memory(this).getPers()
         val userId = sharedPref.getString("token", null)!!
 
@@ -41,6 +40,9 @@ class SeeConfActivity : AppCompatActivity() {
 
         viewModel.Conflist.observe(this, Observer { tours ->
 
+            val editStatus = findViewById<View>(R.id.status_text) as TextView
+            val status =  Memory(this).getStatus()
+            editStatus.text = "Статус заказа: " + status
             val tourists: List<String> = tours.person_list.map { it.fullname }
             val listView: ListView = findViewById(R.id.perslist)
             val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, tourists)

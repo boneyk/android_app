@@ -27,7 +27,7 @@ class TouristsViewModel(val context: Application) : AndroidViewModel(context) {
 
             override fun onError() {
                 Log.d("MyLog", "onError() ")
-                Toast.makeText(context, "Возникла ошибка с подтверждением заказа", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Возникла ошибка с подтверждением заказа", Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(error: Throwable) {
@@ -45,12 +45,12 @@ class TouristsViewModel(val context: Application) : AndroidViewModel(context) {
 
             override fun onError() {
                 Log.d("MyLog", "onError() ")
-                Toast.makeText(context, "Возникла ошибка с добавление туриста", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Возникла ошибка с добавление туриста", Toast.LENGTH_LONG).show()
             }
 
             override fun onFailure(error: Throwable) {
                 Log.d("MyLog", "info!! = onFailure()")
-                Toast.makeText(context, "Ошибка подключения к серверу", Toast.LENGTH_LONG).show()
+//                Toast.makeText(context, "Ошибка подключения к серверу", Toast.LENGTH_LONG).show()
             }
         })
     }
